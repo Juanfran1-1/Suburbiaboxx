@@ -60,29 +60,78 @@ nav ul li a {
 /* AJUSTES RESPONSIVOS GLOBALES */
 
 /* Para Tablets y Celulares */
+/* --- ESTILOS PARA EL MENÚ CELULAR --- */
+
+/* 1. Escondemos el botón y el sidebar por defecto (para que no se vean en PC) */
+.menu-btn, .sidebar {
+    display: none;
+}
+
 @media (max-width: 768px) {
-    header {
-        flex-direction: column; /* Apila logo y menú */
-        padding: 10px;
-        position: relative; /* Para que no flote sobre el contenido en móviles */
-        background: #000;
-    }
-
+    /* 2. Escondemos el nav horizontal de PC */
     nav {
-        position: static; /* Sacamos el centrado absoluto */
-        transform: none;
-        left: 0;
-        margin: 15px 0;
+        display: none;
     }
 
-    nav ul {
-        flex-direction: column; /* Links uno debajo del otro */
-        gap: 10px;
-        text-align: center;
+    /* 3. Mostramos el botón de hamburguesa */
+    .menu-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 20; /* Por encima de todo */
     }
 
-    .Botones_usuarios {
-        width: 100%;
-        justify-content: center;
+    .bar {
+        width: 30px;
+        height: 4px;
+        background-color: #f1c916; /* Tu dorado */
+        border-radius: 2px;
+    }
+
+    /* 4. Estilo del Sidebar */
+    .sidebar {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%; /* Empezamos afuera de la pantalla */
+        width: 70%;   /* Ocupa el 70% del ancho */
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 100;
+        padding: 50px 30px;
+        transition: 0.4s ease; /* Animación de entrada */
+        border-left: 2px solid #f1c916;
+    }
+
+    /* Clase que activaremos con JS para mostrarlo */
+    .sidebar.active {
+        right: 0;
+    }
+
+    .close-sidebar {
+        font-size: 3rem;
+        color: #f1c916;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .sidebar-links {
+        list-style: none;
+        margin-top: 50px;
+    }
+
+    .sidebar-links li {
+        margin-bottom: 30px;
+    }
+
+    .sidebar-links li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-family: 'New Rocker', sans-serif;
+        text-transform: uppercase;
     }
 }

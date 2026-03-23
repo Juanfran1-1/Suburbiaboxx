@@ -34,4 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
             slides[currentSlide].style.opacity = 1;
         }, 3000); // 3.5 segundos para que de tiempo a verla
     }
+
+    // --- LÓGICA DEL MENÚ LATERAL (SIDEBAR) ---
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
+
+    // Abrir
+    if (menuBtn) {
+        menuBtn.onclick = () => {
+            sidebar.classList.add('active');
+        };
+    }
+
+    // Cerrar
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            sidebar.classList.remove('active');
+        };
+    }
 });
