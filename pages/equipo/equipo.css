@@ -122,6 +122,7 @@
         position: relative;
         height: 550px;
         overflow: hidden; /* Para que la carta que se va no se vea */
+        touch-action: pan-y;
     }
 
     .team-card {

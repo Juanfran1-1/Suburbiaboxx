@@ -38,28 +38,24 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // LÓGICA DE GESTOS (SWIPE)
+        // LÓGICA DE GESTOS (SWIPE) MEJORADA
         const teamGrid = document.querySelector('.team-grid');
 
         teamGrid.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
-        });
+        }, {passive: true}); // passive ayuda al rendimiento del scroll
 
         teamGrid.addEventListener('touchend', e => {
             touchEndX = e.changedTouches[0].screenX;
             handleGesture();
-        });
+        }, {passive: true});
 
         function handleGesture() {
             const currentCard = cards[currentIndex];
-            const screenWidth = window.innerWidth;
-            
-            // Calculamos qué tan largo fue el deslizamiento
             const swipeDistance = Math.abs(touchEndX - touchStartX);
 
-            // Si el deslizamiento fue de más de 50px (para evitar toques accidentales)
+            // Solo si el movimiento es claramente horizontal (más de 50px)
             if (swipeDistance > 50) {
-                // .toggle agrega la clase si no está, y la saca si ya está.
-                // Independientemente de la dirección, la carta gira.
                 currentCard.classList.toggle('active-flip');
             }
         }
