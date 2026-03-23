@@ -68,6 +68,22 @@ nav ul li a {
 }
 
 @media (max-width: 768px) {
+
+    header {
+        /* Reducimos el espacio a los costados al mínimo (10px o 5px) */
+        padding: 10px 15px !important; 
+        flex-direction: row !important; /* Aseguramos que estén en la misma línea */
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+
+    /* Si el logo tiene margen, se lo quitamos */
+    header a img {
+        margin-left: 0 !important;
+    }
+
+
     /* 2. Escondemos el nav horizontal de PC */
     nav {
         display: none;
@@ -80,6 +96,8 @@ nav ul li a {
         gap: 5px;
         cursor: pointer;
         z-index: 20; /* Por encima de todo */
+        margin-right: 0 !important;
+        padding: 5px; /* Un poquito de área para que sea fácil de tocar */
     }
 
     .bar {

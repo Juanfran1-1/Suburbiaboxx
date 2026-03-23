@@ -246,6 +246,7 @@
 }
 
 @media (max-width: 768px) {
+    
     .info-container {
         display: block !important; /* Cambiamos flex por block para evitar colapsos */
         padding: 10px !important;
