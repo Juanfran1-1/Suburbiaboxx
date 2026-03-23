@@ -18,7 +18,13 @@
     font-weight: 300; /* Si podés, que sea más fina la letra */
 }
 
-
+/* Base para que el carrusel nunca mida 0 */
+.info-carousel {
+    min-height: 250px;
+    background-color: #111; /* Fondo oscuro por si la foto falla */
+    position: relative;
+    overflow: hidden;
+}
 
 .Botones_usuarios {
     display: flex;
@@ -28,7 +34,7 @@
 .Botones_usuarios a {
     text-decoration: none;
     padding: 10px 20px;
-    border: 1px solid rgb(255, 255, 255); /* borde fino  */
+    border: 1px solid #f1c916; /* borde fino  */
     color: rgb(241, 221, 221);
     border-radius: 5px;      
     transition: 0.3s;        /* para que el efecto al pasar el mouse sea suave */
@@ -40,16 +46,6 @@
     color: black;
 }
 
-.btn-registro {
-    background-color: #f1c916; /* Fondo amarillo fijo */
-    color: black !important;   /* Letras negras para contraste */
-    border: none !important;
-    font-weight: bold;
-}
-
-.btn-registro:hover {
-    background-color: rgb(5, 5, 5) !important; /* Cambia a blanco al pasar el mouse */
-}
 
 
 /* Contenedores Generales */
@@ -161,21 +157,25 @@
 
 /* Las cajas de contenido (donde va la imagen y el iframe) */
 .box-style {
-    height: 350px; /* ALTURA IGUAL PARA AMBOS */
+    width: 100%;
+    background-color: #111;
     border: 2px solid #f1c916;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Quitamos el height fijo de aquí para que no afecte a todos por igual */
 }
 
-.box-style img, 
-.box-style iframe {
+.box-style img {
     width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    object-fit: contain; /* Para que la grilla se vea completa */
+    height: auto; /* La imagen mantiene su proporción */
+    display: block; /* Saca espacios extra abajo de la foto */
+    object-fit: contain; 
 }
+
+
 
 
 /* ANIMACIÓN DE SCROLL */
@@ -196,38 +196,118 @@
     transform: translate(0, 0); /* Vuelve a su posición original (sea X o Y) */
 }
 
+/* REGLA PARA LA PLANILLA (Se adapta a la foto) */
+.location-column:first-child .box-style {
+    height: auto !important; 
+}
 
+.location-column:first-child .box-style img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* REGLA PARA EL MAPA (Altura fija para que se vea) */
+.location-column:last-child .box-style {
+    height: 450px !important; /* Ajustá este número a tu gusto */
+}
+
+.location-column:last-child .box-style iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
 /* RESPONSIVE INDEX */
 
 @media (max-width: 992px) {
     .main-title {
-        font-size: 4rem; /* Título más chico en tablets/netbooks */
+        font-size: 4rem;
     }
 
     .info-container, .location-container {
-        flex-direction: column; /* Dejamos de usar dos columnas */
+        display: flex; /* Aseguramos que sea flex */
+        flex-direction: column; 
         gap: 30px;
         padding: 40px 5%;
     }
 
-    .location-column {
+    /* EL RESCATE: Le damos altura acá también para tablets */
+    .info-carousel {
         width: 100%;
-        max-width: 100%;
+        height: 350px; /* Si no tiene altura, no se ve nada */
+        position: relative;
+        overflow: hidden;
     }
 
     .box-style {
-        height: 300px; /* Reducimos altura para que no ocupe toda la pantalla del celu */
+        height: auto;
     }
 }
 
-@media (max-width: 480px) {
-    .main-title {
-        font-size: 2.8rem; /* Título para celulares chicos */
+@media (max-width: 768px) {
+    .info-container {
+        display: block !important; /* Cambiamos flex por block para evitar colapsos */
+        padding: 10px !important;
+    }
+
+    .info-carousel {
+        width: 100% !important;
+        height: 300px !important;
+        margin: 20px 0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important; /* Anula el efecto fade-in si está fallando */
+    }
+
+    .carousel-track img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
     }
     
-    .hero-content h2 {
-        font-size: 1rem;
-        letter-spacing: 3px;
+    .location-column:last-child .box-style {
+        height: 300px !important; /* Altura más cómoda para celular */
     }
+
+    header > .Botones_usuarios { 
+        display: none !important; 
+    }
+
+    /* 2. Estilo para los botones ADENTRO de la hamburguesa (sidebar) */
+    .Botones_usuarios_mobile {
+        display: flex;
+        flex-direction: column; /* Uno arriba del otro */
+        gap: 15px;
+        margin-top: 30px; /* Separación con el menú */
+        padding: 0 20px;
+    }
+
+    .Botones_usuarios_mobile a {
+        text-decoration: none;
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #f1c916;
+        color: #f1c916;
+        border-radius: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: sans-serif;
+    }
+
+    .Botones_usuarios_mobile a:last-child {
+        background-color: #f1c916; /* El de Registrarse que resalte */
+        color: black;
+    }
+
+    /* 3. Asegurarnos que en PC no se vean los del mobile */
+    @media (min-width: 769px) {
+        .Botones_usuarios_mobile {
+            display: none;
+        }
+    }
+
 }

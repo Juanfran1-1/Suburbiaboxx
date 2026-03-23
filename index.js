@@ -53,4 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.classList.remove('active');
         };
     }
+    // Forzar que la primera foto se vea al cargar
+    const firstImg = document.querySelector('.carousel-track img');
+    if(firstImg) firstImg.style.opacity = 1;
 });
