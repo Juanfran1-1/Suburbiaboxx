@@ -1,67 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll('.team-card');
+    const dots = document.querySelectorAll('.dot');
+    const nextBtn = document.getElementById('next-card');
+    const prevBtn = document.getElementById('prev-card');
     let currentIndex = 0;
     
+    // Variables para el SWIPE
+    let touchStartX = 0;
+    let touchEndX = 0;
+
     const isMobile = () => window.innerWidth <= 768;
 
-    function runCarousel() {
-        if (!isMobile()) {
-            // Si volvemos a PC, limpiamos estilos de celu
-            cards.forEach(card => {
-                card.style.display = '';
-                card.style.opacity = '';
-                card.classList.remove('active-flip');
-            });
-            return;
-        }
-
-        // 1. Limpiar todo antes de mostrar la siguiente
-        cards.forEach(card => {
+    function updateGallery(direction) {
+        cards.forEach((card, index) => {
+            card.classList.remove('active', 'active-flip');
             card.style.display = 'none';
-            card.style.opacity = '0';
-            card.classList.remove('active-flip');
+            dots[index].classList.remove('active');
         });
 
-        // 2. Mostrar la actual
-        const currentCard = cards[currentIndex];
-        if (currentCard) {
-            currentCard.style.display = 'block';
-            
-            // Forzamos un pequeño reflow para la transición de opacidad
-            setTimeout(() => {
-                currentCard.style.opacity = '1';
-                
-                // 3. Girar a los 1.5 seg
-                setTimeout(() => {
-                    if (isMobile()) currentCard.classList.add('active-flip');
-                }, 1500);
-
-                // 4. Pasar a la siguiente a los 5 seg totales
-                setTimeout(() => {
-                    if (isMobile()) {
-                        currentCard.style.opacity = '0';
-                        currentIndex = (currentIndex + 1) % cards.length;
-                        runCarousel(); // Loop
-                    }
-                }, 9000);
-            }, 50);
-        }
+        cards[currentIndex].style.display = 'block';
+        setTimeout(() => cards[currentIndex].classList.add('active'), 10);
+        dots[currentIndex].classList.add('active');
     }
 
-    // Ejecutar solo si estamos en mobile al cargar
     if (isMobile()) {
-        runCarousel();
-    }
+        updateGallery();
 
-    // Por si el usuario cambia el tamaño de la ventana (opcional)
-    window.addEventListener('resize', () => {
-        if (isMobile()) {
-            // Si pasamos de PC a Celu, arrancamos el carrusel
-            if (cards[0].style.display !== 'block' && cards[0].style.display !== 'none') {
-                runCarousel();
+        // NAVEGACIÓN POR FLECHAS
+        nextBtn.onclick = () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateGallery();
+        };
+
+        prevBtn.onclick = () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateGallery();
+        };
+
+        // LÓGICA DE GESTOS (SWIPE)
+        const teamGrid = document.querySelector('.team-grid');
+
+        teamGrid.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        teamGrid.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        function handleGesture() {
+            const currentCard = cards[currentIndex];
+            const screenWidth = window.innerWidth;
+            
+            // Calculamos qué tan largo fue el deslizamiento
+            const swipeDistance = Math.abs(touchEndX - touchStartX);
+
+            // Si el deslizamiento fue de más de 50px (para evitar toques accidentales)
+            if (swipeDistance > 50) {
+                // .toggle agrega la clase si no está, y la saca si ya está.
+                // Independientemente de la dirección, la carta gira.
+                currentCard.classList.toggle('active-flip');
             }
         }
-    });
+    }
 
         // --- LÓGICA DEL MENÚ LATERAL ---
     const menuBtn = document.getElementById('menu-btn');

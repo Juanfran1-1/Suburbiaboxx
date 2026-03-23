@@ -42,6 +42,11 @@
     cursor: pointer;
 }
 
+/* Ocultamos los controles en PC */
+.team-controls {
+    display: none;
+}
+
 /* Efecto Hover: SOLO FUNCIONA EN PC */
 @media (min-width: 769px) {
     .team-card:hover .card-inner {
@@ -113,44 +118,59 @@
 
 /* --- RESPONSIVE CELULAR (CARRUSEL) --- */
 @media (max-width: 768px) {
-    .main-title {
-        font-size: 2.2rem !important;
-        margin-bottom: 5px;
-    }
-
     .team-grid {
         position: relative;
-        display: block !important;
-        width: 100%;
-        /* Subimos un poco el alto del contenedor para que la carta alargada quepa */
-        height: 600px; 
-        margin-top: 10px;
+        height: 550px;
+        overflow: hidden; /* Para que la carta que se va no se vea */
     }
 
     .team-card {
         position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        /* Hacemos la carta más angosta y más alta para que sea "alargada" */
-        width: 260px; 
-        height: 480px; 
-        display: none;
-        opacity: 0;
-        transition: opacity 0.6s ease;
+        display: none; /* El JS maneja cuál se ve */
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        z-index: 1;
     }
 
-    .card-back {
-        padding: 20px;
-        /* Distribuimos mejor el contenido en el espacio alargado */
-        justify-content: space-between; 
+    .team-card.active {
+        display: block;
+        opacity: 1;
     }
 
-    .card-back p {
-        font-size: 0.9rem;
-        line-height: 1.4;
-        /* Permitimos que el texto ocupe el centro con aire */
-        margin: 20px 0; 
+    /* CONTROLES */
+    .team-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 10px;
+    }
+
+    .control-btn {
+        background: none;
+        border: 2px solid #f1c916;
+        color: #f1c916;
+        font-size: 1rem;
+        padding: 10px 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .dots-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        background: #444;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+
+    .dot.active {
+        background: #f1c916;
+        transform: scale(1.3);
     }
 }
 
