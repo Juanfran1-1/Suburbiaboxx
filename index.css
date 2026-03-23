@@ -1,0 +1,233 @@
+
+.hero-content {
+    text-align: center; /* Centra el texto */
+    color: white;       /* resalta sobre el fondo */
+    z-index: 2;
+}
+.main-title {
+    font-family: new rocker;
+    font-size: 8rem; 
+    line-height: 0.9; 
+    color: #f1c916;  
+    margin-bottom: 10px;
+}
+
+.hero-content h2 {
+    font-size: 1.5rem; /* Achicamos un poco el slogan para que el H1 destaque */
+    letter-spacing: 8px;
+    font-weight: 300; /* Si podés, que sea más fina la letra */
+}
+
+
+
+.Botones_usuarios {
+    display: flex;
+    gap: 15px;
+}
+
+.Botones_usuarios a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid rgb(255, 255, 255); /* borde fino  */
+    color: rgb(241, 221, 221);
+    border-radius: 5px;      
+    transition: 0.3s;        /* para que el efecto al pasar el mouse sea suave */
+}
+
+/* efecto cuando pasas el mouse por encima */
+.Botones_usuarios a:hover {
+    background-color: rgb(134, 124, 124);
+    color: black;
+}
+
+.btn-registro {
+    background-color: #f1c916; /* Fondo amarillo fijo */
+    color: black !important;   /* Letras negras para contraste */
+    border: none !important;
+    font-weight: bold;
+}
+
+.btn-registro:hover {
+    background-color: rgb(5, 5, 5) !important; /* Cambia a blanco al pasar el mouse */
+}
+
+
+/* Contenedores Generales */
+.info-section, .location-section {
+    padding: 80px 10%;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.info-container, .location-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+/* Texto a la izquierda */
+.info-text {
+    flex: 1;
+}
+
+.info-text h2 {
+    color: #f1c916;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.info-text h2 span { color: #fff; font-size: 1.8rem; }
+
+.info-text p {
+    color: #ccc;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+/* El contenedor ahora tiene una altura fija */
+.info-carousel {
+    flex: 1;
+    height: 450px; /* Ajustá este valor según tus 11 renglones */
+    border: 2px solid #f1c916;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* Para que las fotos se apilen */
+    background-color: #111; /* Fondo oscuro por si carga una foto lenta */
+}
+
+.carousel-track {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Corta la foto para que llene el contenedor */
+    position: absolute; /* Apila una encima de otra */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Todas invisibles por defecto */
+    transition: opacity 0.2s ease-in-out; /* El fundido suave */
+}
+
+/* La primera foto tiene que ser visible al arrancar */
+.carousel-track img:first-child {
+    opacity: 1;
+}
+
+
+/* Contenedor principal */
+.location-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px 0;
+}
+
+/* Cada columna (Horarios y Mapa) */
+.location-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px; /* Para que no se estiren demasiado en pantallas grandes */
+}
+
+/* Los encabezados (Títulos arriba de las cajas) */
+.column-header {
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.column-header p {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 0;
+    text-align: center;
+}
+
+/* El texto de la dirección específicamente */
+.address-text-styled {
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #f1c916;
+    padding-bottom: 2px;
+}
+
+/* Las cajas de contenido (donde va la imagen y el iframe) */
+.box-style {
+    height: 350px; /* ALTURA IGUAL PARA AMBOS */
+    border: 2px solid #f1c916;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+}
+
+.box-style img, 
+.box-style iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    object-fit: contain; /* Para que la grilla se vea completa */
+}
+
+
+/* ANIMACIÓN DE SCROLL */
+/* Estado base de todos los que van a aparecer */
+.fade-in {
+    opacity: 0;
+    transition: all 1s ease-out;
+}
+
+/* Variaciones de dirección */
+.from-left { transform: translateX(-50px); }  /* Viene de la izquierda */
+.from-right { transform: translateX(50px); } /* Viene de la derecha */
+.fade-in:not(.from-left):not(.from-right) { transform: translateY(30px); } /* El mapa y titulo suben normal */
+
+/* Cuando el JS activa la clase .appear */
+.fade-in.appear {
+    opacity: 1;
+    transform: translate(0, 0); /* Vuelve a su posición original (sea X o Y) */
+}
+
+
+
+/* RESPONSIVE INDEX */
+
+@media (max-width: 992px) {
+    .main-title {
+        font-size: 4rem; /* Título más chico en tablets/netbooks */
+    }
+
+    .info-container, .location-container {
+        flex-direction: column; /* Dejamos de usar dos columnas */
+        gap: 30px;
+        padding: 40px 5%;
+    }
+
+    .location-column {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .box-style {
+        height: 300px; /* Reducimos altura para que no ocupe toda la pantalla del celu */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.8rem; /* Título para celulares chicos */
+    }
+    
+    .hero-content h2 {
+        font-size: 1rem;
+        letter-spacing: 3px;
+    }
+}

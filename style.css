@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FUENTE DE LETRAS : NEW ROCKER*/
+.new-rocker-regular {
+    font-family: "New Rocker", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* el fondo */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/suburbia.jpg');
+    background-size: cover;               /* esto hace que la imagen cubra todo */
+    background-position: center;        
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px; 
+    z-index: 10;
+}
+
+nav {
+    margin: 0; 
+    position: absolute; /* Lo sacamos del flujo para centrarlo respecto a la pantalla */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+nav ul {
+    display: flex;          /* pone las secciones en horizontal */
+    list-style: none;       /* Quita los puntitos negros de la lista */
+    gap: 20px;           
+}
+
+nav ul li a {
+    text-decoration: none;  /* saca el subrayado azul clásico */
+    color: rgba(241, 201, 22, 0.87);           /* color de las letras */
+    font-family: sans-serif; 
+    font-weight: bold;
+    text-transform: uppercase; 
+}
+
+/* AJUSTES RESPONSIVOS GLOBALES */
+
+/* Para Tablets y Celulares */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Apila logo y menú */
+        padding: 10px;
+        position: relative; /* Para que no flote sobre el contenido en móviles */
+        background: #000;
+    }
+
+    nav {
+        position: static; /* Sacamos el centrado absoluto */
+        transform: none;
+        left: 0;
+        margin: 15px 0;
+    }
+
+    nav ul {
+        flex-direction: column; /* Links uno debajo del otro */
+        gap: 10px;
+        text-align: center;
+    }
+
+    .Botones_usuarios {
+        width: 100%;
+        justify-content: center;
+    }
+}
