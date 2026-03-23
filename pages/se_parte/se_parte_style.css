@@ -135,9 +135,9 @@
 }
 
 .play-icon {
-    font-size: 50px;
+    font-size: 30px;
     color: #f1c916;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
 
 .pre-video-screen p {
@@ -253,22 +253,24 @@ video {
     }
 
     .modal-content {
-        width: 90% !important;
-        height: auto !important; /* Permitimos que crezca hacia abajo */
-        aspect-ratio: auto !important; /* Quitamos la forma de video horizontal */
-        display: flex;
-        flex-direction: column; 
-        padding: 0 !important; 
-        margin: 15% auto !important;
-        overflow-y: auto; /* Por si el texto es muy largo en celus viejos */
+        width: 92% !important;
+        max-height: 95vh !important; /* Aprovechamos casi toda la pantalla */
+        height: auto !important;
+        padding: 40px 15px 15px 15px !important; /* Más espacio arriba para la X */
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center; /* Centra todo verticalmente */
+        margin: auto !important;
     }
 
     /* El video mantiene su forma arriba */
     #video-player {
+        aspect-ratio: 16 / 9;
         width: 100% !important;
         height: auto !important;
-        aspect-ratio: 16 / 9; /* El video sí es apaisado */
-        border-bottom: 2px solid #f1c916; /* Línea divisoria dorada */
+        position: sticky; /* Opcional: mantiene el video arriba mientras scrolleas */
+        top: 0;
+        z-index: 5;
     }
 
     /* El botón de cerrar (X) necesita un ajuste porque sacamos el padding */
@@ -283,16 +285,41 @@ video {
         z-index: 10; /* Arriba del video */
     }
 
+    .conversion-plate {
+        gap: 5px !important; /* Espacio mínimo entre elementos */
+        padding: 0 !important;
+    }
+
     .conversion-plate h2 {
-        font-size: 1rem !important;
+        font-size: 1.2rem !important; /* Título más pequeño */
+        line-height: 1 !important;
+        margin-bottom: 5px !important;
     }
 
     .conversion-plate p {
-        font-size: 1rem;
+        font-size: 0.85rem !important; /* Texto más pequeño */
+        line-height: 1.2 !important;
+        margin-bottom: 10px !important;
     }
 
     .whatsapp-btn {
-        width: 100%;
-        justify-content: center;
+        padding: 8px 15px !important; /* Menos alto */
+        font-size: 0.8rem !important;
+        margin-top: 0 !important;
+    }
+
+    .whatsapp-btn img {
+        width: 18px !important; /* Icono más chico */
+    }
+
+    .coordinator-info {
+        margin-top: 10px !important;
+        font-size: 0.65rem !important; /* Info del coordinador bien chiquita */
+        line-height: 1.1 !important;
+    }
+
+    .phone-link {
+        display: inline-block;
+        margin-top: 2px;
     }
 }

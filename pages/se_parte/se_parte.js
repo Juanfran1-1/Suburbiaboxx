@@ -1,99 +1,90 @@
+let player; // Variable global para el reproductor de YouTube
+
+// 1. Cargamos la API de YouTube de forma asíncrona
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+const config = {
+    iniciacion: {
+        videoId: "iRwEFkNwUI4", // SOLO el ID del video
+        titulo: "¡EL PRIMER PASO ES EL MÁS FUERTE!",
+        subtitulo: "Unite al grupo y coordiná tu clase de acondicionamiento técnico ahora."
+    },
+    experiencia: {
+        videoId: "iRwEFkNwUI4", 
+        titulo: "¡EL EQUIPO TE ESPERA!",
+        subtitulo: "Unite al grupo y coordiná tu clase de reacondicionamiento técnico ahora."
+    }
+};
+
+let currentType = "";
+
+// 2. Esta función la llama YouTube automáticamente cuando la API está lista
+window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player('youtube-audio-player', {
+        height: '100%',
+        width: '100%',
+        videoId: '', // Empieza vacío
+        playerVars: {
+            'playsinline': 1,
+            'rel': 0,
+            'modestbranding': 1
+        },
+        events: {
+            'onStateChange': onPlayerStateChange
+        }
+    });
+};
+
+// 3. Detectar cuando el video termina
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        document.getElementById('player-container').style.display = "none";
+        const plate = document.getElementById('conversion-plate');
+        plate.style.display = "flex";
+        
+        document.getElementById('conversion-title').innerText = config[currentType].titulo;
+        document.getElementById('conversion-text').innerText = config[currentType].subtitulo;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('video-modal');
-    const player = document.getElementById('video-player');
-    const plate = document.getElementById('conversion-plate');
     const preScreen = document.getElementById('pre-video-screen');
-    const closeBtn = document.querySelector('.close-btn');
-    
-    const title = document.getElementById('conversion-title');
-    const text = document.getElementById('conversion-text');
-
-    let currentType = ""; 
-
-    const config = {
-        iniciacion: {
-            video: "../../assets/video_iniciacion.mp4",
-            titulo: "¡EL PRIMER PASO ES EL MÁS FUERTE!",
-            subtitulo: "Unite al grupo y coordiná tu clase de acondicionamiento tecnico ahora."
-        },
-        experiencia: {
-            video: "../../assets/video_iniciacion.mp4", // Asegurate que el nombre del archivo sea exacto (mayúsculas/minúsculas)
-            titulo: "¡EL EQUIPO TE ESPERA!",
-            subtitulo: "Unite al grupo y coordiná tu clase de reacondicionamiento tecnico ahora."
-        }
-    };
+    const plate = document.getElementById('conversion-plate');
 
     function abrirModal(tipo) {
         currentType = tipo;
-        
-        // 1. Seteamos el video y lo CARGAMOS
-        player.src = config[tipo].video;
-        player.load(); 
-        
-        // 2. IMPORTANTE para iPhone: Empezar muteado suele evitar el "tachado"
-        // El usuario igual puede activar el sonido con los controles
-        player.muted = false; 
-
         document.body.style.overflow = 'hidden'; 
         modal.style.display = 'flex';
         preScreen.style.display = 'flex';
         plate.style.display = 'none';
-        player.style.display = "none";
+        document.getElementById('player-container').style.display = "none";
     }
 
-    // Al tocar los botones de la página
-    document.querySelector('.btn-experiencia').onclick = (e) => {
-        e.preventDefault();
-        abrirModal('experiencia');
-    };
+    document.querySelector('.btn-experiencia').onclick = (e) => { e.preventDefault(); abrirModal('experiencia'); };
+    document.querySelector('.btn-iniciacion').onclick = (e) => { e.preventDefault(); abrirModal('iniciacion'); };
 
-    document.querySelector('.btn-iniciacion').onclick = (e) => {
-        e.preventDefault();
-        abrirModal('iniciacion');
-    };
-
-    // BOTÓN REPRODUCIR (El que arregla el problema del iPhone)
     document.getElementById('start-video-btn').onclick = () => {
         preScreen.style.display = "none";
-        player.style.display = "block";
+        document.getElementById('player-container').style.display = "block";
         
-        // Intentamos reproducir con una promesa (requerido en móviles modernos)
-        let playPromise = player.play();
-
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Reproducción automática prevenida. Intentando con mute...");
-                player.muted = true;
-                player.play();
-            });
-        }
+        // Cargamos y reproducimos el video por ID
+        player.loadVideoById(config[currentType].videoId);
+        player.playVideo();
     };
 
-    // CUANDO EL VIDEO TERMINA
-    player.onended = () => {
-        player.style.display = "none";
-        plate.style.display = "flex";
-        
-        title.innerText = config[currentType].titulo;
-        text.innerText = config[currentType].subtitulo;
-    };
-
-    // Cerrar modal
-    const cerrarModal = () => {
+    window.cerrarModal = () => {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
-        player.pause();
-        player.src = "";
+        player.stopVideo();
         plate.style.display = "none";
     };
 
-    closeBtn.onclick = cerrarModal;
-
-    window.onclick = (event) => {
-        if (event.target == modal) {
-            cerrarModal();
-        }
-    };
+    document.querySelector('.close-btn').onclick = window.cerrarModal;
+    window.onclick = (event) => { if (event.target == modal) window.cerrarModal(); };
 
     // --- LÓGICA DEL MENÚ LATERAL ---
     const menuBtn = document.getElementById('menu-btn');
