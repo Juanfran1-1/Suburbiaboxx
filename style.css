@@ -12,17 +12,28 @@
 }
 
 
+/* style.css */
+
+html, body {
+    /* Esto asegura que si el contenido supera la pantalla, 
+       siempre haya un fondo negro sólido detrás */
+    background-color: #000; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
 
 .hero {
-    height: 100vh;
+    /* Cambiamos height por min-height para que si el contenido 
+       empuja hacia abajo, el fondo acompañe */
+    min-height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* el fondo */
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/suburbia.jpg');
-    background-size: cover;               /* esto hace que la imagen cubra todo */
-    background-position: center;        
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Mantiene la imagen fija mientras scrolleás */
 }
 
 header {
@@ -71,7 +82,7 @@ nav ul li a {
 
     header {
         /* Reducimos el espacio a los costados al mínimo (10px o 5px) */
-        padding: 10px 15px !important; 
+        padding: 10px 5px !important; 
         flex-direction: row !important; /* Aseguramos que estén en la misma línea */
         justify-content: space-between !important;
         align-items: center !important;
@@ -81,6 +92,12 @@ nav ul li a {
     /* Si el logo tiene margen, se lo quitamos */
     header a img {
         margin-left: 0 !important;
+    }
+
+    header img {
+        width: 60px !important; /* Estaba en 90px, 60px queda mucho más fino */
+        height: auto;
+        transition: 0.3s;
     }
 
 
@@ -98,6 +115,7 @@ nav ul li a {
         z-index: 20; /* Por encima de todo */
         margin-right: 0 !important;
         padding: 5px; /* Un poquito de área para que sea fácil de tocar */
+        margin-top: 5px;
     }
 
     .bar {
