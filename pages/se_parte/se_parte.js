@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('video-modal');
     const player = document.getElementById('video-player');
     const plate = document.getElementById('conversion-plate');
+    const preScreen = document.getElementById('pre-video-screen');
     const closeBtn = document.querySelector('.close-btn');
     
-    // Elementos de la placa para cambiar textos
     const title = document.getElementById('conversion-title');
     const text = document.getElementById('conversion-text');
 
@@ -17,104 +17,94 @@ document.addEventListener('DOMContentLoaded', () => {
             subtitulo: "Unite al grupo y coordiná tu clase de acondicionamiento tecnico ahora."
         },
         experiencia: {
-            video: "../../assets/video_iniciacion.mp4",
+            video: "../../assets/video_iniciacion.mp4", // Asegurate que el nombre del archivo sea exacto (mayúsculas/minúsculas)
             titulo: "¡EL EQUIPO TE ESPERA!",
             subtitulo: "Unite al grupo y coordiná tu clase de reacondicionamiento tecnico ahora."
         }
     };
 
-    // Al tocar "Tengo experiencia"
+    function abrirModal(tipo) {
+        currentType = tipo;
+        
+        // 1. Seteamos el video y lo CARGAMOS
+        player.src = config[tipo].video;
+        player.load(); 
+        
+        // 2. IMPORTANTE para iPhone: Empezar muteado suele evitar el "tachado"
+        // El usuario igual puede activar el sonido con los controles
+        player.muted = false; 
+
+        document.body.style.overflow = 'hidden'; 
+        modal.style.display = 'flex';
+        preScreen.style.display = 'flex';
+        plate.style.display = 'none';
+        player.style.display = "none";
+    }
+
+    // Al tocar los botones de la página
     document.querySelector('.btn-experiencia').onclick = (e) => {
         e.preventDefault();
         abrirModal('experiencia');
     };
 
-    // Al tocar "No tengo experiencia"
     document.querySelector('.btn-iniciacion').onclick = (e) => {
         e.preventDefault();
         abrirModal('iniciacion');
     };
 
+    // BOTÓN REPRODUCIR (El que arregla el problema del iPhone)
     document.getElementById('start-video-btn').onclick = () => {
-    document.getElementById('pre-video-screen').style.display = "none";
-    const player = document.getElementById('video-player');
-    player.style.display = "block";
-    player.play();
-};
-
-function abrirModal(tipo) {
-    currentType = tipo;
-    const modal = document.getElementById('video-modal');
-    const player = document.getElementById('video-player');
-    const preScreen = document.getElementById('pre-video-screen');
-
-    player.src = config[tipo].video;
-    
-    // Bloqueamos el scroll del body al abrir el modal
-    document.body.style.overflow = 'hidden'; 
-
-    modal.style.display = 'flex';
-    preScreen.style.display = 'flex';
-    player.style.display = "none";
-}
-
-
-    // Cuando tocan el botón "REPRODUCIR" dentro del modal
-    document.getElementById('start-video-btn').onclick = () => {
-        document.getElementById('pre-video-screen').style.display = "none";
+        preScreen.style.display = "none";
         player.style.display = "block";
-        player.play();
+        
+        // Intentamos reproducir con una promesa (requerido en móviles modernos)
+        let playPromise = player.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Reproducción automática prevenida. Intentando con mute...");
+                player.muted = true;
+                player.play();
+            });
+        }
     };
 
     // CUANDO EL VIDEO TERMINA
     player.onended = () => {
-        player.style.display = "none"; // Desaparece el video
-        plate.style.display = "flex";  // Aparece la invitación
+        player.style.display = "none";
+        plate.style.display = "flex";
         
-        // Cambiamos solo los textos según el video que vio
         title.innerText = config[currentType].titulo;
         text.innerText = config[currentType].subtitulo;
     };
 
     // Cerrar modal
     const cerrarModal = () => {
-        document.getElementById('video-modal').style.display = 'none';
-        document.body.style.overflow = 'auto'; // Habilitamos scroll de nuevo
         modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
         player.pause();
         player.src = "";
-        
-        // RESET FUNDAMENTAL:
-        // Dejamos el video listo para la próxima y escondemos la placa
-        player.style.display = "block"; 
         plate.style.display = "none";
     };
 
     closeBtn.onclick = cerrarModal;
 
-    // También reseteamos si clickean fuera del rectángulo
     window.onclick = (event) => {
         if (event.target == modal) {
             cerrarModal();
         }
     };
 
-    // --- LÓGICA DEL MENÚ LATERAL (SIDEBAR) ---
+    // --- LÓGICA DEL MENÚ LATERAL ---
     const menuBtn = document.getElementById('menu-btn');
     const sidebar = document.getElementById('sidebar');
     const closeBtnmenu = document.getElementById('close-sidebar');
 
-    // Abrir
     if (menuBtn) {
-        menuBtn.onclick = () => {
-            sidebar.classList.add('active');
-        };
+        menuBtn.onclick = () => sidebar.classList.add('active');
     }
 
-    // Cerrar
     if (closeBtnmenu) {
-        closeBtnmenu.onclick = () => {
-            sidebar.classList.remove('active');
-        };
+        closeBtnmenu.onclick = () => sidebar.classList.remove('active');
     }
 });
