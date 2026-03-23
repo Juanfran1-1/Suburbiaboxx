@@ -98,4 +98,23 @@ function abrirModal(tipo) {
             cerrarModal();
         }
     };
+
+    // --- LÓGICA DEL MENÚ LATERAL (SIDEBAR) ---
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtnmenu = document.getElementById('close-sidebar');
+
+    // Abrir
+    if (menuBtn) {
+        menuBtn.onclick = () => {
+            sidebar.classList.add('active');
+        };
+    }
+
+    // Cerrar
+    if (closeBtnmenu) {
+        closeBtnmenu.onclick = () => {
+            sidebar.classList.remove('active');
+        };
+    }
 });

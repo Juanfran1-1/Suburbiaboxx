@@ -63,18 +63,35 @@
     align-items: center;
 }
 
+/* --- ESTILO DEL MODAL (AJUSTE PERFECTO) --- */
+
 .modal-content {
-    background: #000;
-    padding: 0;
-    border: 2px solid #f1c916;
-    width: 90%;
-    max-width: 800px;
-    min-height: 450px;
+    background-color: #000;
+    margin: 5% auto; /* Un pequeño margen arriba para que no pegue al techo */
+    width: 80%; /* Ancho en PC (en celu lo ajustamos abajo) */
+    max-width: 1000px; /* Un tope para pantallas gigantes */
+    border: 3px solid #f1c916; /* Borde dorado Suburbia */
+    border-radius: 10px;
     position: relative;
-    border-radius: 12px;
-    overflow: hidden;
+    padding: 0; /* ¡IMPORTANTE: Sacamos el padding para que el video pegue al borde! */
+    overflow: hidden; /* Mantiene el video dentro de los bordes redondeados */
+    
+    /* ESTA ES LA MAGIA: Forzamos la proporción 16:9 (widescreen) */
+    aspect-ratio: 16 / 9; 
+    
+    /* Aseguramos que el contenido adentro se alinee */
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para el video o iframe adentro */
+.modal-content video,
+.modal-content iframe {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover; /* Asegura que el video llene el contenedor sin deformarse */
+    border: none;
 }
 
 /* --- BOTÓN CERRAR (OPTIMIZADO PARA MÓVIL) --- */
@@ -202,7 +219,7 @@ video {
 }
 
 .coordinator-info {
-    margin-top: 25px;
+    margin-top: 10px;
     font-family: sans-serif;
     color: #888;
     font-size: 0.85rem;
@@ -216,29 +233,58 @@ video {
 
 /* --- RESPONSIVE FINAL (MOBILE) --- */
 
+/* RESPONSIVE SE PARTE */
 @media (max-width: 768px) {
     .main-title {
-        font-size: 3.5rem; /* Título más pequeño en móvil */
+        font-size: 3.5rem !important; /* Achicamos el "SÉ PARTE" */
+        margin-top: 50px;
     }
 
     .Botones_experiencia {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
+        flex-direction: column !important; /* Uno arriba del otro */
+        gap: 15px !important;
+        padding: 0 20px;
     }
 
     .Botones_experiencia a {
-        width: 85%;
+        width: 100%;
         text-align: center;
+        padding: 20px !important; /* Más grandes para el dedo */
     }
 
     .modal-content {
-        width: 95%;
-        min-height: auto; /* Que se adapte al contenido en móvil */
+        width: 90% !important;
+        height: auto !important; /* Permitimos que crezca hacia abajo */
+        aspect-ratio: auto !important; /* Quitamos la forma de video horizontal */
+        display: flex;
+        flex-direction: column; 
+        padding: 0 !important; 
+        margin: 15% auto !important;
+        overflow-y: auto; /* Por si el texto es muy largo en celus viejos */
+    }
+
+    /* El video mantiene su forma arriba */
+    #video-player {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9; /* El video sí es apaisado */
+        border-bottom: 2px solid #f1c916; /* Línea divisoria dorada */
+    }
+
+    /* El botón de cerrar (X) necesita un ajuste porque sacamos el padding */
+    .close-btn {
+        top: 10px !important;
+        right: 15px !important;
+        font-size: 35px !important;
+        color: #fff;
+        background-color: rgba(0,0,0,0.5); /* Fondo semitransparente para que se vea sobre el video */
+        padding: 0 5px;
+        border-radius: 5px;
+        z-index: 10; /* Arriba del video */
     }
 
     .conversion-plate h2 {
-        font-size: 1.6rem;
+        font-size: 1rem !important;
     }
 
     .conversion-plate p {
