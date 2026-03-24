@@ -18,6 +18,36 @@
     font-weight: 300; /* Si podés, que sea más fina la letra */
 }
 
+.hero {
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    min-height: 100vh;
+    padding: 0 10%; /* Espacio a los costados en PC */
+}
+
+
+.btn-unite {
+    display: inline-block;
+    padding: 18px 45px;
+    background-color: #f1c916;
+    color: #000;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.6rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    border: 2px solid #f1c916;
+    margin-top: 20px;
+}
+
+.btn-unite:hover {
+    background-color: transparent;
+    color: #f1c916;
+    transform: scale(1.05);
+}
+
+
+
 /* Base para que el carrusel nunca mida 0 */
 .info-carousel {
     min-height: 250px;
@@ -303,6 +333,26 @@
         background-color: #f1c916; /* El de Registrarse que resalte */
         color: black;
     }
+
+    .hero {
+        padding: 0; /* Quitamos el padding lateral */
+        justify-content: center; /* Centramos el contenido */
+    }
+
+    .hero-content {
+        align-items: center; /* TODO AL CENTRO EN CELU */
+        text-align: center;
+        width: 100%;
+    }
+
+    .btn-unite {
+        width: 100%; /* El botón ocupa casi todo el ancho */
+        max-width: 300px; /* Pero no se deforma en pantallas grandes */
+        font-size: 1.3rem;
+        padding: 15px 20px;
+    }
+
+
 
     /* 3. Asegurarnos que en PC no se vean los del mobile */
     @media (min-width: 769px) {

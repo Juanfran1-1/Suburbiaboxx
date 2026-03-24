@@ -68,14 +68,80 @@ nav ul li a {
     text-transform: uppercase; 
 }
 
+/* --- CONTENEDOR REDES PC --- */
+.social-pc-container {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    flex-direction: column; /* Instagram queda abajo */
+    align-items: center;
+    z-index: 1000;
+}
+
+/* El botón de Instagram (El que siempre se ve) */
+.social-base {
+    width: 60px;
+    height: 60px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+/* El botón de WhatsApp (El que aparece al pasar el mouse) */
+.social-child {
+    width: 50px;
+    height: 50px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-bottom: 15px; /* Espacio entre los dos */
+    
+    /* Estado inicial: escondido */
+    opacity: 0;
+    transform: translateY(25px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.social-pc-container img {
+    width: 35px;
+    height: 35px;
+}
+
+/* --- LÓGICA DEL HOVER --- */
+.social-pc-container:hover .social-child {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.social-pc-container:hover .social-base {
+    transform: scale(1.1);
+    background-color: #000000; /* Opcional: cambia a amarillo al activar */
+}
+
+
 /* AJUSTES RESPONSIVOS GLOBALES */
 
-/* Para Tablets y Celulares */
 /* --- ESTILOS PARA EL MENÚ CELULAR --- */
 
-/* 1. Escondemos el botón y el sidebar por defecto (para que no se vean en PC) */
+/* 1. Escondemos el botón y el sidebar por defecto para que no se vean en PC */
 .menu-btn, .sidebar {
     display: none;
+}
+/* Escondemos el footer para que no se vea en PC */
+.footer-suburbia {
+    display: none; /* Se oculta en PC */
 }
 
 @media (max-width: 768px) {
@@ -169,5 +235,54 @@ nav ul li a {
         font-size: 1.5rem;
         font-family: 'New Rocker', sans-serif;
         text-transform: uppercase;
+    }
+
+    .social-pc-container {
+        display: none; /* Se oculta en celular el boton de redes de PC */
+    }
+
+    .footer-suburbia {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        background-color: #000;
+        width: 100%;
+    }
+
+    .footer-line {
+        width: 60px; /* Línea corta y sutil */
+        height: 1px;
+        background-color: #333; /* Un gris oscuro para que no brille tanto */
+        margin-bottom: 30px;
+    }
+
+    .footer-logo img {
+        width: 50px; /* Logo chiquito como firma */
+        height: auto;
+        opacity: 0.7; /* Sutilmente transparente */
+        filter: grayscale(100%); /* Si lo querés blanco y negro, sacalo si preferís color */
+        margin-bottom: 25px;
+    }
+
+    .footer-socials {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer-socials a {
+        text-decoration: none;
+        color: #f1c916; /* Tu amarillo Suburbia */
+        font-family: sans-serif; /* Fuente limpia */
+        font-size: 0.8rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .footer-dot {
+        color: #333;
+        font-size: 0.8rem;
     }
 }
