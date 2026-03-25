@@ -56,4 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Forzar que la primera foto se vea al cargar
     const firstImg = document.querySelector('.carousel-track img');
     if(firstImg) firstImg.style.opacity = 1;
+
+
+    window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-wrapper');
+    const fill = document.querySelector('.logo-fill-container');
+
+    // 1. Apenas carga el script, el logo empieza a llenarse lento (simulando carga)
+    setTimeout(() => {
+        fill.style.transition = "height 10s linear"; // Una transición larga por si el internet es lento
+        fill.style.height = "100%"; // Lo llevamos al 80% lentamente
+    }, 100);
+
+    // Cambiamos la transición a una más rápida para el tramo final
+    fill.style.transition = "height 0.4s ease-out";
+    fill.style.height = "100%";
+
+    // 3. Desvanecemos el loader completo
+    setTimeout(() => {
+        loader.classList.add('loader-fade-out');
+    }, 500); // Le damos medio segundo para que el usuario vea el logo lleno
+    });
 });
