@@ -47,6 +47,40 @@
 }
 
 
+/* --- INDICADOR DE SCROLL --- */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    transition: opacity 0.5s ease; /* Para que desaparezca suave */
+}
+
+.arrow {
+    width: 40px;
+    height: 40px;
+    border-right: 3px solid #f1c916;
+    border-bottom: 3px solid #f1c916;
+    transform: rotate(45deg);
+    animation: bounce 6s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+    40% { transform: translateY(-10px) rotate(45deg); }
+    60% { transform: translateY(-5px) rotate(45deg); }
+}
+
+/* Clase para ocultar cuando el usuario scrollea */
+.scroll-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 
 /* Base para que el carrusel nunca mida 0 */
 .info-carousel {
@@ -106,9 +140,9 @@
 
 .info-text p {
     color: #ccc;
-    line-height: 1.8;
+    line-height: 1.6;
     font-size: 1.1rem;
-    text-align: justify;
+    text-align: match-parent;
 }
 
 /* El contenedor ahora tiene una altura fija */
@@ -239,13 +273,42 @@
 
 /* REGLA PARA EL MAPA (Altura fija para que se vea) */
 .location-column:last-child .box-style {
-    height: 450px !important; /* Ajustá este número a tu gusto */
+    height: 300px !important; 
 }
 
 .location-column:last-child .box-style iframe {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+@media (min-width: 1024px) {
+    .location-container {
+        display: flex;
+        justify-content: space-between; 
+        align-items: flex-start;
+        max-width: 90%; 
+        margin: 0 auto;
+        gap: 80px; 
+        padding: 50px 0;
+    }
+
+    .location-column {
+        flex: 1; 
+        max-width: 550px; 
+    }
+
+    .location-column:first-child {
+        display: flex;
+        flex-direction: center;
+        align-items: center; /* Horarios más a la izquierda */
+    }
+
+    .location-column:last-child {
+        display: flex;
+        flex-direction: center;
+        align-items: center; /* Mapa más a la derecha */
+    }
 }
 
 /* RESPONSIVE INDEX */
@@ -256,13 +319,12 @@
     }
 
     .info-container, .location-container {
-        display: flex; /* Aseguramos que sea flex */
+        display: flex;
         flex-direction: column; 
         gap: 30px;
         padding: 40px 5%;
     }
 
-    /* EL RESCATE: Le damos altura acá también para tablets */
     .info-carousel {
         width: 100%;
         height: 350px; /* Si no tiene altura, no se ve nada */
@@ -278,8 +340,15 @@
 @media (max-width: 768px) {
     
     .info-container {
-        display: block !important; /* Cambiamos flex por block para evitar colapsos */
+        display: block !important; 
         padding: 10px !important;
+    }
+
+    .info-text p {
+        color: #ccc;
+        line-height: 1.7;
+        font-size: 1rem;
+        text-align: match-parent;
     }
 
     .info-carousel {
@@ -288,7 +357,7 @@
         margin: 20px 0 !important;
         visibility: visible !important;
         opacity: 1 !important;
-        transform: none !important; /* Anula el efecto fade-in si está fallando */
+        transform: none !important; 
     }
 
     .carousel-track img {
@@ -301,19 +370,19 @@
     }
     
     .location-column:last-child .box-style {
-        height: 300px !important; /* Altura más cómoda para celular */
+        height: 300px !important; 
     }
 
     header > .Botones_usuarios { 
         display: none !important; 
     }
 
-    /* 2. Estilo para los botones ADENTRO de la hamburguesa (sidebar) */
+    /* 2. Estilo para los botones sidebar */
     .Botones_usuarios_mobile {
         display: flex;
-        flex-direction: column; /* Uno arriba del otro */
+        flex-direction: column; 
         gap: 15px;
-        margin-top: 30px; /* Separación con el menú */
+        margin-top: 30px;
         padding: 0 20px;
     }
 
@@ -330,24 +399,24 @@
     }
 
     .Botones_usuarios_mobile a:last-child {
-        background-color: #f1c916; /* El de Registrarse que resalte */
+        background-color: #f1c916; 
         color: black;
     }
 
     .hero {
-        padding: 0; /* Quitamos el padding lateral */
-        justify-content: center; /* Centramos el contenido */
+        padding: 0; 
+        justify-content: center; 
     }
 
     .hero-content {
-        align-items: center; /* TODO AL CENTRO EN CELU */
+        align-items: center; 
         text-align: center;
         width: 100%;
     }
 
     .btn-unite {
-        width: 100%; /* El botón ocupa casi todo el ancho */
-        max-width: 300px; /* Pero no se deforma en pantallas grandes */
+        width: 100%; 
+        max-width: 300px; 
         font-size: 1.3rem;
         padding: 15px 20px;
     }

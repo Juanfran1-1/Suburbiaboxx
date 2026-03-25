@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.2 // Se activa cuando se ve el 20% de la sección
     };
 
+    window.addEventListener('scroll', () => {
+        const scrollArrow = document.getElementById('scrollArrow');
+        if (window.scrollY > 50) { // Si bajó más de 50px
+            scrollArrow.classList.add('scroll-hidden');
+        } else {
+            scrollArrow.classList.remove('scroll-hidden');
+        }
+    });
+
     const fadeInObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
