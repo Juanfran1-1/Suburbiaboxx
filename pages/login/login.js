@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('usuarioActivo', userInput);
                     
                     // ¡Directo al Panel del Alumno!
-                    window.location.href = "../../inicio_panel.html"; 
+                    window.location.href = "../../credencial.html"; 
                 } else {
                     alert("Usuario o contraseña incorrectos.");
                     resetButton(btnSubmit, originalText);

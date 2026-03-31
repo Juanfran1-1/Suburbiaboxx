@@ -1,0 +1,116 @@
+/* --- LAYOUT DASHBOARD --- */
+.dashboard-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 60px auto;
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px solid #fff;
+    padding: 50px 40px;
+    position: relative;
+    min-height: 80vh;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Sidebar fijo a la izq y tabla que expande */
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* --- COLUMNA IZQUIERDA --- */
+.sidebar-pago {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.status-card {
+    background: #111;
+    border-left: 5px solid #d60000;
+    padding: 30px;
+    text-align: left;
+}
+
+.label-box { color: #d60000; font-family: 'New Rocker'; font-size: 0.9rem; margin-bottom: 10px; }
+.plan-tipo { font-size: 1.8rem; font-family: 'New Rocker'; color: #fff; }
+.estado-alerta { color: #d60000; font-weight: bold; margin: 10px 0; }
+.monto-grande { font-size: 3rem; font-weight: bold; margin: 20px 0; color: #fff; }
+
+.btn-pagar-box {
+    width: 100%;
+    background: #d60000;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-family: 'New Rocker';
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-pagar-box:hover { background: #fff; color: #000; }
+
+/* --- TABLA EXTENDIDA --- */
+.tabla-wrapper {
+    background: rgba(20, 20, 20, 0.5);
+    border: 1px solid #333;
+}
+
+.box-header {
+    background: #111;
+    padding: 15px 20px;
+    border-bottom: 2px solid #d60000;
+    font-family: 'New Rocker';
+    color: #fff;
+    text-align: left;
+}
+
+.tabla-pc {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-pc th {
+    padding: 20px;
+    text-align: left;
+    color: #888;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid #333;
+}
+
+.tabla-pc td {
+    padding: 20px;
+    color: #fff;
+    border-bottom: 1px solid #222;
+}
+
+.badge-ok {
+    background: #006400;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.btn-download {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-download:hover { background: #fff; color: #000; }
+
+/* REUTILIZAMOS EL LOGO DEL GLOBAL */
+.card-mini-logo {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px; height: 90px;
+    background: #000; border: 4px solid #fff; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+}
+.card-mini-logo img { width: 100%; }

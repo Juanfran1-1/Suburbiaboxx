@@ -1,0 +1,106 @@
+/* --- RESET PARA EVITAR MOVIMIENTOS EXTRAÑOS --- */
+.panel-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* --- LA CAJA BLANCA (TAMAÑO FIJO) --- */
+.dashboard-container {
+    width: 1000px; 
+    height: 650px;
+    background-color: #000;
+    border: 2px solid #fff;
+    padding: 60px 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* LOGO MORDIDITO */
+.card-mini-logo {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    background: #000;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    z-index: 10;
+}
+.card-mini-logo img { width: 100%; border-radius: 50%; }
+
+.titulo-seccion {
+    font-family: 'New Rocker', cursive;
+    color: #fff;
+    font-size: 2rem;
+    margin: 0 0 15px 0;
+}
+
+/* NAVEGACIÓN FIJA ARRIBA */
+.galeria-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: #555;
+    font-family: 'New Rocker';
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.nav-btn.active {
+    color: #fff;
+    border-bottom: 3px solid #d60000;
+}
+
+/* --- EL MOTOR DEL SCROLL (ZONA DE FOTOS) --- */
+.multimedia-scroll-area {
+    flex-grow: 1;      /* Toma el resto de la altura fija (650px) */
+    overflow-y: auto;  /* ACTIVA EL SCROLL AQUÍ ADENTRO */
+    padding-right: 10px;
+}
+
+/* Barra de scroll roja personalizada */
+.multimedia-scroll-area::-webkit-scrollbar { width: 8px; }
+.multimedia-scroll-area::-webkit-scrollbar-track { background: #000; }
+.multimedia-scroll-area::-webkit-scrollbar-thumb { background: #d60000; }
+
+.multimedia-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas como en tu dibujo */
+    gap: 15px;
+}
+
+/* CARDS CUADRADAS */
+.media-card {
+    aspect-ratio: 1 / 1;
+    background: #111;
+    border: 1px solid #333;
+    overflow: hidden;
+    position: relative;
+}
+
+.media-card img, .media-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 2rem;
+    pointer-events: none;
+}

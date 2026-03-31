@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socio | Multimedia Suburbia</title>
+    <link rel="stylesheet" href="panel_global.css">
+    <link rel="stylesheet" href="pages/galeria/galeria.css">
+    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
+</head>
+<body class="panel-page">
+
+    <div class="panel-wrapper">
+        <div class="dashboard-container">
+            
+            <div class="card-mini-logo">
+                <img src="assets/logo-suburbia.jpg" alt="Logo">
+            </div>
+
+            <h2 class="titulo-seccion">MULTIMEDIA</h2>
+
+            <div class="galeria-nav">
+                <button class="nav-btn active" data-filter="all">TODO</button>
+                <button class="nav-btn" data-filter="foto">FOTOS</button>
+                <button class="nav-btn" data-filter="video">VIDEOS</button>
+            </div>
+
+            <div class="multimedia-scroll-area">
+                <div class="multimedia-grid" id="galeria">
+                    <div class="media-card foto"><img src="assets/img1.jpg"></div>
+                    <div class="media-card video">
+                        <div class="play-icon">▶</div>
+                        <video src="assets/vid1.mp4" muted></video>
+                    </div>
+                    <div class="media-card foto"><img src="assets/img2.jpg"></div>
+                    <div class="media-card video">
+                        <div class="play-icon">▶</div>
+                        <video src="assets/vid2.mp4" muted></video>
+                    </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="panel_global.js"></script>
+    <script src="pages/galeria/galeria.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+.main-card.inicio-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1.2fr; /* Columna Foto | Columna Datos | Columna Botones */
+    gap: 30px;
+    align-items: center;
+    padding: 60px; /* Aumentamos padding superior para que el logo no tape el contenido */
+    position: relative; /* Clave para el posicionamiento absoluto del logo */
+    border: 3px solid #fff; /* Aseguramos que el borde blanco esté presente */
+    border-radius: 5px; /* Sutil redondeo */
+    margin: 0; 
+    width: 100%;
+    max-width: 1000px; /* Ajusta este ancho a tu gusto para que no sea infinita */
+}
+
+.panel-wrapper {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    min-height: 100vh;      /* Ocupa el 100% de la altura de la ventana */
+    width: 100%;
+    padding: 20px;          /* Espacio para que no toque los bordes en móviles */
+    box-sizing: border-box;
+}
+
+.panel-page {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita scrolls raros a los costados */
+}
+
+/* --- MINI LOGO FLOTANTE --- */
+.card-mini-logo {
+    position: absolute;
+    top: -45px; /* Sube el logo para que flote sobre el borde */
+    left: 50%;
+    transform: translateX(-50%); /* Lo centra exactamente */
+    width: 90px;
+    height: 90px;
+    background: #000; /* Fondo negro para que resalte */
+    border: 4px solid #fff; /* Borde blanco igual que la tarjeta */
+    border-radius: 50%; /* Lo hace circular */
+    z-index: 10; /* Lo pone por encima de todo */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Sombra para darle profundidad */
+}
+
+.card-mini-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- COLUMNA 1: PERFIL --- */
+.col-profile {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 2px solid #222;
+    padding-right: 20px;
+    min-width: 0; 
+    max-width: 250px; 
+}
+
+.photo-box {
+    width: 180px;
+    height: 180px;
+    border: 3px solid #d60000; /* Borde rojo Suburbia */
+    margin: 0 auto 20px;
+    overflow: hidden;
+    background: #000;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la foto no se deforme */
+}
+
+#userName {
+    font-family: 'New Rocker', cursive;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem); 
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;       /* Permite que las palabras bajen */
+    justify-content: center; /* Mantiene el nombre centrado */
+    gap: 100vw;           
+    
+    /* Seguridad */
+    word-break: normal;    /* Evita que se corten las letras */
+    overflow-wrap: anywhere; 
+    width: 100%;
+}
+
+/* --- COLUMNA 2: DATOS --- */
+.col-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dividimos los datos en 2 columnas internas */
+    gap: 20px;
+}
+
+.data-box {
+    background: rgba(10, 10, 10, 0.9);
+    border: 1px solid #333;
+    padding: 20px;
+    text-align: left;
+}
+
+.data-box label {
+    display: block;
+    color: #d60000; /* Rojo Suburbia para los títulos */
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.data-box span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Estilo especial para el Vencimiento (Rojo) */
+.data-box.vcto {
+    background: #d60000;
+    border: none;
+}
+
+.data-box.vcto label {
+    color: #fff;
+}
+
+.data-box.vcto span {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+/* --- COLUMNA 3: ACCIONES --- */
+.col-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 20px;
+    border-left: 2px solid #222; /* Línea divisoria sutil */
+}
+
+.btn-panel {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'New Rocker', cursive;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-panel:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Botón Salir con estética Roja */
+.btn-panel.btn-logout {
+    border-color: #d60000;
+    color: #d60000;
+    margin-top: 10px;
+}
+
+.btn-panel.btn-logout:hover {
+    background: #d60000;
+    color: #fff;
+}

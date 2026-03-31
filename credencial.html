@@ -3,30 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Socio | Suburbia Boxx</title>
-    <link rel="stylesheet" href="pages/panel_alumno/panel.css">
+    <title>Socio | Suburbia Boxx</title>
+    
+    <link rel="stylesheet" href="panel_global.css">
     <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="pages/credencial/credencial.css">
 </head>
 <body class="panel-page">
     
-    <div class="menu-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <div class="logo-top">
-        <img src="assets/logo-suburbia.jpg" alt="Suburbia Logo">
-    </div>
-
     <div class="panel-wrapper">
-        <div class="main-card">
+        <div class="main-card inicio-grid">
             
+
+            <div class="card-mini-logo">
+                <img src="assets/logo-suburbia.jpg" alt="Logo">
+            </div>
+
             <div class="col-profile">
                 <div class="photo-box">
                     <img src="assets/mayweather.jpg" alt="Socio" id="userPhoto">
                 </div>
-                <h2 id="userName">ÁNGEL ROMERO</h2>
+                <h2 id="userName">JUAN FRANCISCO UCEDA COLOMBO</h2>
             </div>
 
             <div class="col-data">
@@ -51,30 +49,12 @@
             <div class="col-actions">
                 <button class="btn-panel">MIS CLASES</button>
                 <button class="btn-panel">PAGAR CUOTA</button>
-                <button class="btn-panel btn-logout">SALIR</button>
+                <button class="btn-panel btn-logout">CERRAR SESIÓN</button>
             </div>
 
         </div>
     </div>
 
-    <div class="overlay" id="overlay"></div>
-    <nav class="side-menu" id="sideMenu">
-        <div class="menu-header">
-            <img src="assets/logo-suburbia.jpg" alt="Logo">
-            <h3>SUBURBIA BOXX</h3>
-        </div>
-        <ul class="menu-links">
-            <li><a href="index.html" class="active">INICIO</a></li>
-            <li><a href="clases.html">MIS CLASES</a></li>
-            <li><a href="pagos.html">PAGAR CUOTA</a></li>
-            <li><a href="galeria.html">GALERÍA</a></li>
-            <li><a href="notas.html">NOTAS DEL PROFE</a></li>
-            <li><a href="perfil.html">MI PERFIL</a></li>
-            <hr>
-            <li><a href="index.html" class="logout">SALIR</a></li>
-        </ul>
-    </nav>
-
-    <script src="pages/panel_alumno/panel.js"></script>
+    <script src="panel_global.js"></script>
 </body>
 </html>

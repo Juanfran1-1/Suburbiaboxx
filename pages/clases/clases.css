@@ -1,0 +1,157 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+/* Se apoya sobre el .panel-wrapper del HTML para centrarse */
+.clases-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 80px auto 40px; /* Margen superior para no chocar con el icono del menú */
+    padding: 60px 30px 40px;
+    background: rgba(0, 0, 0, 0.9); /* Fondo oscuro sólido para legibilidad */
+    border: 3px solid #fff; /* Borde blanco de la tarjeta */
+    position: relative;
+    z-index: 10;
+}
+
+/* --- LOGO FLOTANTE --- */
+/* Reutilizamos la lógica del diseño anterior para que flote sobre el borde blanco */
+.card-mini-logo {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    background: #000;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.card-mini-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- TÍTULO --- */
+.titulo-seccion {
+    font-family: 'New Rocker', cursive;
+    color: #fff;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #d60000; /* Sombra roja para agresividad */
+}
+
+/* --- SELECTOR DE DÍAS --- */
+.days-tabs {
+    display: flex;
+    flex-wrap: wrap; /* Para que en móviles no se rompa */
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    padding: 10px 18px;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn:hover {
+    color: #fff;
+    border-color: #fff;
+}
+
+.tab-btn.active {
+    color: #fff;
+    background: #d60000; /* Rojo Suburbia */
+    border-color: #d60000;
+    box-shadow: 0 0 10px rgba(214, 0, 0, 0.4);
+}
+
+/* --- LISTADO DE CLASES --- */
+.clases-viewport {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.clase-row {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid #333;
+    border-left: 5px solid #d60000; /* Acento rojo lateral */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    transition: 0.3s ease;
+}
+
+.clase-row:hover {
+    background: rgba(40, 40, 40, 0.8);
+    border-color: #fff;
+}
+
+.clase-detalles {
+    text-align: left;
+}
+
+.clase-detalles p {
+    margin: 4px 0;
+    color: #eee;
+    font-size: 0.95rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.clase-detalles span {
+    color: #d60000; /* Títulos de los datos en rojo */
+    font-family: 'New Rocker', cursive;
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+/* --- BOTÓN ASISTIR --- */
+.clase-registro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.cupos-text {
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.btn-asistir {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-asistir:hover {
+    background: #d60000;
+    color: #fff;
+}
