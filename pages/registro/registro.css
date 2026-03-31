@@ -1,0 +1,122 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.register-page {
+    background-color: #000000; /* Fondo negro */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px; /* Espacio para que no toque los bordes en celu */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.register-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px; /* Un poco más ancho que el login */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.mini-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #000;
+    margin-bottom: 10px;
+    border: 2px solid #000;
+    object-fit: cover;
+}
+
+h1 {
+    font-family: 'New Rocker', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+
+.iti {
+    width: 100%; 
+    display: block;
+}
+
+#phone {
+    padding-left: 85px !important; 
+}
+
+.iti__country-list {
+    color: #000; 
+    text-align: left;
+    white-space: normal; 
+}
+
+.iti input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.input-group input, .select-experience {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.select-experience {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #000;
+    color: #f1c916;
+    border: none;
+    border-radius: 8px;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-footer {
+    margin-top: 25px;
+    font-size: 0.85rem;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.register-footer a { color: #000; font-weight: bold; text-decoration: none; }
+
+/* Ajuste para celulares */
+@media (max-width: 480px) {
+    .form-row { flex-direction: column; gap: 0; }
+}

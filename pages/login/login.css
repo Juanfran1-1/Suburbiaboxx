@@ -1,0 +1,107 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.login-page {
+    background-color: #000000; /* Un gris casi blanco de fondo */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.login-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 50px 40px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* Sombra muy suave */
+    text-align: center;
+}
+
+.mini-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid #000;
+    background-color: #000; /* Fondo negro para el círculo */
+    object-fit: cover;      /* Asegura que la imagen llene el círculo sin deformarse */
+    display: block;         /* Centrado */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-family: 'New Rocker', cursive;
+    font-size: 1.8rem;
+    color: #000;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #000000;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #030303;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.form-options {
+    text-align: left;
+    margin-top: -15px;
+    margin-bottom: 30px;
+}
+
+.forgot-pass {
+    font-size: 0.8rem;
+    color: #000000;
+    text-decoration: none;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #000;
+    color: #f1c916; /* Color Suburbia */
+    border: none;
+    border-radius: 8px;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-submit:hover {
+    background: #222;
+    transform: translateY(-2px);
+}
+
+.login-footer {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.login-footer a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}

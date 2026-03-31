@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Socio | Suburbia Boxx</title>
+    <link rel="stylesheet" href="pages/registro/registro.css">
+    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
+</head>
+<body class="register-page">
+    <div class="register-card">
+        <div class="register-header">
+            <a href="index.html">
+                <img src="assets/logo-suburbia.jpg" alt="Suburbia Boxx" class="mini-logo">
+            </a>
+            <h1>NUEVO SOCIO</h1>
+        </div>
+
+        <form class="register-form" id="regForm">
+            <div class="form-row">
+                <div class="input-group">
+                    <label>NOMBRE</label>
+                    <input type="text" placeholder="Ej: Ángel" required>
+                </div>
+                <div class="input-group">
+                    <label>APELLIDO</label>
+                    <input type="text" placeholder="Ej: Romero" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label>EDAD</label>
+                    <input type="number" placeholder="0" required>
+                </div>
+                <div class="input-group">
+                    <label>DNI</label>
+                    <input type="text" placeholder="Sin puntos" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>EMAIL</label>
+                <input type="email" placeholder="mail@ejemplo.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>TELÉFONO / WHATSAPP</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="input-group">
+                <label>EXPERIENCIA EN BOXEO</label>
+                <select required class="select-experience">
+                    <option value="" disabled selected>Seleccioná una opción</option>
+                    <option value="none">No tengo experiencia</option>
+                    <option value="1-3">1 a 3 años</option>
+                    <option value="4+">4 o más años</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>CONTRASEÑA</label>
+                <input type="password" placeholder="Mínimo 8 caracteres" required>
+            </div>
+            <div class="input-group">
+                <label>REPETIR CONTRASEÑA</label>
+                <input type="password" placeholder="Confirmá tu clave" required>
+            </div>
+
+            <button type="submit" class="btn-submit">CREAR CUENTA</button>
+        </form>
+
+        <div class="register-footer">
+            <p>¿Ya sos socio? <a href="login.html">Iniciá sesión </a></p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    
+    <script src="pages/registro/registro.js"></script>
+</body>
+</html>
