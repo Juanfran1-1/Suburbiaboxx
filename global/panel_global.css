@@ -4,7 +4,7 @@
 /* --- FONDO Y SCROLL GLOBAL --- */
 .panel-page {
     background: linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.88)), 
-                url('../../assets/suburbiaxx.jpg'); /* Fondo de graffiti */
+                url('../assets/suburbiaxx.jpg'); /* Fondo de graffiti */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* El fondo no se mueve al scrollear */

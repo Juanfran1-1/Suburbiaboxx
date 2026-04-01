@@ -43,47 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             slides[currentSlide].style.opacity = 1;
         }, 3000); // 3.5 segundos para que de tiempo a verla
     }
-
-    // --- LÓGICA DEL MENÚ LATERAL (SIDEBAR) ---
-    const menuBtn = document.getElementById('menu-btn');
-    const sidebar = document.getElementById('sidebar');
-    const closeBtn = document.getElementById('close-sidebar');
-
-    // Abrir
-    if (menuBtn) {
-        menuBtn.onclick = () => {
-            sidebar.classList.add('active');
-        };
-    }
-
-    // Cerrar
-    if (closeBtn) {
-        closeBtn.onclick = () => {
-            sidebar.classList.remove('active');
-        };
-    }
     // Forzar que la primera foto se vea al cargar
     const firstImg = document.querySelector('.carousel-track img');
     if(firstImg) firstImg.style.opacity = 1;
-
-
-    window.addEventListener('load', () => {
-    const loader = document.getElementById('loader-wrapper');
-    const fill = document.querySelector('.logo-fill-container');
-
-    // 1. Apenas carga el script, el logo empieza a llenarse lento (simulando carga)
-    setTimeout(() => {
-        fill.style.transition = "height 10s linear"; // Una transición larga por si el internet es lento
-        fill.style.height = "100%"; // Lo llevamos al 80% lentamente
-    }, 100);
-
-    // Cambiamos la transición a una más rápida para el tramo final
-    fill.style.transition = "height 0.4s ease-out";
-    fill.style.height = "100%";
-
-    // 3. Desvanecemos el loader completo
-    setTimeout(() => {
-        loader.classList.add('loader-fade-out');
-    }, 500); // Le damos medio segundo para que el usuario vea el logo lleno
-    });
 });

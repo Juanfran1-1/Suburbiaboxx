@@ -19,6 +19,35 @@
     text-align: center;
 }
 
+.back-home-btn {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #f1c916; /* Tu color dorado */
+    font-family: 'New Rocker', cursive;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 100; /* Para que siempre esté arriba */
+}
+
+.back-home-btn .arrow-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.back-home-btn:hover {
+    color: #fff;
+    transform: translateX(-5px); /* Pequeño salto a la izquierda al pasar el mouse */
+}
+
+.back-home-btn:hover .arrow-icon {
+    transform: scale(1.1);
+}
+
 .mini-logo {
     width: 80px;
     height: 80px;

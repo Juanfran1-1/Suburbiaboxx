@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="feedback.html">MI PROGRESO</a></li>
                 <li><a href="perfil.html">MI PERFIL</a></li>
                 <hr class="menu-hr">
-                <li><a href="../../index.html" class="logout">CERRAR SESIÓN</a></li>
+                <li><a href="../index.html" class="logout">CERRAR SESIÓN</a></li>
             </ul>
         </nav>
     `;

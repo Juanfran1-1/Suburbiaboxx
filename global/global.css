@@ -30,7 +30,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/suburbia.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../assets/suburbia.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Mantiene la imagen fija mientras scrolleás */
@@ -45,6 +45,26 @@ header {
     align-items: center;
     padding: 20px 50px; 
     z-index: 10;
+}
+
+.Botones_usuarios {
+    display: flex;
+    gap: 15px;
+}
+
+.Botones_usuarios a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid #f1c916; /* borde fino  */
+    color: rgb(241, 221, 221);
+    border-radius: 5px;      
+    transition: 0.3s;        /* para que el efecto al pasar el mouse sea suave */
+}
+
+/* efecto cuando pasas el mouse por encima */
+.Botones_usuarios a:hover {
+    background-color: rgb(134, 124, 124);
+    color: black;
 }
 
 nav {
@@ -335,5 +355,42 @@ nav ul li a {
     .footer-dot {
         color: #333;
         font-size: 0.8rem;
+    }
+
+    /* 2. Estilo para los botones sidebar */
+    .Botones_usuarios_mobile {
+        display: flex;
+        flex-direction: column; 
+        gap: 15px;
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    .Botones_usuarios_mobile a {
+        text-decoration: none;
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #f1c916;
+        color: #f1c916;
+        border-radius: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: sans-serif;
+    }
+
+    .Botones_usuarios_mobile a:last-child {
+        background-color: #f1c916; 
+        color: black;
+    }
+
+    .Botones_usuarios {
+        display: none;
+    }
+
+    /* 3. Asegurarnos que en PC no se vean los del mobile */
+    @media (min-width: 769px) {
+        .Botones_usuarios_mobile {
+            display: none;
+        }
     }
 }
