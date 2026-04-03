@@ -67,16 +67,15 @@
 
 .modal-content {
     background-color: #000;
-    margin: 5% auto; /* Un pequeño margen arriba para que no pegue al techo */
-    width: 80%; /* Ancho en PC (en celu lo ajustamos abajo) */
-    max-width: 1000px; /* Un tope para pantallas gigantes */
-    border: 3px solid #f1c916; /* Borde dorado Suburbia */
+    margin: 5% auto; 
+    width: 80%; 
+    max-width: 1000px; 
+    border: 3px solid #f1c916;
     border-radius: 10px;
     position: relative;
     padding: 0; /* ¡IMPORTANTE: Sacamos el padding para que el video pegue al borde! */
-    overflow: hidden; /* Mantiene el video dentro de los bordes redondeados */
-    
-    /* ESTA ES LA MAGIA: Forzamos la proporción 16:9 (widescreen) */
+    overflow: hidden; 
+
     aspect-ratio: 16 / 9; 
     
     /* Aseguramos que el contenido adentro se alinee */
@@ -230,6 +229,126 @@ video {
     text-decoration: none;
     font-weight: bold;
 }
+/* 1. Fondo fijo con más carácter */
+body {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('../../assets/suburbia.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.label-yellow {
+    color: #f1c916;
+    font-family: sans-serif;
+    font-weight: 900;
+    letter-spacing: 10px; /* Letras bien separadas */
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.system-title-down {
+    font-family: 'New Rocker', cursive;
+    color: #fff;
+    font-size: 5.5rem; /* Tamaño imponente */
+    line-height: 0.85;
+    margin: 15px 0;
+    letter-spacing: -2px;
+}
+
+.subtitle-italic {
+    color: #666; /* Gris más oscuro para que no compita */
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 80px; /* Mucho espacio antes de los pasos */
+}
+
+/* 2. La sección de abajo con un desenfoque sutil (Glassmorphism) */
+.info-section {
+    min-height: 100vh;
+    padding: 120px 10%; /* Mucho espacio a los costados */
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), #000 30%); /* El fondo se funde a negro */
+}
+
+.info-container {
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* 3. Estilo para los números (Brillo dorado) */
+.num {
+    color: #f1c916;
+    font-family: 'New Rocker';
+    font-size: 2.8rem;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(241, 201, 22, 0.4); /* Brillo suave */
+}
+
+/* 4. Título con más peso */
+.system-title-down {
+    font-family: 'New Rocker';
+    color: #fff;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    margin: 15px 0;
+    text-transform: uppercase;
+}
+
+/* 5. Los ítems con una línea divisoria sutil */
+.step {
+    display: flex;
+    color: #fff;
+    gap: 25px;
+    padding: 20px;
+    border-left: 1px solid rgba(241, 201, 22, 0.2); /* Línea lateral fina */
+    transition: 0.3s;
+}
+
+/* --- ESTILOS DE LA FLECHA --- */
+.scroll-hint {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.scroll-hint span {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: #f1c916;
+}
+
+/* Animación del "mouse" */
+.mouse {
+    width: 25px;
+    height: 40px;
+    border: 2px solid #f1c916;
+    border-radius: 20px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: #f1c916;
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+    0% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, 15px); }
+}
+
 
 /* --- RESPONSIVE FINAL (MOBILE) --- */
 

@@ -30,9 +30,10 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../assets/suburbia.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 6), rgba(0,0,0,0.6)), url('../assets/suburbia.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed; /* Mantiene la imagen fija mientras scrolleás */
 }
 
@@ -215,7 +216,7 @@ nav ul li a {
     display: none; /* Se oculta en PC */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1160px) {
 
     header {
         /* Reducimos el espacio a los costados al mínimo (10px o 5px) */
@@ -388,7 +389,7 @@ nav ul li a {
     }
 
     /* 3. Asegurarnos que en PC no se vean los del mobile */
-    @media (min-width: 769px) {
+    @media (min-width: 1161px) {
         .Botones_usuarios_mobile {
             display: none;
         }

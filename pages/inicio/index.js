@@ -1,13 +1,26 @@
+// --- FUNCIONES GLOBALES PARA EL ZOOM ---
+window.abrirZoom = function(src) {
+    const modal = document.getElementById('modal-planilla');
+    const img = document.getElementById('img-expandida');
+    img.src = src;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Bloquea el scroll
+}
+
+window.cerrarZoom = function() {
+    document.getElementById('modal-planilla').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Habilita el scroll
+}
+
+// --- RESTO DE TU LÓGICA EXISTENTE ---
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. EFECTO DE APARECER AL SCROLLEAR ---
-    const observerOptions = {
-        threshold: 0.2 // Se activa cuando se ve el 20% de la sección
-    };
+    // 1. EFECTO DE APARECER AL SCROLLEAR
+    const observerOptions = { threshold: 0.2 };
 
     window.addEventListener('scroll', () => {
         const scrollArrow = document.getElementById('scrollArrow');
-        if (window.scrollY > 50) { // Si bajó más de 50px
+        if (window.scrollY > 50) {
             scrollArrow.classList.add('scroll-hidden');
         } else {
             scrollArrow.classList.remove('scroll-hidden');
@@ -22,28 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Seleccionamos todas las secciones que tengan la clase 'fade-in'
-    const hiddenElements = document.querySelectorAll('.fade-in');
-    hiddenElements.forEach((el) => fadeInObserver.observe(el));
+    document.querySelectorAll('.fade-in').forEach((el) => fadeInObserver.observe(el));
 
-
-    // --- 2. LÓGICA DEL CARRUSEL SIMPLE ---
+    // 2. LÓGICA DEL CARRUSEL
     const slides = document.querySelectorAll('.carousel-track img');
     let currentSlide = 0;
 
     if (slides.length > 0) {
+        slides[0].style.opacity = 1; // Asegurar que la primera se vea
         setInterval(() => {
-            // Quitamos visibilidad a la foto actual
             slides[currentSlide].style.opacity = 0;
-            
-            // Calculamos la siguiente
             currentSlide = (currentSlide + 1) % slides.length;
-            
-            // Le damos visibilidad a la nueva
             slides[currentSlide].style.opacity = 1;
-        }, 3000); // 3.5 segundos para que de tiempo a verla
+        }, 3000);
     }
-    // Forzar que la primera foto se vea al cargar
-    const firstImg = document.querySelector('.carousel-track img');
-    if(firstImg) firstImg.style.opacity = 1;
 });
