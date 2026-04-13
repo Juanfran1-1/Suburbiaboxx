@@ -13,11 +13,17 @@ const panelNodeModulesDir = path.join(panelDir, 'node_modules');
 
 function run(command, args, options = {}) {
     return new Promise((resolve, reject) => {
-        const executable = process.platform === 'win32' ? `${command}.cmd` : command;
-        const child = spawn(executable, args, {
-            stdio: 'inherit',
-            ...options,
-        });
+        const isWindows = process.platform === 'win32';
+        const child = isWindows
+            ? spawn(`${command} ${args.join(' ')}`, {
+                stdio: 'inherit',
+                shell: true,
+                ...options,
+            })
+            : spawn(command, args, {
+                stdio: 'inherit',
+                ...options,
+            });
 
         child.on('exit', (code) => {
             if (code === 0) {

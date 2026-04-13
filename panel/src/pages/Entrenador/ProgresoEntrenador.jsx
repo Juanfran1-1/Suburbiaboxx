@@ -1,5 +1,5 @@
 import ProgresoGestion from '../shared/ProgresoGestion';
-import NavbarEntrenador from '../../components/Dashboard/NavbarEntrenador';
+import NavbarEntrenador from '../../components/Dashboard/NavBarEntrenador';
 
 export default function ProgresoEntrenador() {
     return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContextBase';
-import NavbarEntrenador from '../../components/Dashboard/NavbarEntrenador';
+import NavbarEntrenador from '../../components/Dashboard/NavBarEntrenador';
 import { notify } from '../../components/SuburbiaToast';
 import { profileService } from '../../services/profileService';
 import { clasesService } from '../../services/clasesService';

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import NavbarEntrenador from '../../components/Dashboard/NavbarEntrenador';
+import NavbarEntrenador from '../../components/Dashboard/NavBarEntrenador';
 import ClassCard from '../../components/Dashboard/ClassCard';
 import ClassStudentsModal from '../../components/Dashboard/ClassStudentsModal';
 import MonthDateSelector from '../../components/Dashboard/MonthDateSelector';

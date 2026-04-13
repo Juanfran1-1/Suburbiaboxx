@@ -1,4 +1,4 @@
-import NavbarEntrenador from '../../components/Dashboard/NavbarEntrenador';
+import NavbarEntrenador from '../../components/Dashboard/NavBarEntrenador';
 import UserCredential from '../../components/Dashboard/UserCredential.jsx';
 import '../../styles/Dashboard.css';
 

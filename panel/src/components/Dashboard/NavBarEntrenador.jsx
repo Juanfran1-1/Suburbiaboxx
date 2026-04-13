@@ -1,4 +1,4 @@
-import DashboardNavbar from './DashboardNavbar';
+import DashboardNavbar from './DashboardNavBar';
 import '../../styles/NavBar.css';
 
 export default function NavbarEntrenador() {
