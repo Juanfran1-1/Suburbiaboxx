@@ -10,6 +10,25 @@ const panelDir = path.join(root, 'panel');
 const panelDistDir = path.join(panelDir, 'dist');
 const outputPanelDir = path.join(outputDir, 'panel');
 const panelNodeModulesDir = path.join(panelDir, 'node_modules');
+const panelStaticRoutes = [
+    'login',
+    'register',
+    'forgot-password',
+    'update-password',
+    'alumno/inicio',
+    'alumno/clases',
+    'alumno/pagos',
+    'alumno/progreso',
+    'alumno/perfil',
+    'entrenador/inicio',
+    'entrenador/clases',
+    'entrenador/progreso',
+    'entrenador/perfil',
+    'admin/inicio',
+    'admin/clases',
+    'admin/pagos',
+    'admin/progreso',
+];
 
 function run(command, args, options = {}) {
     return new Promise((resolve, reject) => {
@@ -58,6 +77,12 @@ await run('npm', ['run', 'build:cloudflare'], {
 
 await rm(outputPanelDir, { recursive: true, force: true });
 await cp(panelDistDir, outputPanelDir, { recursive: true });
+
+for (const route of panelStaticRoutes) {
+    const routeDir = path.join(outputPanelDir, route);
+    await mkdir(routeDir, { recursive: true });
+    await cp(path.join(outputPanelDir, 'index.html'), path.join(routeDir, 'index.html'));
+}
 
 await writeFile(
     path.join(outputDir, '_redirects'),
