@@ -1,4 +1,4 @@
-import { cp, mkdir, rm } from 'node:fs/promises';
+import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -58,5 +58,15 @@ await run('npm', ['run', 'build:cloudflare'], {
 
 await rm(outputPanelDir, { recursive: true, force: true });
 await cp(panelDistDir, outputPanelDir, { recursive: true });
+
+await writeFile(
+    path.join(outputDir, '_redirects'),
+    [
+        '/panel /panel/index.html 200',
+        '/panel/ /panel/index.html 200',
+        '/panel/* /panel/index.html 200',
+        '',
+    ].join('\n'),
+);
 
 console.log('Build listo en dist/. Web en / y panel en /panel.');
