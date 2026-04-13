@@ -79,10 +79,10 @@ function injectHeader() {
 function injectFooter() {
     const footerHTML = `
     <div class="social-pc-container">
-        <a href="https://wa.me/tunúmero" target="_blank" class="social-child wsp">
+        <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank" class="social-child wsp">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WSP">
         </a>
-        <a href="https://instagram.com/tuusuario" target="_blank" class="social-base ig">
+        <a href="https://instagram.com/suburbiaboxx/" target="_blank" class="social-base ig">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="IG">
         </a>
     </div>
@@ -90,9 +90,9 @@ function injectFooter() {
         <div class="footer-line"></div>
         <div class="footer-logo"><img src="assets/logo-suburbia.jpg" alt="Suburbia Logo"></div>
         <div class="footer-socials">
-            <a href="https://instagram.com/tuusuario" target="_blank">INSTAGRAM</a>
+            <a href="https://instagram.com/suburbiaboxx/" target="_blank">INSTAGRAM</a>
             <span class="footer-dot">•</span>
-            <a href="https://wa.me/tunúmero" target="_blank">WHATSAPP</a>
+            <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank">WHATSAPP</a>
         </div>
     </footer>`;
     document.body.insertAdjacentHTML('beforeend', footerHTML);
