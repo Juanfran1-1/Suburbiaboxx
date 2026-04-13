@@ -9,7 +9,7 @@ import { InicioEntrenador , ClasesEntrenador, ProgresoEntrenador, PerfilEntrenad
 import { InicioAdmin, ClasesAdmin, PagosAdmin, ProgresoAdmin } from './pages/Admin';
 
 import Loader from './components/Loader';
-import './styles/global.css';
+import './styles/Global.css';
 import { Toaster } from 'react-hot-toast'; 
 import ProtectedRoute from './components/ProtectedRoute';
 
