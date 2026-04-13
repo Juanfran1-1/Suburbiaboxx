@@ -59,3 +59,38 @@
         font-size: 0.9rem; /* Achicamos un poco el texto del select */
     }
 }
+
+@media (max-width: 480px) {
+    .register-card {
+        width: 100%;
+        padding: 28px 16px 22px;
+        margin: 0 auto;
+    }
+
+    .register-form,
+    .form-row,
+    .form-row .input-group {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .form-row {
+        display: block;
+        gap: 0;
+    }
+
+    .register-form input,
+    .register-form select,
+    .PhoneInput {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .register-form input[type="date"] {
+        display: block;
+        width: 100%;
+        min-height: 47px;
+        line-height: normal;
+    }
+}

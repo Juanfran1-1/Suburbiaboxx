@@ -63,6 +63,8 @@
 
 .input-group input, .select-experience {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding: 14px;
     border: 1px solid #000000; /* BORDE NEGRO PERFECTO */
     border-radius: 8px;
@@ -160,6 +162,7 @@
 .btn-back-mobile {
     display: block;
     width: 100%;
+    max-width: 100%;
     padding: 12px;
     background-color: #b4b3b3; /* Fondo negro como los otros botones */
     color: #1a1919; /* Dorado */
@@ -169,6 +172,31 @@
     border-radius: 8px;
     text-transform: uppercase;
     transition: background 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .auth-page-layout {
+        align-items: flex-start;
+        padding: 58px 14px 28px;
+        overflow-x: hidden;
+    }
+
+    .auth-card,
+    .input-wrapper,
+    .input-group {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .input-group input[type="date"] {
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .back-link-mobile {
+        margin: 18px 0 0;
+        padding-top: 14px;
+    }
 }
 
 
