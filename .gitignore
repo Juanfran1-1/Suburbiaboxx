@@ -1,0 +1,9 @@
+dist/
+node_modules/
+
+panel/dist/
+panel/node_modules/
+panel/.env
+
+*.log
+.DS_Store

@@ -1,0 +1,144 @@
+.historia-page {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(0, 0, 0, 0.95) 20%, 
+        rgba(0, 0, 0, 0.7) 100%
+    ), 
+    url('../../assets/bolsas_suburbia.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+    z-index: 1;
+    position: relative;
+}
+
+/* Agregamos una viñeta para oscurecer los bordes (opcional pero recomendado) */
+.historia-page::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+}
+
+/* Aseguramos que el contenido esté por encima de la viñeta */
+.historia-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 80px; /* Más espacio entre texto y video */
+    align-items: center;
+    width: 100%;
+    max-width: 1250px;
+}
+
+/* --- TEXTO --- */
+.historia-text {
+    flex: 1;
+}
+
+.historia-title {
+    font-family: 'New Rocker', cursive;
+    color: #fff;
+    font-size: 4.5rem;
+    line-height: 1;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.historia-p {
+    color: #f1c916; /* Dorado como en tu captura */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    max-width: 450px;
+}
+
+
+/* --- VIDEO CARD --- */
+.historia-video-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.video-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+}
+
+.video-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    overflow: hidden;
+}
+
+.video-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-button::after {
+    content: '';
+    border-style: solid;
+    border-width: 10px 0 10px 20px;
+    border-color: transparent transparent transparent #fff;
+}
+
+.video-info {
+    margin-top: 20px;
+}
+
+.video-info h3 {
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.video-info p {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .historia-container { flex-direction: column; text-align: center; padding: 50px 0; }
+    .historia-p { margin: 0 auto 20px; }
+    .social-icons { justify-content: center; }
+}

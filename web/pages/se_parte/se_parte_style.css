@@ -1,0 +1,444 @@
+/* --- ESTILOS GENERALES (SE PARTE) --- */
+
+.main-title {
+    font-family: new rocker;
+    font-size: 6rem; 
+    line-height: 0.9; 
+    color: #f1c916;  
+    margin-bottom: 10px;
+}
+
+.hero-content {
+    text-align: center; /* Centra el texto */
+    color: white;       /* resalta sobre el fondo */
+    z-index: 2;
+}
+
+.Botones_experiencia {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 30px;              /* Espacio entre los dos botones */
+    margin-top: 40px;       /* Distancia con el título principal */
+}
+
+.Botones_experiencia a {
+    text-decoration: none;
+    padding: 15px 30px;
+    border: 2px solid #f1c916; /* Borde dorado original */
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.4s; /* Transición suave */
+    border-radius: 5px;
+}
+
+.btn-experiencia:hover {
+    background-color: rgba(19, 228, 12, 0.4) !important; 
+    border-color: #51cc0a !important; 
+    box-shadow: 0 0 20px rgba(44, 179, 3, 0.5);
+    color: white !important;
+}
+
+.btn-iniciacion:hover {
+    background-color: rgba(255, 0, 0, 0.4) !important; 
+    border-color: #ff0000 !important; 
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    color: white !important;
+}
+
+/* --- MODAL (CONTENEDOR) --- */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Un poco más oscuro para mejor contraste */
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- ESTILO DEL MODAL (AJUSTE PERFECTO) --- */
+
+.modal-content {
+    background-color: #000;
+    margin: 5% auto; 
+    width: 80%; 
+    max-width: 1000px; 
+    border: 3px solid #f1c916;
+    border-radius: 10px;
+    position: relative;
+    padding: 0; /* ¡IMPORTANTE: Sacamos el padding para que el video pegue al borde! */
+    overflow: hidden; 
+
+    aspect-ratio: 16 / 9; 
+    
+    /* Aseguramos que el contenido adentro se alinee */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para el video o iframe adentro */
+.modal-content video,
+.modal-content iframe {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover; /* Asegura que el video llene el contenedor sin deformarse */
+    border: none;
+}
+
+/* --- BOTÓN CERRAR (OPTIMIZADO PARA MÓVIL) --- */
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1001; /* Siempre por encima de todo */
+    background: rgba(0, 0, 0, 0.6); /* Fondo para que se vea siempre sobre el video */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #f1c916;
+    transform: scale(1.1);
+}
+
+/* --- PANTALLAS INTERNAS --- */
+
+.pre-video-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+.play-icon {
+    font-size: 30px;
+    color: #f1c916;
+    margin-bottom: 0px;
+}
+
+.pre-video-screen p {
+    color: #fff;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
+
+.btn-start {
+    background-color: #f1c916;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.video-wrapper {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    position: relative;
+}
+
+video {
+    width: 100%;
+    max-height: 75vh; /* Evita que en móviles tape toda la pantalla */
+    outline: none;
+    display: block;
+}
+
+.conversion-plate {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+}
+
+.conversion-plate h2 {
+    color: #f1c916;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.conversion-plate p {
+    color: #ddd;
+    font-size: 1.1rem;
+    max-width: 500px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.whatsapp-btn {
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.05);
+}
+
+.coordinator-info {
+    margin-top: 10px;
+    font-family: sans-serif;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.phone-link {
+    color: #f1c916;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* 1. Fondo fijo con más carácter */
+body {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('../../assets/suburbia.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.label-yellow {
+    color: #f1c916;
+    font-family: sans-serif;
+    font-weight: 900;
+    letter-spacing: 10px; /* Letras bien separadas */
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.system-title-down {
+    font-family: 'New Rocker', cursive;
+    color: #fff;
+    font-size: 5.5rem; /* Tamaño imponente */
+    line-height: 0.85;
+    margin: 15px 0;
+    letter-spacing: -2px;
+}
+
+.subtitle-italic {
+    color: #666; /* Gris más oscuro para que no compita */
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 80px; /* Mucho espacio antes de los pasos */
+}
+
+/* 2. La sección de abajo con un desenfoque sutil (Glassmorphism) */
+.info-section {
+    min-height: 100vh;
+    padding: 120px 10%; /* Mucho espacio a los costados */
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), #000 30%); /* El fondo se funde a negro */
+}
+
+.info-container {
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* 3. Estilo para los números (Brillo dorado) */
+.num {
+    color: #f1c916;
+    font-family: 'New Rocker';
+    font-size: 2.8rem;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(241, 201, 22, 0.4); /* Brillo suave */
+}
+
+/* 4. Título con más peso */
+.system-title-down {
+    font-family: 'New Rocker';
+    color: #fff;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    margin: 15px 0;
+    text-transform: uppercase;
+}
+
+/* 5. Los ítems con una línea divisoria sutil */
+.step {
+    display: flex;
+    color: #fff;
+    gap: 25px;
+    padding: 20px;
+    border-left: 1px solid rgba(241, 201, 22, 0.2); /* Línea lateral fina */
+    transition: 0.3s;
+}
+
+/* --- ESTILOS DE LA FLECHA --- */
+.scroll-hint {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.scroll-hint span {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: #f1c916;
+}
+
+/* Animación del "mouse" */
+.mouse {
+    width: 25px;
+    height: 40px;
+    border: 2px solid #f1c916;
+    border-radius: 20px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: #f1c916;
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+    0% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, 15px); }
+}
+
+
+/* --- RESPONSIVE FINAL (MOBILE) --- */
+
+/* RESPONSIVE SE PARTE */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 3.5rem !important; /* Achicamos el "SÉ PARTE" */
+        margin-top: 50px;
+    }
+
+    .Botones_experiencia {
+        flex-direction: column !important; /* Uno arriba del otro */
+        gap: 15px !important;
+        padding: 0 20px;
+    }
+
+    .Botones_experiencia a {
+        width: 100%;
+        text-align: center;
+        padding: 20px !important; /* Más grandes para el dedo */
+    }
+
+    .modal-content {
+        width: 92% !important;
+        max-height: 95vh !important; /* Aprovechamos casi toda la pantalla */
+        height: auto !important;
+        padding: 40px 15px 15px 15px !important; /* Más espacio arriba para la X */
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center; /* Centra todo verticalmente */
+        margin: auto !important;
+    }
+
+    /* El video mantiene su forma arriba */
+    #video-player {
+        aspect-ratio: 16 / 9;
+        width: 100% !important;
+        height: auto !important;
+        position: sticky; /* Opcional: mantiene el video arriba mientras scrolleas */
+        top: 0;
+        z-index: 5;
+    }
+
+    /* El botón de cerrar (X) necesita un ajuste porque sacamos el padding */
+    .close-btn {
+        top: 10px !important;
+        right: 15px !important;
+        font-size: 35px !important;
+        color: #fff;
+        background-color: rgba(0,0,0,0.5); /* Fondo semitransparente para que se vea sobre el video */
+        padding: 0 5px;
+        border-radius: 5px;
+        z-index: 10; /* Arriba del video */
+    }
+
+    .conversion-plate {
+        gap: 5px !important; /* Espacio mínimo entre elementos */
+        padding: 0 !important;
+    }
+
+    .conversion-plate h2 {
+        font-size: 1.2rem !important; /* Título más pequeño */
+        line-height: 1 !important;
+        margin-bottom: 5px !important;
+    }
+
+    .conversion-plate p {
+        font-size: 0.85rem !important; /* Texto más pequeño */
+        line-height: 1.2 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .whatsapp-btn {
+        padding: 8px 15px !important; /* Menos alto */
+        font-size: 0.8rem !important;
+        margin-top: 0 !important;
+    }
+
+    .whatsapp-btn img {
+        width: 18px !important; /* Icono más chico */
+    }
+
+    .coordinator-info {
+        margin-top: 10px !important;
+        font-size: 0.65rem !important; /* Info del coordinador bien chiquita */
+        line-height: 1.1 !important;
+    }
+
+    .phone-link {
+        display: inline-block;
+        margin-top: 2px;
+    }
+}

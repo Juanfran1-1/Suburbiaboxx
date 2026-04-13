@@ -1,0 +1,403 @@
+.progreso-box {
+    width: 95%;
+    max-width: 1100px;
+    min-height: 72vh;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    color: #fff;
+}
+
+.progreso-header span,
+.progreso-selected-card span,
+.progreso-summary-card span {
+    color: #fbff00;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.progreso-header h1 {
+    margin: 4px 0 0;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.progreso-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+}
+
+.progreso-primary-btn {
+    border: none;
+    border-radius: 8px;
+    background: #fbff00;
+    color: #000;
+    padding: 12px 18px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.progreso-primary-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.progreso-primary-btn.full {
+    width: 100%;
+}
+
+.progreso-gestion-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 18px;
+    min-height: 0;
+}
+
+.progreso-alumnos-panel,
+.progreso-main-panel,
+.progreso-section,
+.progreso-summary-card,
+.progreso-selected-card {
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.progreso-alumnos-panel {
+    padding: 16px;
+}
+
+.progreso-alumnos-panel input {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    padding: 12px 14px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.progreso-alumnos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 390px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.progreso-alumno-btn {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    min-height: 58px;
+    padding: 10px 12px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.progreso-alumno-btn.active {
+    background: rgba(251, 255, 0, 0.18);
+    border-color: rgba(251, 255, 0, 0.55);
+}
+
+.progreso-alumno-btn strong,
+.progreso-alumno-btn small {
+    display: block;
+}
+
+.progreso-alumno-btn small {
+    color: #bfbfbf;
+    margin-top: 4px;
+    font-weight: 800;
+}
+
+.progreso-main-panel {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.progreso-selected-card,
+.progreso-summary-card,
+.progreso-section {
+    padding: 18px;
+}
+
+.progreso-selected-card h2,
+.progreso-summary-card h2,
+.progreso-section h2 {
+    margin: 6px 0 0;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.progreso-summary-card p {
+    margin: 12px 0;
+    color: #d9d9d9;
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+.progreso-summary-card small {
+    color: #fbff00;
+    font-weight: 900;
+}
+
+.progreso-section h2 {
+    margin-bottom: 14px;
+    color: #fff;
+}
+
+.progreso-scroll-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 235px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.progreso-alumnos-list::-webkit-scrollbar,
+.progreso-scroll-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.progreso-alumnos-list::-webkit-scrollbar-thumb,
+.progreso-scroll-list::-webkit-scrollbar-thumb {
+    background: rgba(251, 255, 0, 0.45);
+    border-radius: 999px;
+}
+
+.progreso-alumnos-list::-webkit-scrollbar-track,
+.progreso-scroll-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+}
+
+.progreso-class-item,
+.progreso-note-item {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.progreso-class-item {
+    padding: 14px;
+}
+
+.progreso-class-item strong,
+.progreso-class-item span,
+.progreso-class-item small {
+    display: block;
+}
+
+.progreso-class-item strong {
+    font-weight: 900;
+}
+
+.progreso-class-item span {
+    color: #fbff00;
+    margin-top: 6px;
+    font-weight: 900;
+}
+
+.progreso-class-item small {
+    color: #bfbfbf;
+    margin-top: 6px;
+    font-weight: 800;
+}
+
+.progreso-note-head {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 28px 1fr 96px;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.progreso-note-head span {
+    color: #fbff00;
+    font-weight: 900;
+}
+
+.progreso-note-head strong {
+    font-weight: 900;
+}
+
+.progreso-note-head small {
+    justify-self: end;
+    background: #fbff00;
+    color: #000;
+    border-radius: 8px;
+    padding: 7px 9px;
+    font-weight: 900;
+}
+
+.progreso-note-body {
+    padding: 0 14px 16px 52px;
+}
+
+.progreso-note-body h4 {
+    margin: 0 0 8px;
+    color: #fbff00;
+    font-weight: 900;
+}
+
+.progreso-note-body p {
+    margin: 0;
+    color: #d7d7d7;
+    line-height: 1.45;
+    font-weight: 700;
+}
+
+.progreso-note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.progreso-note-actions button {
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.progreso-note-actions button.danger {
+    color: #ff6b6b;
+}
+
+.progreso-empty {
+    padding: 20px;
+    color: #bfbfbf;
+    font-weight: 900;
+    text-align: center;
+}
+
+.progreso-modal {
+    width: 92%;
+    max-width: 620px;
+    max-height: 86vh;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 18px;
+    padding: 24px 20px;
+    color: #fff;
+    background: rgba(18, 18, 18, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.progreso-modal h2 {
+    margin: 0 0 18px;
+    color: #fbff00;
+    font-weight: 900;
+}
+
+.progreso-modal-field {
+    margin-bottom: 14px;
+}
+
+.progreso-modal-field label {
+    display: block;
+    color: #bfbfbf;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.progreso-modal-field p,
+.progreso-modal-field input,
+.progreso-modal-field select,
+.progreso-modal-field textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    padding: 12px 14px;
+    font-weight: 800;
+}
+
+.progreso-modal-field option {
+    background: #111;
+    color: #fff;
+}
+
+.progreso-modal-field textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+@media (max-width: 768px) {
+    .progreso-box {
+        width: 100%;
+        padding: 18px 14px 22px;
+        border-radius: 18px;
+    }
+
+    .progreso-header-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .progreso-gestion-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .progreso-alumnos-list {
+        max-height: 340px;
+    }
+
+    .progreso-scroll-list {
+        max-height: 220px;
+        padding-right: 2px;
+    }
+
+    .progreso-note-head {
+        grid-template-columns: 24px 1fr;
+    }
+
+    .progreso-note-head small {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .progreso-note-body {
+        padding-left: 48px;
+    }
+
+    .progreso-modal {
+        width: 95%;
+        max-height: calc(100dvh - 112px);
+    }
+
+    .progreso-modal .close-btn {
+        top: 10px;
+        right: 12px;
+    }
+}

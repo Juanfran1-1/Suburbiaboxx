@@ -1,0 +1,620 @@
+.misclases-box {
+    width: 95%;
+    max-width: 1100px;
+    min-height: 72vh;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    color: #fff;
+}
+
+.misclases-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.dias-selector {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.month-date-selector {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    gap: 12px;
+}
+
+.month-date-content {
+    min-width: 0;
+}
+
+.month-date-title {
+    color: #fbff00;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.month-days-strip {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.month-days-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.month-day-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 64px;
+}
+
+.month-day-btn span {
+    font-size: 1rem;
+}
+
+.month-day-btn small {
+    font-size: 0.72rem;
+    font-weight: 900;
+}
+
+.month-arrow-btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.month-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.month-arrow-btn:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+}
+
+.month-arrow-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.dia-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.25s ease;
+    min-width: 72px;
+}
+
+.dia-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.dia-btn.active {
+    background: #fbff00;
+    color: #000;
+}
+
+.clases-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: min(58vh, 620px);
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.clases-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.clases-list::-webkit-scrollbar-thumb {
+    background: rgba(251, 255, 0, 0.45);
+    border-radius: 999px;
+}
+
+.clases-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+}
+
+.class-card {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr;
+    gap: 20px;
+    align-items: center;
+    padding: 22px 24px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.class-mobile-main,
+.class-card-extra,
+.class-card-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.class-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.class-label {
+    color: #bfbfbf;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.class-value {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.class-card-right {
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.class-action-btn {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.25s ease;
+    min-width: 150px;
+}
+
+.class-action-btn.asistir {
+    background: #fbff00;
+    color: #000;
+}
+
+.class-action-btn.cancelar {
+    background: #ff2020;
+    color: #fff;
+}
+
+.class-action-btn.completado {
+    background: #6a6a6a;
+    color: #f1f1f1;
+}
+
+.class-action-btn:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.sin-clases-msg {
+    text-align: center;
+    padding: 40px 20px;
+    font-weight: 900;
+    color: #bfbfbf;
+    letter-spacing: 1px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 18px;
+}
+
+.class-students-modal {
+    width: 90%;
+    max-width: 700px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 28px 22px;
+    position: relative;
+    color: #fff;
+}
+
+.students-modal-title {
+    margin: 0 0 20px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fbff00;
+}
+
+.students-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.student-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 14px 16px;
+    border-radius: 12px;
+    gap: 10px;
+}
+
+.student-name {
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.student-name small {
+    color: #fbff00;
+    margin-right: 8px;
+}
+
+.student-extra {
+    color: #cfcfcf;
+    font-size: 0.9rem;
+}
+
+.clases-admin-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+}
+
+.manage-classes-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 10;
+    min-width: 230px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+}
+
+.manage-classes-dropdown button {
+    border: none;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    padding: 13px 14px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.manage-classes-dropdown button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.gestion-mode-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.gestion-mode-header span {
+    color: #fbff00;
+    font-weight: 900;
+}
+
+.gestion-mode-header button {
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    padding: 10px 12px;
+}
+
+.create-class-modal {
+    width: 92%;
+    max-width: 760px;
+}
+
+.create-class-modal .input-group label {
+    color: #fff;
+}
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+}
+
+.horario-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.horario-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.horario-btn.active {
+    background: #fbff00;
+    color: #000;
+}
+
+.horarios-empty {
+    background: rgba(255, 255, 255, 0.06);
+    color: #cfcfcf;
+    border-radius: 10px;
+    padding: 14px;
+    font-weight: 800;
+}
+
+.class-card-admin-wrapper {
+    position: relative;
+}
+
+.class-status-badge {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    background: #6a6a6a;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 900;
+    padding: 6px 10px;
+    border-radius: 999px;
+    z-index: 2;
+}
+
+.class-actions-menu {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 3;
+}
+
+.class-dots-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.class-actions-dropdown {
+    position: absolute;
+    right: 0;
+    top: 44px;
+    min-width: 160px;
+    background: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.class-actions-dropdown button {
+    border: none;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.class-actions-dropdown button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.class-actions-dropdown button.danger {
+    color: #ff6b6b;
+}
+
+.class-warning-box {
+    background: rgba(251, 255, 0, 0.12);
+    border: 1px solid rgba(251, 255, 0, 0.35);
+    color: #fbff00;
+    font-weight: 800;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+.disabled-grid {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .misclases-box {
+        width: 100%;
+        min-height: auto;
+        padding: 18px 14px 22px;
+        border-radius: 18px;
+        gap: 18px;
+    }
+
+    .misclases-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .misclases-header h1 {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    .dias-selector {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .month-date-selector {
+        grid-template-columns: 38px 1fr 38px;
+        gap: 8px;
+    }
+
+    .month-arrow-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .dias-selector::-webkit-scrollbar {
+        display: none;
+    }
+
+    .dia-btn {
+        flex: 0 0 auto;
+        min-width: 68px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+    }
+
+    .clases-list {
+        gap: 14px;
+        max-height: 56vh;
+        padding-right: 2px;
+    }
+
+    .class-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 18px 16px;
+        border-radius: 16px;
+    }
+
+    .class-mobile-main,
+    .class-card-extra,
+    .class-card-right {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .class-mobile-main {
+        order: 1;
+    }
+
+    .class-card-extra {
+        order: 2;
+    }
+
+    .class-card-right {
+        order: 3;
+        align-items: center;
+    }
+
+    .class-field {
+        gap: 4px;
+    }
+
+    .class-label {
+        font-size: 0.72rem;
+    }
+
+    .class-value {
+        font-size: 0.98rem;
+    }
+
+    .class-mobile-main .class-field:first-child .class-value {
+        font-size: 1.1rem;
+        font-weight: 900;
+    }
+
+    .class-action-btn {
+        width: 100%;
+        max-width: 220px;
+        min-width: unset;
+        padding: 13px 16px;
+        font-size: 0.95rem;
+    }
+
+    .sin-clases-msg {
+        padding: 28px 16px;
+        font-size: 0.9rem;
+    }
+
+        .class-students-modal {
+        width: 94%;
+        padding: 22px 16px;
+    }
+
+    .students-modal-title {
+        font-size: 1.15rem;
+        padding-right: 30px;
+    }
+
+    .student-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .clases-admin-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .manage-classes-dropdown {
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .gestion-mode-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

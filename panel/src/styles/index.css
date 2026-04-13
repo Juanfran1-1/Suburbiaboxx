@@ -1,0 +1,81 @@
+/* src/styles/index.css */
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
+
+:root {
+    --amarillo-suburbia: #fbff00;
+    --negro-puro: #000000;
+    --gris-oscuro: #121212;
+    --rojo-error: #ff0000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Fundamental para que nada se desborde */
+}
+
+html, body {
+    width: 100%;
+    /* 100dvh se adapta a las barras de los navegadores móviles */
+    min-height: 100dvh; 
+    background-color: var(--negro-puro);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden; /* Evita el scroll lateral accidental */
+}
+
+/* --- CLASES DE UTILIDAD GLOBAL --- */
+
+.gold-text {
+    color: #f1c916;
+    font-family: 'New Rocker', cursive;
+}
+
+/* 1. Contenedor Maestro para todas las pantallas (Login, Register, Dashboard) */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: 20px;
+    width: 100%;
+}
+
+/* 2. Regla para las "Cards" (Login, Register, Credencial) */
+.auth-card, .cred-card-suburbia {
+    width: 100%;
+    max-width: 95%; /* Por defecto en mobile */
+    transition: transform 0.3s ease;
+}
+
+/* --- MEDIA QUERIES GLOBALES (Todos los casos) --- */
+
+/* Caso: Escritorio / Tablet Pro */
+@media (min-width: 769px) {
+    .auth-card { max-width: 450px; }
+    .register-card { max-width: 550px; }
+    .cred-card-suburbia { max-width: 800px; }
+}
+
+/* Caso: Celular acostado (Landscape) */
+@media (orientation: landscape) and (max-height: 500px) {
+    .page-container {
+        justify-content: flex-start; /* Permite que el scroll empiece arriba */
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .auth-card, .cred-card-suburbia {
+        transform: scale(0.9); /* Achicamos un poco para que entre en el alto del celu */
+        margin-bottom: 30px;
+    }
+}
+
+/* Caso: Celulares ultra chicos (iPhone SE, etc) */
+@media (max-width: 380px) {
+    h1 { font-size: 1.5rem !important; }
+    .auth-card, .cred-card-suburbia {
+        padding: 20px 15px !important;
+    }
+}

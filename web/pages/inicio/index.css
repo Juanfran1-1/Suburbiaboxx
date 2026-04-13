@@ -1,0 +1,578 @@
+
+.hero-content {
+    text-align: center; /* Centra el texto */
+    color: white;       /* resalta sobre el fondo */
+    z-index: 2;
+}
+.main-title {
+    font-family: new rocker;
+    font-size: 8rem; 
+    line-height: 0.9; 
+    color: #f1c916;  
+    margin-bottom: 10px;
+}
+
+.hero-content h2 {
+    font-size: 1.5rem; /* Achicamos un poco el slogan para que el H1 destaque */
+    letter-spacing: 8px;
+    font-weight: 300; /* Si podés, que sea más fina la letra */
+}
+
+.hero {
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    min-height: 100vh;
+    padding: 0 10%; /* Espacio a los costados en PC */
+}
+
+
+.btn-unite {
+    display: inline-block;
+    padding: 18px 45px;
+    background-color: #f1c916;
+    color: #000;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.6rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    border: 2px solid #f1c916;
+    margin-top: 20px;
+}
+
+.btn-unite:hover {
+    background-color: transparent;
+    color: #f1c916;
+    transform: scale(1.05);
+}
+
+
+/* --- INDICADOR DE SCROLL --- */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    transition: opacity 0.5s ease; /* Para que desaparezca suave */
+}
+
+.arrow {
+    width: 40px;
+    height: 40px;
+    border-right: 3px solid #f1c916;
+    border-bottom: 3px solid #f1c916;
+    transform: rotate(45deg);
+    animation: bounce 6s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+    40% { transform: translateY(-10px) rotate(45deg); }
+    60% { transform: translateY(-5px) rotate(45deg); }
+}
+
+/* Clase para ocultar cuando el usuario scrollea */
+.scroll-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* Base para que el carrusel nunca mida 0 */
+.info-carousel {
+    min-height: 250px;
+    background-color: #111; /* Fondo oscuro por si la foto falla */
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+/* Contenedores Generales */
+.info-section, .location-section {
+    padding: 80px 10%;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.info-container, .location-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+/* Texto a la izquierda */
+.info-text {
+    flex: 1;
+}
+
+.info-text h2 {
+    color: #f1c916;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.info-text h2 span { color: #fff; font-size: 1.8rem; }
+
+.info-text p {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    text-align: match-parent;
+}
+
+/* El contenedor ahora tiene una altura fija */
+.info-carousel {
+    flex: 1;
+    height: 450px; /* Ajustá este valor según tus 11 renglones */
+    border: 2px solid #f1c916;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* Para que las fotos se apilen */
+    background-color: #111; /* Fondo oscuro por si carga una foto lenta */
+}
+
+.carousel-track {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Corta la foto para que llene el contenedor */
+    position: absolute; /* Apila una encima de otra */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Todas invisibles por defecto */
+    transition: opacity 0.2s ease-in-out; /* El fundido suave */
+}
+
+/* La primera foto tiene que ser visible al arrancar */
+.carousel-track img:first-child {
+    opacity: 1;
+}
+
+
+/* Contenedor principal */
+.location-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px 0;
+}
+
+/* Cada columna (Horarios y Mapa) */
+.location-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px; /* Para que no se estiren demasiado en pantallas grandes */
+}
+
+/* Los encabezados (Títulos arriba de las cajas) */
+.column-header {
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.column-header p {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 0;
+    text-align: center;
+}
+
+/* El texto de la dirección específicamente */
+.address-text-styled {
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #f1c916;
+    padding-bottom: 2px;
+}
+
+/* Las cajas de contenido (donde va la imagen y el iframe) */
+.box-style {
+    width: 100%;
+    background-color: #111;
+    border: 2px solid #f1c916;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Quitamos el height fijo de aquí para que no afecte a todos por igual */
+}
+
+.box-style img {
+    width: 100%;
+    height: auto; /* La imagen mantiene su proporción */
+    display: block; /* Saca espacios extra abajo de la foto */
+    object-fit: contain; 
+}
+
+
+
+
+/* ANIMACIÓN DE SCROLL */
+/* Estado base de todos los que van a aparecer */
+.fade-in {
+    opacity: 0;
+    transition: all 1s ease-out;
+}
+
+/* Variaciones de dirección */
+.from-left { transform: translateX(-50px); }  /* Viene de la izquierda */
+.from-right { transform: translateX(50px); } /* Viene de la derecha */
+.fade-in:not(.from-left):not(.from-right) { transform: translateY(30px); } /* El mapa y titulo suben normal */
+
+/* Cuando el JS activa la clase .appear */
+.fade-in.appear {
+    opacity: 1;
+    transform: translate(0, 0); /* Vuelve a su posición original (sea X o Y) */
+}
+
+/* REGLA PARA LA PLANILLA (Se adapta a la foto) */
+.location-column:first-child .box-style {
+    height: auto !important; 
+}
+
+.location-column:first-child .box-style img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* REGLA PARA EL MAPA (Altura fija para que se vea) */
+.location-column:last-child .box-style {
+    height: 300px !important; 
+}
+
+.location-column:last-child .box-style iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Fondo oscuro que cubre TODA la pantalla */
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95); /* Negro casi total */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* Por encima de la navbar y todo */
+    cursor: zoom-out;
+}
+
+/* La imagen dentro del zoom */
+.zoom-img-full {
+    max-width: 95%;
+    max-height: 90%;
+    object-fit: contain; /* Mantiene la proporción sin deformar */
+    border: 2px solid #f1c916;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(241, 201, 22, 0.2);
+    animation: zoomIn 0.2s ease-out; /* Efecto suave de apertura */
+}
+
+/* Botón de cerrar (la X) */
+.zoom-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1c916;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Animación para que no aparezca de golpe */
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Bloquear el scroll del cuerpo cuando el zoom está abierto (Opcional) */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* --- ESTILOS DEL MODAL ZOOM --- */
+.modal-zoom {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px); /* Desenfoque de fondo */
+    cursor: zoom-out;
+}
+
+.modal-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+#img-expandida {
+    max-width: 100%;
+    max-height: 85vh;
+    border: 2px solid #f1c916;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+    animation: zoomAnim 0.3s ease-out;
+}
+
+.cerrar-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1c916;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes zoomAnim {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (min-width: 1024px) {
+    .location-container {
+        display: flex;
+        justify-content: space-between; 
+        align-items: flex-start;
+        max-width: 90%; 
+        margin: 0 auto;
+        gap: 80px; 
+        padding: 50px 0;
+    }
+
+    .location-column {
+        flex: 1; 
+        max-width: 550px; 
+    }
+
+    .location-column:first-child {
+        display: flex;
+        flex-direction: center;
+        align-items: center; /* Horarios más a la izquierda */
+    }
+
+    .location-column:last-child {
+        display: flex;
+        flex-direction: center;
+        align-items: center; /* Mapa más a la derecha */
+    }
+}
+
+/* RESPONSIVE INDEX */
+
+@media (max-width: 992px) {
+    .main-title {
+        font-size: 4rem;
+    }
+
+    .info-container, .location-container {
+        display: flex;
+        flex-direction: column; 
+        gap: 30px;
+        padding: 40px 5%;
+    }
+
+    .info-carousel {
+        width: 100%;
+        height: 350px; /* Si no tiene altura, no se ve nada */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .box-style {
+        height: auto;
+    }
+
+        /* Contenedor principal: asegura que las columnas ocupen todo el ancho disponible */
+    .location-container {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 0 !important;
+        gap: 20px !important; /* Espacio entre planilla y mapa */
+    }
+
+    /* Cada columna (Horarios y Mapa) */
+    .location-column {
+        width: 100% !important; /* Ambas al 100% del ancho del celular */
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    /* Las cajas que envuelven la imagen y el mapa */
+    .location-column .box-style {
+        width: 100% !important; /* Ancho total */
+        height: 300px !important; /* Alto fijo para que sean iguales */
+        display: flex !important;
+        overflow: hidden;
+        border: 2px solid #f1c916 !important;
+        border-radius: 10px;
+    }
+
+    /* La imagen de la planilla */
+    .location-column .box-style img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important; /* Llena el ancho y alto sin deformarse */
+    }
+
+    /* El mapa */
+    .location-column .box-style iframe {
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
+    }
+
+    /* Ajuste de los títulos (NUESTROS HORARIOS / ESTAMOS EN) */
+    .column-header {
+        height: auto !important;
+        margin-bottom: 10px !important;
+    }
+
+    .column-header p {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    
+    .info-container {
+        display: block !important; 
+        padding: 10px !important;
+        margin-bottom: 0 !important; 
+    }
+
+    .info-text p {
+        color: #ccc;
+        line-height: 1.5;
+        font-size: 1rem;
+        text-align: match-parent;
+    }
+
+    .info-carousel {
+        width: 105% !important;
+        height: 500px !important;
+        margin: 40px 0 10px 0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: translateX(-5px) !important;
+    }
+
+    .carousel-track img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+    }
+    
+    .info-section, .location-section {
+        padding: 20px 5% !important;
+    }
+
+/* --- ESTA ES LA PARTE QUE ARREGLA EL MAPA --- */
+    /* Contenedor principal: asegura que las columnas ocupen todo el ancho disponible */
+    .location-container {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 0 !important;
+        gap: 20px !important; /* Espacio entre planilla y mapa */
+    }
+
+    /* Cada columna (Horarios y Mapa) */
+    .location-column {
+        width: 100% !important; /* Ambas al 100% del ancho del celular */
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    /* Las cajas que envuelven la imagen y el mapa */
+    .location-column .box-style {
+        width: 100% !important; /* Ancho total */
+        height: 300px !important; /* Alto fijo para que sean iguales */
+        display: flex !important;
+        overflow: hidden;
+        border: 2px solid #f1c916 !important;
+        border-radius: 10px;
+    }
+
+    /* La imagen de la planilla */
+    .location-column .box-style img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important; /* Llena el ancho y alto sin deformarse */
+    }
+
+    /* El mapa */
+    .location-column .box-style iframe {
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
+    }
+
+    /* Ajuste de los títulos (NUESTROS HORARIOS / ESTAMOS EN) */
+    .column-header {
+        height: auto !important;
+        margin-bottom: 10px !important;
+    }
+
+    .column-header p {
+        font-size: 1.2rem !important;
+    }
+
+    /* Ocultar botones de usuario en el header para móviles */
+    header > .Botones_usuarios { 
+        display: none !important; 
+    }
+
+    .hero {
+        padding: 0; 
+        justify-content: center; 
+    }
+
+    .hero-content {
+        align-items: center; 
+        text-align: center;
+        width: 100%;
+    }
+
+    .btn-unite {
+        width: 100%; 
+        max-width: 300px; 
+        font-size: 1.3rem;
+        padding: 15px 20px;
+    }
+
+}

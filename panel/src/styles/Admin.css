@@ -1,0 +1,649 @@
+/* src/styles/Admin.css */
+
+.admin-glass-box {
+    position: relative;
+    display: flex;
+    width: 95%;
+    max-width: 950px;
+    height: 80vh; /* Para que se vea el fondo suburbiaxx.jpg arriba y abajo */
+    background: rgba(255, 255, 255, 0.05); /* Transparencia estilo vidrio */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.admin-gestion-toggle,
+.admin-menu-backdrop {
+    display: none;
+}
+
+/* Sidebar del dibujo */
+.admin-aside-menu {
+    width: 200px;
+    background: rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+}
+
+.aside-title {
+    font-weight: 900;
+    color: #fbff00;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.aside-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    text-align: left;
+    font-weight: 900;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.aside-btn.active {
+    color: #fff;
+    background: rgba(251, 255, 0, 0.2);
+    border-left: 4px solid #fbff00;
+}
+
+.admin-register-user-btn {
+    margin-top: auto;
+    border: 1px solid rgba(251, 255, 0, 0.7);
+    border-radius: 8px;
+    background: #fbff00;
+    color: #000;
+    padding: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Lista del dibujo */
+.admin-list-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.list-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.list-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 10px;
+    border-bottom: 2px solid #fbff00; /* La línea amarilla del dibujo */
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #aaa;
+}
+
+.list-scroll {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Las líneas entre alumnos */
+}
+
+.user-info {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.user-role {
+    color: #fbff00;
+    font-weight: 700;
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+
+.user-info small { color: #fbff00; margin-right: 10px; }
+
+.btn-ver-planilla {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 6px 12px;
+    font-weight: 900;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.user-actions-menu {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.user-dots-btn {
+    width: 38px;
+    height: 34px;
+    border: none;
+    border-radius: 6px;
+    background: #fff;
+    color: #000;
+    font-weight: 900;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.user-actions-dropdown {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    min-width: 165px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+}
+
+.user-actions-dropdown button {
+    border: none;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    padding: 13px 14px;
+    font-size: 0.78rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.user-actions-dropdown button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.user-actions-dropdown button.danger {
+    color: #ff6b6b;
+}
+
+/* Modal igual al Alumno */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    backdrop-filter: blur(10px);
+}
+.close-btn {
+    position: absolute; top: -40px; right: 0;
+    background: #fbff00; border: none; padding: 5px 15px; font-weight: 900;
+}
+
+.empty-msg {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.admin-planilla-modal {
+    width: 92%;
+    max-width: 980px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: rgba(18, 18, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    padding: 26px 22px;
+    position: relative;
+    color: #fff;
+}
+
+.admin-planilla-modal .close-btn,
+.admin-user-modal .close-btn {
+    top: 10px;
+    right: 12px;
+    z-index: 2;
+}
+
+.admin-user-modal {
+    position: relative;
+    width: 92%;
+    max-width: 720px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: rgba(18, 18, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 26px 22px;
+    color: #fff;
+}
+
+.admin-user-modal h2 {
+    margin: 0 0 8px;
+    color: #fbff00;
+    font-size: 1.35rem;
+    font-weight: 900;
+}
+
+.admin-user-modal-hint {
+    margin: 0 0 20px;
+    color: #bfbfbf;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.admin-user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.admin-user-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.admin-user-form-grid .full {
+    grid-column: 1 / -1;
+}
+
+.admin-user-form-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    color: #bfbfbf;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.admin-user-form-grid input,
+.admin-user-form-grid select {
+    min-height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    padding: 0 12px;
+    font-weight: 800;
+}
+
+.admin-phone-field .PhoneInput {
+    min-height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0 12px;
+}
+
+.admin-phone-field .PhoneInputInput {
+    min-height: 42px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-weight: 800;
+    outline: none;
+}
+
+.admin-phone-field .PhoneInputCountrySelect {
+    color: #000;
+}
+
+.admin-user-form-grid select option {
+    background: #111;
+    color: #fff;
+}
+
+.admin-user-submit {
+    min-height: 46px;
+    border: none;
+    border-radius: 8px;
+    background: #fbff00;
+    color: #000;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.admin-user-submit:disabled,
+.admin-user-form-grid input:disabled,
+.admin-user-form-grid select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-planilla-loading {
+    text-align: center;
+    padding: 40px 20px;
+    font-weight: 900;
+}
+
+.admin-planilla-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-planilla-avatar {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fbff00;
+}
+
+.admin-planilla-header-info h2 {
+    margin: 0 0 6px;
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+
+.admin-planilla-header-info span {
+    color: #fbff00;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.admin-planilla-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.admin-planilla-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.admin-planilla-card h3 {
+    margin: 0 0 16px;
+    color: #fbff00;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.admin-planilla-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+}
+
+.admin-planilla-grid .full {
+    grid-column: 1 / -1;
+}
+
+.admin-planilla-grid label {
+    display: block;
+    font-size: 0.75rem;
+    color: #bfbfbf;
+    font-weight: 900;
+    margin-bottom: 6px;
+    letter-spacing: 0.8px;
+}
+
+.admin-planilla-grid p {
+    margin: 0;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 12px 14px;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.admin-archivos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-archivo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 12px 14px;
+    border-radius: 12px;
+}
+
+.admin-archivo-item strong {
+    display: block;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.admin-archivo-item small {
+    color: #bfbfbf;
+    font-weight: 800;
+}
+
+.admin-clases-asignadas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-clase-asignada-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 12px 14px;
+    border-radius: 12px;
+}
+
+.admin-clase-asignada-item strong {
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.admin-clase-asignada-item span {
+    color: #fbff00;
+    font-weight: 900;
+    text-align: right;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .admin-glass-box {
+        width: 100%;
+        min-height: 72vh;
+        height: auto;
+        overflow: visible;
+        flex-direction: column;
+        border-radius: 18px;
+    }
+
+    .admin-gestion-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        align-self: flex-start;
+        margin: 14px 14px 0;
+        padding: 10px 12px;
+        border: none;
+        border-radius: 6px;
+        background: rgba(251, 255, 0, 0.25);
+        color: #fff;
+        font-weight: 900;
+        cursor: pointer;
+        letter-spacing: 1px;
+        z-index: 12;
+    }
+
+    .admin-gestion-bars {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .admin-gestion-bars span {
+        width: 18px;
+        height: 2px;
+        background: #fbff00;
+        border-radius: 999px;
+    }
+
+    .admin-menu-backdrop {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 8;
+        border: none;
+        background: rgba(0, 0, 0, 0.92);
+        cursor: pointer;
+    }
+
+    .admin-aside-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: min(78vw, 260px);
+        height: 100%;
+        z-index: 10;
+        transform: translateX(-105%);
+        transition: transform 0.25s ease;
+        border-right: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0, 0, 0, 0.88);
+        box-shadow: 18px 0 36px rgba(0, 0, 0, 0.45);
+        padding-top: 66px;
+    }
+
+    .admin-register-user-btn {
+        margin-top: 18px;
+    }
+
+    .admin-aside-menu.is-open {
+        transform: translateX(0);
+    }
+
+    .aside-title {
+        margin-bottom: 12px;
+    }
+
+    .admin-list-container {
+        width: 100%;
+        padding: 18px 14px 20px;
+    }
+
+    .list-title {
+        font-size: 1.05rem;
+        margin-bottom: 14px;
+        padding-left: 2px;
+    }
+
+    .list-labels {
+        padding: 0 6px 10px;
+        font-size: 0.68rem;
+    }
+
+    .row-item {
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 6px;
+    }
+
+    .user-info {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.82rem;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    .user-role {
+        display: block;
+        margin: 4px 0 0 24px;
+    }
+
+    .user-actions-dropdown {
+        right: 0;
+        min-width: 150px;
+    }
+
+    .modal-overlay {
+        align-items: flex-start;
+        padding: 84px 0 24px;
+        overflow-y: auto;
+    }
+
+    .admin-planilla-modal {
+        width: 95%;
+        max-height: calc(100dvh - 112px);
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .admin-user-modal {
+        width: 95%;
+        max-height: calc(100dvh - 112px);
+        padding: 22px 16px;
+        border-radius: 16px;
+    }
+
+    .admin-planilla-modal .close-btn,
+    .admin-user-modal .close-btn {
+        top: 10px;
+        right: 12px;
+        z-index: 2;
+    }
+
+    .admin-planilla-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .admin-planilla-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-user-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-archivo-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-clase-asignada-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-clase-asignada-item span {
+        text-align: left;
+        white-space: normal;
+    }
+}

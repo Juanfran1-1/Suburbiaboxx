@@ -1,0 +1,161 @@
+.dashboard-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                    url('../assets/suburbiaxx.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Elimina cualquier posibilidad de scroll */
+}
+
+.content-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 50px;
+}
+
+
+.confirm-modal {
+    position: relative;
+    width: 92%;
+    max-width: 420px;
+    background: rgba(20, 20, 20, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 26px 22px;
+    color: #fff;
+    text-align: center;
+}
+
+.confirm-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #fbff00;
+    color: #000;
+    padding: 5px 10px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.confirm-modal-close:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.confirm-modal-title {
+    margin: 0 0 12px;
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #fbff00;
+}
+
+.confirm-modal-message {
+    margin: 0 0 22px;
+    color: #d7d7d7;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.confirm-modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.confirm-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-weight: 900;
+    cursor: pointer;
+    min-width: 130px;
+    transition: 0.2s ease;
+}
+
+.confirm-btn.cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.confirm-btn.primary {
+    background: #fbff00;
+    color: #000;
+}
+
+.confirm-btn.danger {
+    background: #ff2f2f;
+    color: #fff;
+}
+
+.confirm-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+/* --- ADAPTACIÓN CELULAR DASHBOARD --- */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        /* En lugar de 'height: auto', usamos el alto dinámico del dispositivo */
+        min-height: 100dvh; 
+        width: 100vw;
+        
+        /* 'auto' hace la magia: si no sobra contenido, NO hay scroll. 
+           Si el contenido es más largo que la pantalla, aparece el scroll. */
+        overflow-y: auto; 
+        overflow-x: hidden;
+
+        background-attachment: scroll;
+
+        display: flex;
+        flex-direction: column;
+        
+        top: 0;
+        left: 0;
+
+        background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), 
+                        url('../assets/suburbiaxx.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .content-container {
+        /* flex-grow asegura que si hay poco contenido, ocupe el espacio pero no fuerce scroll */
+        flex: 1; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start; /* Centra la credencial verticalmente si sobra espacio */
+        padding: 20px;
+        /* Padding inferior para que el contenido no pegue contra el borde si hay scroll */
+        padding-top: 13%;
+        padding-bottom: 40px; 
+    }
+
+        .confirm-modal {
+        width: 94%;
+        padding: 22px 16px;
+    }
+
+    .confirm-modal-title {
+        font-size: 1.15rem;
+    }
+
+    .confirm-modal-actions {
+        flex-direction: column;
+    }
+
+    .confirm-btn {
+        width: 100%;
+    }
+
+}

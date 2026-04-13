@@ -1,0 +1,102 @@
+@import './Forms.css';
+
+/* src/styles/Login.css */
+
+.login-card {
+    max-width: 420px; 
+    padding: 70px 40px;
+}
+
+.login-header h1 {
+    margin-bottom: 35px;
+}
+
+.form-options {
+    text-align: left;
+    margin-top: -15px;
+    margin-bottom: 30px;
+}
+
+.forgot-pass {
+    font-size: 0.8rem;
+    color: #000000;
+    text-decoration: none;
+}
+
+
+/* Específico para Forgot Password */
+.forgot-password-page .auth-card {
+    max-width: 700px; /* Un poco más angosta que el register */
+    padding: 40px 30px;
+    border-top: 4px solid #d4ff00; /* Detalle de color arriba */
+}
+
+.forgot-password-page h1 {
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.forgot-password-page p {
+    color: #888;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+/* El botón de enviar en esta pantalla */
+.forgot-password-page .btn-submit {
+    margin-top: 20px;
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(212, 255, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.forgot-password-page .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 255, 0, 0.5);
+    background: #8d8c8c; /* Cambio a blanco al pasar el mouse para que brille */
+    color: #000000;
+}
+
+/* Estilo para el link de "Volver" */
+.forgot-password-page .auth-footer a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.forgot-password-page .auth-footer a:hover {
+    color: #454d1f;
+    text-decoration: underline;
+}
+
+
+
+.auth-form a {
+    display: block;
+    text-align: left; /* Lo tiramos a la derecha */
+    font-size: 0.85rem;
+    color: #636060; /* Gris claro para que sea sutil */
+    text-decoration: none;
+    margin-top: -10px; /* Lo acercamos al input de arriba */
+    margin-bottom: 25px; /* Espacio antes del botón */
+    transition: color 0.2s;
+    font-weight: 600;
+}
+
+.auth-form a:hover {
+    color: #000000; /* Brillo amarillo al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* Ajuste extra para el botón cuando está cargando */
+.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}

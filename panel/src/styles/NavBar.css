@@ -1,0 +1,171 @@
+/* --- CONFIG PC  --- */
+.menu-icon, .side-menu, .overlay { display: none; }
+
+@media (min-width: 975px) {
+    .nav-main {
+        width: 100%;
+        height: 100px;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.788);
+        border-bottom: 3px solid #00000000; /* Línea amarilla gruesa */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+    }
+
+    .nav-logo-circle {
+        height: 75px;
+        width: 75px;
+        border-radius: 50%;
+        border: 2px solid #000000;
+    }
+
+    .nav-center {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-center a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 900;
+        padding: 12px 25px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        
+        /* EFECTO PANEL GLASS INDIVIDUAL */
+        background: rgba(255, 255, 255, 0.1); /* Blanco muy transparente */
+        backdrop-filter: blur(10px); /* El desenfoque para el efecto vidrio */
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borde finito de cristal */
+        border-radius: 50px; /* Bordes bien redondeados tipo cápsula */
+    }
+
+    .nav-center a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid #fbff00; 
+        transform: translateY(-2px); 
+    }
+
+    .nav-center a.active {
+        background-color: #fbff00; 
+        color: #000000;
+        border: 1px solid #fbff00;
+        backdrop-filter: none; 
+    }
+
+    /* Cuarto punto: Botón cerrar sesión rojo con letras blancas */
+    .btn-logout-outline {
+        background: #ff0000;
+        color: #ffffff;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 900;
+        text-transform: uppercase;
+        box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+    }
+}
+
+/* --- CONFIG CELULAR  --- */
+@media (max-width: 1076px) {
+    .pc-only { display: none !important; }
+
+    /* --- ICONO HAMBURGUESA --- */
+    .menu-icon {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 0px;
+        cursor: pointer;
+        z-index: 1500;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0);
+        border-radius: 8px;
+    }
+    .menu-icon span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background: #fbff00; /* Amarillo Suburbia */
+        margin-bottom: 5px;
+        transition: 0.3s;
+    }
+
+    /* --- OVERLAY --- */
+    .overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        z-index: 1400;
+        backdrop-filter: blur(4px);
+    }
+    .overlay.active { display: block; }
+
+    /* --- SIDEBAR --- */
+    .side-menu {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 280px;
+        height: 100%;
+        background: #000;
+        border-right: 2px solid #979797; /* Cambié el rojo por amarillo Suburbia */
+        z-index: 1600;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 40px 20px;
+        overflow-y: auto;
+        padding-bottom: 50px;
+    }
+
+    .side-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .side-menu.open { left: 0; }
+
+    .menu-header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #222;
+        padding-bottom: 20px;
+    }
+    .menu-header img { width: 80px; border-radius: 50%; border: 2px solid #494944; margin-bottom: 10px; }
+    .menu-header h3 { color: #fcfcfc; font-size: 1.2rem; font-weight: 900; }
+
+    .menu-links { list-style: none; padding: 0; }
+    .menu-links li { margin-bottom: 5px; }
+
+    .menu-links a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        font-size: 1.2rem;
+        display: block;
+        padding: 15px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    .menu-links a.active {
+        background: #8c8f03;
+        color: #000;
+    }
+
+    .logout-btn-side {
+        width: 100%;
+        background: #ff0000dc;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        font-weight: 900;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+}

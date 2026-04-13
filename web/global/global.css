@@ -1,0 +1,397 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FUENTE DE LETRAS : NEW ROCKER*/
+.new-rocker-regular {
+    font-family: "New Rocker", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* style.css */
+
+html, body {
+    /* Esto asegura que si el contenido supera la pantalla, 
+       siempre haya un fondo negro sólido detrás */
+    background-color: #000; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.hero {
+    /* Cambiamos height por min-height para que si el contenido 
+       empuja hacia abajo, el fondo acompañe */
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 6), rgba(0,0,0,0.6)), url('../assets/suburbia.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantiene la imagen fija mientras scrolleás */
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px; 
+    z-index: 10;
+}
+
+.Botones_usuarios {
+    display: flex;
+    gap: 15px;
+}
+
+.Botones_usuarios a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid #f1c916; /* borde fino  */
+    color: rgb(241, 221, 221);
+    border-radius: 5px;      
+    transition: 0.3s;        /* para que el efecto al pasar el mouse sea suave */
+}
+
+/* efecto cuando pasas el mouse por encima */
+.Botones_usuarios a:hover {
+    background-color: rgb(134, 124, 124);
+    color: black;
+}
+
+nav {
+    margin: 0; 
+    position: absolute; /* Lo sacamos del flujo para centrarlo respecto a la pantalla */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+nav ul {
+    display: flex;          /* pone las secciones en horizontal */
+    list-style: none;       /* Quita los puntitos negros de la lista */
+    gap: 20px;           
+}
+
+nav ul li a {
+    text-decoration: none;  /* saca el subrayado azul clásico */
+    color: rgba(241, 201, 22, 0.87);           /* color de las letras */
+    font-family: sans-serif; 
+    font-weight: bold;
+    text-transform: uppercase; 
+}
+
+/* --- CONTENEDOR REDES PC --- */
+.social-pc-container {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    flex-direction: column; /* Instagram queda abajo */
+    align-items: center;
+    z-index: 1000;
+}
+
+/* El botón de Instagram (El que siempre se ve) */
+.social-base {
+    width: 60px;
+    height: 60px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+/* El botón de WhatsApp (El que aparece al pasar el mouse) */
+.social-child {
+    width: 50px;
+    height: 50px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-bottom: 15px; /* Espacio entre los dos */
+    
+    /* Estado inicial: escondido */
+    opacity: 0;
+    transform: translateY(25px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.social-pc-container img {
+    width: 35px;
+    height: 35px;
+}
+
+/* --- LÓGICA DEL HOVER --- */
+.social-pc-container:hover .social-child {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.social-pc-container:hover .social-base {
+    transform: scale(1.1);
+    background-color: #000000; /* Opcional: cambia a amarillo al activar */
+}
+
+
+/* --- LOADER SUBURBIA --- */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.6s ease;
+}
+
+.loader-content {
+    position: relative;
+    width: 180px; /* Ajustalo al tamaño que quieras */
+    height: 180px;
+}
+
+.logo-base {
+    width: 100%;
+    height: 100%;
+    opacity: 0.15; /* Se ve muy sutil, como una marca de agua */
+}
+
+.logo-fill-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%; /* Empieza vacío */
+    overflow: hidden; /* Esto hace que el logo se vaya "descubriendo" */
+    transition: height 1.8s ease-in-out; /* Velocidad del llenado */
+}
+
+.logo-revealed {
+    width: 180px; /* Debe ser igual al ancho de .loader-content */
+    height: 180px; /* Debe ser igual al alto de .loader-content */
+    position: absolute;
+    bottom: 0; /* Mantiene el logo pegado abajo para que no se mueva al llenar */
+}
+
+/* Clase para desaparecer el loader */
+.loader-fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* AJUSTES RESPONSIVOS GLOBALES */
+
+/* --- ESTILOS PARA EL MENÚ CELULAR --- */
+
+/* 1. Escondemos el botón y el sidebar por defecto para que no se vean en PC */
+.menu-btn, .sidebar {
+    display: none;
+}
+/* Escondemos el footer para que no se vea en PC */
+.footer-suburbia {
+    display: none; /* Se oculta en PC */
+}
+
+@media (max-width: 1160px) {
+
+    header {
+        /* Reducimos el espacio a los costados al mínimo (10px o 5px) */
+        padding: 10px 5px !important; 
+        flex-direction: row !important; /* Aseguramos que estén en la misma línea */
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+
+    /* Si el logo tiene margen, se lo quitamos */
+    header a img {
+        margin-left: 0 !important;
+    }
+
+    header img {
+        width: 80px !important; /* Estaba en 90px, 60px queda mucho más fino */
+        height: auto;
+        transition: 0.3s;
+    }
+
+
+    /* 2. Escondemos el nav horizontal de PC */
+    nav {
+        display: none;
+    }
+
+    /* 3. Mostramos el botón de hamburguesa */
+    .menu-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 20; /* Por encima de todo */
+        margin-right: 0 !important;
+        padding: 5px; /* Un poquito de área para que sea fácil de tocar */
+        margin-top: 5px;
+    }
+
+    .bar {
+        width: 30px;
+        height: 6px;
+        background-color: #f1c916; /* Tu dorado */
+        border-radius: 2px;
+    }
+
+    /* 4. Estilo del Sidebar */
+    .sidebar {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%; /* Empezamos afuera de la pantalla */
+        width: 70%;   /* Ocupa el 70% del ancho */
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 100;
+        padding: 50px 30px;
+        transition: 0.4s ease; /* Animación de entrada */
+        border-left: 2px solid #f1c916;
+    }
+
+    /* Clase que activaremos con JS para mostrarlo */
+    .sidebar.active {
+        right: 0;
+    }
+
+    .close-sidebar {
+        font-size: 3rem;
+        color: #f1c916;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .sidebar-links {
+        list-style: none;
+        margin-top: 50px;
+    }
+
+    .sidebar-links li {
+        margin-bottom: 30px;
+    }
+
+    .sidebar-links li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-family: 'New Rocker', sans-serif;
+        text-transform: uppercase;
+    }
+
+    .social-pc-container {
+        display: none; /* Se oculta en celular el boton de redes de PC */
+    }
+
+    .footer-suburbia {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        background-color: #000;
+        width: 100%;
+    }
+
+    .footer-line {
+        width: 60px; /* Línea corta y sutil */
+        height: 1px;
+        background-color: #333; /* Un gris oscuro para que no brille tanto */
+        margin-bottom: 30px;
+    }
+
+    .footer-logo img {
+        width: 50px; /* Logo chiquito como firma */
+        height: auto;
+        opacity: 0.7; /* Sutilmente transparente */
+        filter: grayscale(100%); /* Si lo querés blanco y negro, sacalo si preferís color */
+        margin-bottom: 25px;
+    }
+
+    .footer-socials {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer-socials a {
+        text-decoration: none;
+        color: #f1c916; /* Tu amarillo Suburbia */
+        font-family: sans-serif; /* Fuente limpia */
+        font-size: 0.8rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .footer-dot {
+        color: #333;
+        font-size: 0.8rem;
+    }
+
+    /* 2. Estilo para los botones sidebar */
+    .Botones_usuarios_mobile {
+        display: flex;
+        flex-direction: column; 
+        gap: 15px;
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    .Botones_usuarios_mobile a {
+        text-decoration: none;
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #f1c916;
+        color: #f1c916;
+        border-radius: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: sans-serif;
+    }
+
+    .Botones_usuarios_mobile a:last-child {
+        background-color: #f1c916; 
+        color: black;
+    }
+
+    .Botones_usuarios {
+        display: none;
+    }
+
+    /* 3. Asegurarnos que en PC no se vean los del mobile */
+    @media (min-width: 1161px) {
+        .Botones_usuarios_mobile {
+            display: none;
+        }
+    }
+}

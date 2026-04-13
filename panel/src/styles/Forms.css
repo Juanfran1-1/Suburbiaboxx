@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.auth-page-layout{ 
+    background-color: #000000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+}
+/* --- LA TARJETA BLANCA (Común) --- */
+.auth-card {
+    background: #ffffff; /* Tarjeta blanca */
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Sombra para que flote */
+    text-align: center;
+    border: 2px solid #f1c916;
+}
+
+/* --- TÍTULOS Y LOGOS (Común) --- */
+.auth-header h1 {
+    font-family: 'New Rocker', cursive;
+    font-size: 1.8rem;
+    color: #000000; /* Texto negro */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mini-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: #000;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -40px;
+}
+
+/* --- INPUTS Y LABELS (Borde Negro) --- */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #000000; /* Label negro */
+    text-transform: uppercase;
+}
+
+.input-group input, .select-experience {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #000000; /* BORDE NEGRO PERFECTO */
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #000;
+    background-color: #fff;
+}
+
+/* --- BOTÓN DORADO  --- */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #000000; /* Fondo negro */
+    color: #f1c916; /* Texto dorado */
+    border: none;
+    border-radius: 8px;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #222222;
+    transform: translateY(-2px);
+}
+
+/* En Forms.css o Login.css */
+.btn-submit:disabled {
+    background-color: #333 !important;
+    border-color: #444 !important;
+    color: #777 !important;
+    cursor: not-allowed;
+    transform: none !important; /* Evita que se mueva al pasar el mouse */
+    box-shadow: none !important;
+}
+
+/* Animación opcional para que el texto parpadee mientras carga */
+@keyframes pulse-text {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.btn-disabled {
+    animation: pulse-text 1.5s infinite;
+}
+
+/* --- BOTÓN VOLVER  --- */
+.back-home-btn {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #f1c916;
+    font-family: 'New Rocker', cursive;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back-home-btn:hover {
+    color: #ffffff;
+    transform: translateX(-5px);
+}
+
+/* --- FOOTER (Común) --- */
+.auth-footer {
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #000;
+    margin-top: 5px;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+.auth-footer a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* --- ENLACE VOLVER (Estilo Botón para Móvil) --- */
+.back-link-mobile {
+    display: none; /* Oculto en escritorio */
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee; /* Una línea sutil para separar */
+    margin-bottom: -30px;
+}
+
+.btn-back-mobile {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #b4b3b3; /* Fondo negro como los otros botones */
+    color: #1a1919; /* Dorado */
+    text-decoration: none;
+    font-family: 'New Rocker', cursive;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+}
+
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .back-home-btn {
+        display: none !important; /* Chau flecha arriba */
+    }
+
+    .back-link-mobile {
+        display: block; /* Hola botón abajo */
+    }
+}

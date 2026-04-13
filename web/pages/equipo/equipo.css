@@ -1,0 +1,177 @@
+/* --- ESTILOS GENERALES Y PC --- */
+.equipo-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 70px;
+}
+
+.main-title {
+    font-family: 'New Rocker', cursive;
+    font-size: 3rem;
+    color: #f1c916;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.team-card {
+    width: 300px;
+    height: 450px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+/* Ocultamos los controles en PC */
+.team-controls {
+    display: none;
+}
+
+/* Efecto Hover: SOLO FUNCIONA EN PC */
+@media (min-width: 769px) {
+    .team-card:hover .card-inner {
+        transform: rotateY(180deg);
+    }
+}
+
+/* Clase que usa el JS para girar la carta en celular */
+.active-flip .card-inner {
+    transform: rotateY(180deg) !important;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    border: 2px solid #f1c916;
+    overflow: hidden;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name-tag {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #f1c916;
+    padding: 15px;
+    font-family: 'New Rocker', cursive;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.card-back {
+    background-color: #111;
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.card-back h3 {
+    font-family: 'New Rocker', cursive;
+    color: #f1c916;
+    margin-bottom: 15px;
+}
+
+.ig-link {
+    margin-top: 20px;
+    color: #000;
+    background-color: #f1c916;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+/* --- RESPONSIVE CELULAR (CARRUSEL) --- */
+@media (max-width: 768px) {
+    .team-grid {
+        position: relative;
+        height: 550px;
+        overflow: hidden; /* Para que la carta que se va no se vea */
+        touch-action: pan-y;
+    }
+
+    .team-card {
+        position: absolute;
+        display: none; /* El JS maneja cuál se ve */
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        z-index: 1;
+    }
+
+    .team-card.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* CONTROLES */
+    .team-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 10px;
+    }
+
+    .control-btn {
+        background: none;
+        border: 2px solid #f1c916;
+        color: #f1c916;
+        font-size: 1rem;
+        padding: 10px 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .dots-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        background: #444;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+
+    .dot.active {
+        background: #f1c916;
+        transform: scale(1.3);
+    }
+}
+

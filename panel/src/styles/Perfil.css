@@ -1,0 +1,377 @@
+.perfil-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.perfil-title {
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.perfil-hero {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+.perfil-avatar-card,
+.perfil-card {
+    background: rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.perfil-avatar-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 26px 20px;
+}
+
+.perfil-avatar {
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fbff00;
+    box-shadow: 0 0 25px rgba(251, 255, 0, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.perfil-avatar-btn {
+    background: #fbff00;
+    color: #000;
+    border: none;
+    padding: 12px 18px;
+    font-weight: 900;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    width: 100%;
+    max-width: 190px;
+}
+
+.perfil-avatar-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+}
+
+.perfil-card {
+    padding: 22px 22px 20px;
+}
+
+.perfil-card h2 {
+    color: #fbff00;
+    margin: 0 0 18px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+}
+
+.perfil-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.perfil-field.full {
+    grid-column: 1 / -1;
+}
+
+.perfil-field label {
+    font-size: 0.8rem;
+    color: #d8d8d8;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+}
+
+.perfil-grid input,
+.perfil-grid textarea,
+.perfil-grid select,
+.perfil-upload-input {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    outline: none;
+    font-size: 0.96rem;
+    transition: 0.2s ease;
+}
+
+.perfil-grid input::placeholder,
+.perfil-grid textarea::placeholder {
+    color: #a9a9a9;
+}
+
+.perfil-grid input:focus,
+.perfil-grid textarea:focus,
+.perfil-grid select:focus,
+.perfil-upload-input:focus {
+    border-color: rgba(251, 255, 0, 0.7);
+    box-shadow: 0 0 0 3px rgba(251, 255, 0, 0.12);
+}
+
+.perfil-grid input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.perfil-grid textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.perfil-archivos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.perfil-archivos-header h2 {
+    margin: 0;
+}
+
+.perfil-upload-input {
+    max-width: 320px;
+}
+
+.archivos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.archivo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 14px;
+    border-radius: 12px;
+}
+
+.archivo-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.archivo-icon {
+    font-size: 1.2rem;
+}
+
+.archivo-nombre {
+    color: #fff;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.archivo-delete-btn {
+    border: none;
+    background: rgba(255, 0, 0, 0.14);
+    color: #ff6b6b;
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-weight: 900;
+    transition: 0.2s ease;
+}
+
+.archivo-delete-btn:hover {
+    background: rgba(255, 0, 0, 0.24);
+}
+
+.perfil-save-btn {
+    background: #fbff00;
+    color: #000;
+    font-weight: 900;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: 0.2s ease;
+    width: 100%;
+}
+
+.perfil-save-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+}
+
+.perfil-save-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.perfil-empty-files {
+    color: #ffffff;
+    font-weight: 700;
+    background: rgba(255, 253, 253, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.trainer-class-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.trainer-class-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.trainer-class-item strong {
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.trainer-class-item span {
+    color: #fbff00;
+    font-weight: 900;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.perfil-archivos-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.archivo-actions {
+    color: #000000;
+    display: flex;
+    gap: 10px;
+}
+
+.archivo-categoria {
+    color: #b3b1b1;
+    font-size: 0.78rem;
+    font-weight: 800;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+.perfil-upload-input {
+    color: #000;
+    background: rgb(255, 252, 252);
+}
+
+@media (max-width: 900px) {
+    .perfil-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-avatar-card {
+        padding: 22px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .perfil-container {
+        gap: 18px;
+        padding-bottom: 20px;
+    }
+
+    .perfil-title {
+        font-size: 1.9rem;
+    }
+
+    .perfil-card,
+    .perfil-avatar-card {
+        padding: 18px 16px;
+        border-radius: 16px;
+    }
+
+    .perfil-card h2 {
+        font-size: 1.35rem;
+    }
+
+    .perfil-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .perfil-archivos-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .perfil-upload-input {
+        max-width: none;
+    }
+
+    .archivo-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .archivo-delete-btn {
+        width: 100%;
+    }
+
+    .perfil-archivos-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .archivo-actions {
+        flex-direction: column;
+    }
+
+    .trainer-class-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .trainer-class-item span {
+        text-align: left;
+        white-space: normal;
+    }
+}

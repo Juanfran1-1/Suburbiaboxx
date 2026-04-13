@@ -1,0 +1,61 @@
+@import './Forms.css';
+
+/* src/styles/Register.css */
+
+.register-card {
+    width: 95%; /* Ocupa casi todo el ancho en mobile */
+    max-width: 500px;
+    padding: 30px 20px; /* Reducimos padding en mobile */
+    margin: 20px auto;
+}
+
+/* Fila doble: se convierte en columna en celulares chicos */
+.form-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    flex-wrap: wrap; /* CLAVE: permite que el segundo input baje si no hay espacio */
+}
+
+.form-row .input-group {
+    flex: 1 1 200px; /* Intenta medir 200px, si hay menos, baja */
+    min-width: 0; /* Evita desbordes */
+}
+
+/* --- Ajuste específico para el Input de Teléfono --- */
+.PhoneInput {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    background-color: #272727;
+    box-sizing: border-box; /* Asegura que el borde no sume ancho extra */
+}
+
+.PhoneInputInput {
+    flex: 1;
+    padding: 14px 10px;
+    border: none !important;
+    outline: none !important;
+    font-size: 1rem; /* Un poco más grande para que iOS no haga zoom automático */
+    color: #fff;
+    background: transparent;
+    width: 100%;
+}
+
+/* Para pantallas MUY chicas (menos de 400px) */
+@media (max-width: 400px) {
+    .register-card {
+        padding: 20px 15px;
+    }
+    
+    .form-row {
+        gap: 0; /* Los inputs se pegan verticalmente */
+    }
+
+    .select-experience {
+        font-size: 0.9rem; /* Achicamos un poco el texto del select */
+    }
+}
