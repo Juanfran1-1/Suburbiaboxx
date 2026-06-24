@@ -1,128 +1,119 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. INYECTAR COMPONENTES COMUNES
-    injectLoader();
-    injectHeader();
-    injectFooter();
-
-    // 2. ACTIVAR LÓGICA DEL MENÚ (Después de inyectar)
-    setupMenu();
-
-    // 3. OBSERVER PARA FADE-IN
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('appear');
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-});
-
 const PANEL_URL = window.SUBURBIA_PANEL_URL || 'http://localhost:5173';
 
-function injectLoader() {
+document.addEventListener('DOMContentLoaded', () => {
+    injectHeader();
+    injectFooter();
+    setupMenu();
+});
+
+function injectHeader() {
     document.body.insertAdjacentHTML('afterbegin', `
-        <div id="loader-wrapper">
-            <div class="loader-content">
-                <img src="assets/logo-suburbia.jpg" class="logo-base" alt="Suburbia">
-                <div class="logo-fill-container">
-                    <img src="assets/logo-suburbia.jpg" class="logo-revealed" alt="Suburbia">
+        <header>
+            <a href="index.html" aria-label="Suburbia Boxx, inicio">
+                <img src="assets/logo-suburbia.jpg" alt="Suburbia Boxx">
+            </a>
+
+            <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+
+            <nav aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nuestra_historia.html">Nuestra Historia</a></li>
+                    <li><a href="index.html#equipo">Nuestro equipo</a></li>
+                    <li><a href="se_parte.html">Sé parte</a></li>
+                </ul>
+            </nav>
+
+            <aside class="sidebar" id="sidebar" aria-label="Menú móvil">
+                <button class="close-sidebar" id="close-sidebar" type="button" aria-label="Cerrar menú">×</button>
+                <ul class="sidebar-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nuestra_historia.html">Nuestra Historia</a></li>
+                    <li><a href="index.html#equipo">Nuestro equipo</a></li>
+                    <li><a href="se_parte.html">Sé parte</a></li>
+                </ul>
+                <div class="Botones_usuarios_mobile">
+                    <a href="${PANEL_URL}/login">Iniciar sesión</a>
+                    <a href="${PANEL_URL}/register">Registrarse</a>
                 </div>
+            </aside>
+
+            <div class="Botones_usuarios">
+                <a href="${PANEL_URL}/login">Iniciar sesión</a>
+                <a href="${PANEL_URL}/register">Registrarse</a>
             </div>
-        </div>
+        </header>
     `);
 }
 
-function injectHeader() {
-    const headerHTML = `
-    <header>
-        <a href="index.html">
-            <img src="assets/logo-suburbia.jpg" alt="Logo" style="width: 90px; height: auto;">
-        </a>
-
-        <div class="menu-btn" id="menu-btn">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-
-        <nav> 
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="se_parte.html">Sé parte</a></li>
-                <li><a href="nuestra_historia.html">Nuestra Historia</a></li>
-                <li><a href="equipo.html">Nuestro equipo</a></li>
-            </ul>
-        </nav>
-
-        <div class="sidebar" id="sidebar">
-            <div class="close-sidebar" id="close-sidebar">×</div>
-            <ul class="sidebar-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="se_parte.html">Sé parte</a></li>
-                <li><a href="nuestra_historia.html">Nuestra Historia</a></li>
-                <li><a href="equipo.html">Nuestro equipo</a></li>
-            </ul>
-
-            <div class="Botones_usuarios_mobile">
-                <a href="${PANEL_URL}/login">Iniciar Sesión</a>
-                <a href="${PANEL_URL}/register">Registrarse</a>
-            </div>
-        </div>
-
-        <div class="Botones_usuarios">
-            <a href="${PANEL_URL}/login">Iniciar Sesión</a>
-            <a href="${PANEL_URL}/register">Registrarse</a>
-        </div>
-    </header>`;
-    document.body.insertAdjacentHTML('afterbegin', headerHTML);
-}
-
 function injectFooter() {
-    const footerHTML = `
-    <div class="social-pc-container">
-        <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank" class="social-child wsp">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WSP">
-        </a>
-        <a href="https://instagram.com/suburbiaboxx/" target="_blank" class="social-base ig">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="IG">
-        </a>
-    </div>
-    <footer class="footer-suburbia">
-        <div class="footer-line"></div>
-        <div class="footer-logo"><img src="assets/logo-suburbia.jpg" alt="Suburbia Logo"></div>
-        <div class="footer-socials">
-            <a href="https://instagram.com/suburbiaboxx/" target="_blank">INSTAGRAM</a>
-            <span class="footer-dot">•</span>
-            <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank">WHATSAPP</a>
+    document.body.insertAdjacentHTML('beforeend', `
+        <div class="social-pc-container">
+            <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank" rel="noopener noreferrer" class="social-child">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            </a>
+            <a href="https://instagram.com/suburbiaboxx/" target="_blank" rel="noopener noreferrer" class="social-base">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
         </div>
-    </footer>`;
-    document.body.insertAdjacentHTML('beforeend', footerHTML);
+
+        <footer class="footer-suburbia">
+            <div class="footer-main">
+                <div class="footer-identity">
+                    <img src="assets/logo-suburbia.jpg" alt="Suburbia Boxx">
+                    <div>
+                        <strong>SUBURBIA BOXX</strong>
+                        <p>Más que solamente un club de boxeo.</p>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <span>NAVEGACIÓN</span>
+                    <a href="index.html">Inicio</a>
+                    <a href="nuestra_historia.html">Nuestra Historia</a>
+                    <a href="index.html#equipo">Nuestro equipo</a>
+                    <a href="se_parte.html">Sé parte</a>
+                </div>
+
+                <div class="footer-column">
+                    <span>CONTACTO</span>
+                    <a href="https://instagram.com/suburbiaboxx/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+                    <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+                    <a href="https://maps.google.com/?q=-34.921124,-57.954753" target="_blank" rel="noopener noreferrer">La Plata, Buenos Aires ↗</a>
+                </div>
+
+                <div class="footer-column">
+                    <span>USUARIOS</span>
+                    <a href="${PANEL_URL}/login">Iniciar sesión</a>
+                    <a href="${PANEL_URL}/register">Registrarse</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© ${new Date().getFullYear()} Suburbia Boxx. Todos los derechos reservados.</p>
+                <p>Diseñado y desarrollado por <strong>Juan Uceda</strong>.</p>
+            </div>
+        </footer>
+    `);
 }
 
 function setupMenu() {
-    const menuBtn = document.getElementById('menu-btn');
+    const openButton = document.getElementById('menu-btn');
+    const closeButton = document.getElementById('close-sidebar');
     const sidebar = document.getElementById('sidebar');
-    const closeBtn = document.getElementById('close-sidebar');
-    if (menuBtn) menuBtn.onclick = () => sidebar.classList.add('active');
-    if (closeBtn) closeBtn.onclick = () => sidebar.classList.remove('active');
+
+    const setMenuOpen = open => {
+        sidebar.classList.toggle('active', open);
+        openButton.setAttribute('aria-expanded', String(open));
+    };
+
+    openButton.addEventListener('click', () => setMenuOpen(true));
+    closeButton.addEventListener('click', () => setMenuOpen(false));
+    sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') setMenuOpen(false);
+    });
 }
-
-// LOGICA DEL LOADER (Igual que antes)
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loader-wrapper');
-    const fill = document.querySelector('.logo-fill-container');
-
-    // 1. Apenas carga el script, el logo empieza a llenarse lento (simulando carga)
-    setTimeout(() => {
-        fill.style.transition = "height 10s linear"; // Una transición larga por si el internet es lento
-        fill.style.height = "100%"; // Lo llevamos al 80% lentamente
-    }, 100);
-
-    // Cambiamos la transición a una más rápida para el tramo final
-    fill.style.transition = "height 0.4s ease-out";
-    fill.style.height = "100%";
-
-    // 3. Desvanecemos el loader completo
-    setTimeout(() => {
-        loader.classList.add('loader-fade-out');
-    }, 500); // Le damos medio segundo para que el usuario vea el logo lleno
-});

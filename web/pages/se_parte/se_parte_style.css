@@ -1,444 +1,150 @@
-/* --- ESTILOS GENERALES (SE PARTE) --- */
-
-.main-title {
-    font-family: new rocker;
-    font-size: 6rem; 
-    line-height: 0.9; 
-    color: #f1c916;  
-    margin-bottom: 10px;
+:root {
+    --join-black: var(--color-black);
+    --join-charcoal: var(--color-charcoal);
+    --join-gold: var(--color-gold);
+    --join-white: var(--color-white);
 }
 
-.hero-content {
-    text-align: center; /* Centra el texto */
-    color: white;       /* resalta sobre el fondo */
-    z-index: 2;
-}
+body { overflow-x:hidden; background: var(--join-black); color: var(--join-white); font-family: "Inter", Arial, sans-serif; }
+button, a { font: inherit; }
 
-.Botones_experiencia {
-    display: flex;
-    justify-content: center; /* Centra los botones horizontalmente */
-    gap: 30px;              /* Espacio entre los dos botones */
-    margin-top: 40px;       /* Distancia con el título principal */
-}
-
-.Botones_experiencia a {
-    text-decoration: none;
-    padding: 15px 30px;
-    border: 2px solid #f1c916; /* Borde dorado original */
-    color: white;
-    font-family: sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: 0.4s; /* Transición suave */
-    border-radius: 5px;
-}
-
-.btn-experiencia:hover {
-    background-color: rgba(19, 228, 12, 0.4) !important; 
-    border-color: #51cc0a !important; 
-    box-shadow: 0 0 20px rgba(44, 179, 3, 0.5);
-    color: white !important;
-}
-
-.btn-iniciacion:hover {
-    background-color: rgba(255, 0, 0, 0.4) !important; 
-    border-color: #ff0000 !important; 
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-    color: white !important;
-}
-
-/* --- MODAL (CONTENEDOR) --- */
-
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Un poco más oscuro para mejor contraste */
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-/* --- ESTILO DEL MODAL (AJUSTE PERFECTO) --- */
-
-.modal-content {
-    background-color: #000;
-    margin: 5% auto; 
-    width: 80%; 
-    max-width: 1000px; 
-    border: 3px solid #f1c916;
-    border-radius: 10px;
+.join-hero {
     position: relative;
-    padding: 0; /* ¡IMPORTANTE: Sacamos el padding para que el video pegue al borde! */
-    overflow: hidden; 
-
-    aspect-ratio: 16 / 9; 
-    
-    /* Aseguramos que el contenido adentro se alinee */
+    min-height: 100svh;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding: 140px 24px 100px;
+    background: linear-gradient(rgba(0,0,0,.76), rgba(0,0,0,.84)), url("../../assets/suburbia.jpg") center/cover;
 }
 
-/* Estilo para el video o iframe adentro */
-.modal-content video,
-.modal-content iframe {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover; /* Asegura que el video llene el contenedor sin deformarse */
-    border: none;
+.join-hero-content { width:100%; max-width:1080px; min-width:0; overflow:hidden; text-align:center; }
+.join-hero h1 {
+    color: var(--join-gold);
+    font-family: "New Rocker", cursive;
+    font-size: clamp(4.2rem, 9vw, 8rem);
+    font-weight: 400;
+    line-height: .84;
 }
 
-/* --- BOTÓN CERRAR (OPTIMIZADO PARA MÓVIL) --- */
+.join-intro { max-width: 600px; margin: 28px auto 0; color: #c4c4c0; font-size: 1.03rem; line-height: 1.7; }
+.experience-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 44px; }
 
-.close-btn {
+.experience-card {
+    min-height: 136px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 22px;
+    padding: 26px;
+    color: var(--join-white);
+    background: rgba(10,10,10,.86);
+    border: 1px solid #444;
+    text-align: left;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.experience-card:hover, .experience-card:focus-visible { border-color: var(--join-gold); transform: translateY(-3px); }
+.experience-card.featured { color: var(--join-black); background: var(--join-gold); border-color: var(--join-gold); }
+.option-number { align-self: start; color: var(--join-gold); font-size: .67rem; font-weight: 800; }
+.featured .option-number { color: var(--join-black); }
+.option-content { display: grid; gap: 10px; }
+.option-content { min-width:0; }
+.option-content strong { font-size: clamp(1.15rem, 2vw, 1.75rem); font-weight: 900; }
+.option-content small { color: #999; font-size: .78rem; line-height: 1.5; }
+.featured small { color: rgba(0,0,0,.68); }
+.option-arrow { font-size: 1.5rem; }
+
+.join-scroll-cue {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    color: #fff;
-    font-size: 30px;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 1001; /* Siempre por encima de todo */
-    background: rgba(0, 0, 0, 0.6); /* Fondo para que se vea siempre sobre el video */
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-
-.close-btn:hover {
-    color: #f1c916;
-    transform: scale(1.1);
-}
-
-/* --- PANTALLAS INTERNAS --- */
-
-.pre-video-screen {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    padding: 20px;
-    text-align: center;
-}
-
-.play-icon {
-    font-size: 30px;
-    color: #f1c916;
-    margin-bottom: 0px;
-}
-
-.pre-video-screen p {
-    color: #fff;
-    font-family: sans-serif;
-    margin-bottom: 20px;
-}
-
-.btn-start {
-    background-color: #f1c916;
-    color: #000;
-    border: none;
-    padding: 12px 25px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    text-transform: uppercase;
-}
-
-.video-wrapper {
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    position: relative;
-}
-
-video {
-    width: 100%;
-    max-height: 75vh; /* Evita que en móviles tape toda la pantalla */
-    outline: none;
-    display: block;
-}
-
-.conversion-plate {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px 20px;
-    background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
-}
-
-.conversion-plate h2 {
-    color: #f1c916;
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-}
-
-.conversion-plate p {
-    color: #ddd;
-    font-size: 1.1rem;
-    max-width: 500px;
-    line-height: 1.4;
-    margin-bottom: 30px;
-}
-
-.whatsapp-btn {
-    background-color: #25d366;
-    color: white;
-    text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-}
-
-.whatsapp-btn:hover {
-    transform: scale(1.05);
-}
-
-.coordinator-info {
-    margin-top: 10px;
-    font-family: sans-serif;
-    color: #888;
-    font-size: 0.85rem;
-}
-
-.phone-link {
-    color: #f1c916;
-    text-decoration: none;
-    font-weight: bold;
-}
-/* 1. Fondo fijo con más carácter */
-body {
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('../../assets/suburbia.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-}
-
-.label-yellow {
-    color: #f1c916;
-    font-family: sans-serif;
-    font-weight: 900;
-    letter-spacing: 10px; /* Letras bien separadas */
-    font-size: 0.75rem;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.system-title-down {
-    font-family: 'New Rocker', cursive;
-    color: #fff;
-    font-size: 5.5rem; /* Tamaño imponente */
-    line-height: 0.85;
-    margin: 15px 0;
-    letter-spacing: -2px;
-}
-
-.subtitle-italic {
-    color: #666; /* Gris más oscuro para que no compita */
-    font-style: italic;
-    font-size: 1.2rem;
-    margin-bottom: 80px; /* Mucho espacio antes de los pasos */
-}
-
-/* 2. La sección de abajo con un desenfoque sutil (Glassmorphism) */
-.info-section {
-    min-height: 100vh;
-    padding: 120px 10%; /* Mucho espacio a los costados */
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5), #000 30%); /* El fondo se funde a negro */
-}
-
-.info-container {
-    max-width: 1000px;
-    width: 100%;
-}
-
-/* 3. Estilo para los números (Brillo dorado) */
-.num {
-    color: #f1c916;
-    font-family: 'New Rocker';
-    font-size: 2.8rem;
-    line-height: 1;
-    text-shadow: 0 0 15px rgba(241, 201, 22, 0.4); /* Brillo suave */
-}
-
-/* 4. Título con más peso */
-.system-title-down {
-    font-family: 'New Rocker';
-    color: #fff;
-    font-size: 4rem;
-    letter-spacing: 2px;
-    margin: 15px 0;
-    text-transform: uppercase;
-}
-
-/* 5. Los ítems con una línea divisoria sutil */
-.step {
-    display: flex;
-    color: #fff;
-    gap: 25px;
-    padding: 20px;
-    border-left: 1px solid rgba(241, 201, 22, 0.2); /* Línea lateral fina */
-    transition: 0.3s;
-}
-
-/* --- ESTILOS DE LA FLECHA --- */
-.scroll-hint {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-.scroll-hint span {
-    font-size: 0.7rem;
-    letter-spacing: 4px;
-    color: #f1c916;
-}
-
-/* Animación del "mouse" */
-.mouse {
-    width: 25px;
-    height: 40px;
-    border: 2px solid #f1c916;
-    border-radius: 20px;
-    position: relative;
-}
-
-.wheel {
-    width: 4px;
-    height: 8px;
-    background: #f1c916;
-    border-radius: 2px;
-    position: absolute;
-    top: 8px;
+    bottom: 25px;
     left: 50%;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    color: var(--join-white);
+    font-size: .58rem;
+    letter-spacing: .13em;
+    text-decoration: none;
     transform: translateX(-50%);
-    animation: scrollWheel 2s infinite;
+}
+.join-scroll-cue i { width: 10px; height: 10px; border-right: 1px solid var(--join-gold); border-bottom: 1px solid var(--join-gold); transform: rotate(45deg); }
+
+.first-class {
+    display: grid;
+    grid-template-columns: .85fr .8fr 1.15fr;
+    gap: clamp(40px, 6vw, 90px);
+    padding: clamp(90px, 11vw, 155px) clamp(24px, 7vw, 108px);
+    background: linear-gradient(120deg, rgba(255,255,255,.025), transparent 50%), var(--join-charcoal);
 }
 
-@keyframes scrollWheel {
-    0% { opacity: 1; transform: translate(-50%, 0); }
-    100% { opacity: 0; transform: translate(-50%, 15px); }
+.first-class h2, .join-process h2, .modal-stage h2 {
+    font-family: Arial Black, Arial, sans-serif;
+    font-size: clamp(3.4rem, 6vw, 6.7rem);
+    font-weight: 900;
+    letter-spacing: -.065em;
+    line-height: .84;
+}
+.section-intro h2 { color: var(--join-gold); }
+.class-description { align-self: end; }
+.class-description .lead { margin-bottom: 22px; font-size: 1.35rem; font-weight: 600; line-height: 1.4; }
+.class-description > p:not(.lead) { color: #b2b2ae; line-height: 1.75; }
+.join-steps { list-style: none; border-top: 1px solid #444; }
+.join-steps li { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 19px 0; border-bottom: 1px solid #444; }
+.join-steps li > span { color: var(--join-gold); font-size: .65rem; font-weight: 800; }
+.join-steps strong { font-size: .8rem; letter-spacing: .03em; }
+.join-steps p { margin-top: 6px; color: #888; font-size: .76rem; line-height: 1.4; }
+
+.join-process { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; padding: clamp(90px, 11vw, 150px) clamp(24px, 7vw, 108px); }
+.process-path { align-self: end; }
+.process-path article { display: grid; grid-template-columns: 60px 1fr; padding: 27px 0; border-top: 1px solid #333; }
+.process-path article:last-child { border-bottom: 1px solid #333; }
+.process-path span { color: var(--join-gold); font-size: .7rem; }
+.process-path strong { font-size: 1.05rem; text-transform: uppercase; }
+
+.video-modal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,.92); backdrop-filter: blur(9px); }
+.video-modal.open { display: flex; }
+.modal-panel { position: relative; width: min(920px, 100%); min-height: 560px; display: flex; align-items: center; justify-content: center; padding: clamp(40px, 7vw, 90px); overflow: hidden; background: radial-gradient(circle at 50% 0%, #292929, #090909 62%); border: 1px solid rgba(228,189,22,.6); }
+.modal-close { position: absolute; top: 16px; right: 16px; z-index: 3; width: 46px; height: 46px; color: white; background: #111; border: 1px solid #444; border-radius: 50%; font-size: 1.7rem; cursor: pointer; }
+.modal-progress { position: absolute; top: 22px; left: 22px; display: flex; gap: 7px; }
+.modal-progress span { width: 30px; height: 3px; background: #444; }
+.modal-progress span.active { background: var(--join-gold); }
+.modal-stage { display: none; width: min(650px, 100%); text-align: center; }
+.modal-stage.active { display: block; }
+.modal-kicker { margin-bottom: 15px; color: var(--join-gold); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
+.modal-stage h2 { font-size: clamp(2.6rem, 6vw, 5.2rem); }
+.modal-stage > p:not(.modal-kicker) { max-width: 530px; margin: 25px auto 0; color: #aaa; line-height: 1.7; }
+.watch-button, .whatsapp-button { min-height: 54px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 32px; padding: 0 26px; color: var(--join-black); background: var(--join-gold); border: 0; font-size: .76rem; font-weight: 900; letter-spacing: .04em; text-decoration: none; cursor: pointer; }
+.intro-stage small { display: block; margin-top: 15px; color: #666; font-size: .68rem; }
+.video-stage { width: 100%; }
+.video-frame { aspect-ratio: 16/9; overflow: hidden; background: #000; border: 1px solid #333; }
+#youtube-player, #youtube-player iframe { width: 100%; height: 100%; }
+.video-status { min-height: 24px; margin-top: 14px !important; font-size: .75rem; }
+.success-mark { width: 62px; height: 62px; display: grid; place-items: center; margin: 0 auto 25px; color: var(--join-black); background: var(--join-gold); border-radius: 50%; font-size: 1.7rem; font-weight: 900; }
+.coordinator-link { display: block; width: fit-content; margin: 22px auto 0; color: #aaa; font-size: .74rem; }
+
+@media (max-width: 900px) {
+    .join-hero { background-attachment: scroll; }
+    .experience-options, .first-class, .join-process { grid-template-columns: 1fr; }
+    .first-class, .join-process { padding: 85px 24px; }
+    .class-description { align-self: auto; }
 }
 
-
-/* --- RESPONSIVE FINAL (MOBILE) --- */
-
-/* RESPONSIVE SE PARTE */
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 3.5rem !important; /* Achicamos el "SÉ PARTE" */
-        margin-top: 50px;
-    }
-
-    .Botones_experiencia {
-        flex-direction: column !important; /* Uno arriba del otro */
-        gap: 15px !important;
-        padding: 0 20px;
-    }
-
-    .Botones_experiencia a {
-        width: 100%;
-        text-align: center;
-        padding: 20px !important; /* Más grandes para el dedo */
-    }
-
-    .modal-content {
-        width: 92% !important;
-        max-height: 95vh !important; /* Aprovechamos casi toda la pantalla */
-        height: auto !important;
-        padding: 40px 15px 15px 15px !important; /* Más espacio arriba para la X */
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center; /* Centra todo verticalmente */
-        margin: auto !important;
-    }
-
-    /* El video mantiene su forma arriba */
-    #video-player {
-        aspect-ratio: 16 / 9;
-        width: 100% !important;
-        height: auto !important;
-        position: sticky; /* Opcional: mantiene el video arriba mientras scrolleas */
-        top: 0;
-        z-index: 5;
-    }
-
-    /* El botón de cerrar (X) necesita un ajuste porque sacamos el padding */
-    .close-btn {
-        top: 10px !important;
-        right: 15px !important;
-        font-size: 35px !important;
-        color: #fff;
-        background-color: rgba(0,0,0,0.5); /* Fondo semitransparente para que se vea sobre el video */
-        padding: 0 5px;
-        border-radius: 5px;
-        z-index: 10; /* Arriba del video */
-    }
-
-    .conversion-plate {
-        gap: 5px !important; /* Espacio mínimo entre elementos */
-        padding: 0 !important;
-    }
-
-    .conversion-plate h2 {
-        font-size: 1.2rem !important; /* Título más pequeño */
-        line-height: 1 !important;
-        margin-bottom: 5px !important;
-    }
-
-    .conversion-plate p {
-        font-size: 0.85rem !important; /* Texto más pequeño */
-        line-height: 1.2 !important;
-        margin-bottom: 10px !important;
-    }
-
-    .whatsapp-btn {
-        padding: 8px 15px !important; /* Menos alto */
-        font-size: 0.8rem !important;
-        margin-top: 0 !important;
-    }
-
-    .whatsapp-btn img {
-        width: 18px !important; /* Icono más chico */
-    }
-
-    .coordinator-info {
-        margin-top: 10px !important;
-        font-size: 0.65rem !important; /* Info del coordinador bien chiquita */
-        line-height: 1.1 !important;
-    }
-
-    .phone-link {
-        display: inline-block;
-        margin-top: 2px;
-    }
+@media (max-width: 560px) {
+    .join-hero { min-height: auto; padding: 120px 18px 96px; overflow: hidden; }
+    .join-hero h1 { max-width:100%; font-size:clamp(2rem,8.7vw,2.35rem); line-height:.88; }
+    .join-intro { max-width: 340px; font-size: .92rem; }
+    .experience-options { margin-top: 34px; }
+    .experience-card { min-width:0; min-height:120px; grid-template-columns:28px minmax(0,1fr) auto; gap:10px; padding:20px 16px; overflow:hidden; }
+    .option-content strong { font-size: 1.08rem; }
+    .option-content small { max-width: 235px; overflow-wrap: anywhere; }
+    .option-arrow { font-size: 1.15rem; }
+    .first-class, .join-process { padding: 68px 20px; gap: 42px; }
+    .first-class h2, .join-process h2 { font-size: clamp(2.8rem, 14vw, 4rem); }
+    .class-description .lead { font-size: 1.15rem; }
+    .video-modal { padding: 0; }
+    .modal-panel { width: 100%; min-height: 100svh; padding: 80px 20px 30px; border: 0; }
+    .modal-stage h2 { font-size: clamp(2.5rem, 13vw, 3.7rem); }
+    .watch-button, .whatsapp-button { width: 100%; }
 }

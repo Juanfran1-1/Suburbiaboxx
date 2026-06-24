@@ -1,88 +1,109 @@
-let player; // Variable global para el reproductor de YouTube
+let player;
+let playerReady = false;
+let selectedType = '';
 
-// 1. Cargamos la API de YouTube de forma asíncrona
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-const config = {
-    iniciacion: {
-        videoId: "iRwEFkNwUI4", // SOLO el ID del video
-        titulo: "¡EL PRIMER PASO ES EL MÁS FUERTE!",
-        subtitulo: "Unite al grupo y coordiná tu clase de acondicionamiento técnico ahora."
-    },
+const content = {
     experiencia: {
-        videoId: "iRwEFkNwUI4", 
-        titulo: "¡EL EQUIPO TE ESPERA!",
-        subtitulo: "Unite al grupo y coordiná tu clase de reacondicionamiento técnico ahora."
+        kicker: 'YA TENÉS EXPERIENCIA',
+        title: 'CONOCÉ CÓMO ENTRENAMOS.',
+        description: 'Micky te explica cómo hacemos la adaptación técnica antes de que te sumes al grupo.',
+        conversion: 'Unite a la comunidad y coordiná tu clase de reacondicionamiento técnico.',
+        videoId: 'iRwEFkNwUI4'
+    },
+    iniciacion: {
+        kicker: 'EMPEZÁS DE CERO',
+        title: 'TE ACOMPAÑAMOS DESDE EL PRINCIPIO.',
+        description: 'Micky te cuenta cómo es la primera clase y por qué no necesitás experiencia para arrancar.',
+        conversion: 'Unite a la comunidad y coordiná tu clase inicial de acondicionamiento técnico.',
+        videoId: 'iRwEFkNwUI4'
     }
 };
 
-let currentType = "";
+const youtubeScript = document.createElement('script');
+youtubeScript.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(youtubeScript);
 
-// 2. Esta función la llama YouTube automáticamente cuando la API está lista
 window.onYouTubeIframeAPIReady = () => {
-    player = new YT.Player('youtube-audio-player', {
-        height: '100%',
+    player = new YT.Player('youtube-player', {
         width: '100%',
-        videoId: '', // Empieza vacío
-        playerVars: {
-            'playsinline': 1,
-            'rel': 0,
-            'modestbranding': 1
-        },
+        height: '100%',
+        videoId: '',
+        playerVars: { playsinline: 1, rel: 0, modestbranding: 1 },
         events: {
-            'onStateChange': onPlayerStateChange
+            onReady: () => { playerReady = true; },
+            onStateChange: event => {
+                if (event.data === YT.PlayerState.ENDED) showStage(2);
+            },
+            onError: () => setStatus('No pudimos cargar el video. Cerrá el modal e intentá nuevamente.')
         }
     });
 };
 
-// 3. Detectar cuando el video termina
-function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.ENDED) {
-        document.getElementById('player-container').style.display = "none";
-        const plate = document.getElementById('conversion-plate');
-        plate.style.display = "flex";
-        
-        document.getElementById('conversion-title').innerText = config[currentType].titulo;
-        document.getElementById('conversion-text').innerText = config[currentType].subtitulo;
-    }
+const modal = document.getElementById('video-modal');
+const closeButton = document.querySelector('.modal-close');
+const optionButtons = Array.from(document.querySelectorAll('.experience-card'));
+const watchButton = document.querySelector('.watch-button');
+const stages = Array.from(document.querySelectorAll('.modal-stage'));
+const progressBars = Array.from(document.querySelectorAll('.modal-progress span'));
+const status = document.querySelector('.video-status');
+let selectedButton;
+
+function showStage(index) {
+    stages.forEach((stage, stageIndex) => stage.classList.toggle('active', stageIndex === index));
+    progressBars.forEach((bar, barIndex) => bar.classList.toggle('active', barIndex <= index));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('video-modal');
-    const preScreen = document.getElementById('pre-video-screen');
-    const plate = document.getElementById('conversion-plate');
+function setStatus(message = '') {
+    status.textContent = message;
+}
 
-    function abrirModal(tipo) {
-        currentType = tipo;
-        document.body.style.overflow = 'hidden'; 
-        modal.style.display = 'flex';
-        preScreen.style.display = 'flex';
-        plate.style.display = 'none';
-        document.getElementById('player-container').style.display = "none";
+function openModal(type, button) {
+    selectedType = type;
+    selectedButton = button;
+    const selected = content[type];
+    document.getElementById('modal-kicker').textContent = selected.kicker;
+    document.getElementById('modal-title').textContent = selected.title;
+    document.getElementById('modal-description').textContent = selected.description;
+    document.getElementById('conversion-copy').textContent = selected.conversion;
+    setStatus();
+    showStage(0);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeButton.focus();
+}
+
+function closeModal() {
+    if (playerReady) player.stopVideo();
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    selectedButton?.focus();
+}
+
+optionButtons.forEach(button => button.addEventListener('click', () => openModal(button.dataset.type, button)));
+
+watchButton.addEventListener('click', () => {
+    showStage(1);
+    if (!playerReady) {
+        setStatus('Cargando el video…');
+        const waitForPlayer = window.setInterval(() => {
+            if (!playerReady) return;
+            window.clearInterval(waitForPlayer);
+            setStatus();
+            player.loadVideoById(content[selectedType].videoId);
+        }, 200);
+        window.setTimeout(() => {
+            window.clearInterval(waitForPlayer);
+            if (!playerReady) setStatus('El video está tardando más de lo esperado. Revisá tu conexión.');
+        }, 8000);
+        return;
     }
+    player.loadVideoById(content[selectedType].videoId);
+});
 
-    document.querySelector('.btn-experiencia').onclick = (e) => { e.preventDefault(); abrirModal('experiencia'); };
-    document.querySelector('.btn-iniciacion').onclick = (e) => { e.preventDefault(); abrirModal('iniciacion'); };
-
-    document.getElementById('start-video-btn').onclick = () => {
-        preScreen.style.display = "none";
-        document.getElementById('player-container').style.display = "block";
-        
-        // Cargamos y reproducimos el video por ID
-        player.loadVideoById(config[currentType].videoId);
-        player.playVideo();
-    };
-
-    window.cerrarModal = () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        player.stopVideo();
-        plate.style.display = "none";
-    };
-
-    document.querySelector('.close-btn').onclick = window.cerrarModal;
-    window.onclick = (event) => { if (event.target == modal) window.cerrarModal(); };
+closeButton.addEventListener('click', closeModal);
+modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
 });

@@ -1,578 +1,737 @@
-
-.hero-content {
-    text-align: center; /* Centra el texto */
-    color: white;       /* resalta sobre el fondo */
-    z-index: 2;
-}
-.main-title {
-    font-family: new rocker;
-    font-size: 8rem; 
-    line-height: 0.9; 
-    color: #f1c916;  
-    margin-bottom: 10px;
+:root {
+    --home-black: var(--color-black);
+    --home-charcoal: var(--color-charcoal);
+    --home-gold: var(--color-gold);
+    --home-white: var(--color-white);
+    --home-muted: var(--color-muted);
 }
 
-.hero-content h2 {
-    font-size: 1.5rem; /* Achicamos un poco el slogan para que el H1 destaque */
-    letter-spacing: 8px;
-    font-weight: 300; /* Si podés, que sea más fina la letra */
+html {
+    scroll-behavior: smooth;
+}
+
+.about-section,
+.community-section,
+.join-section {
+    scroll-margin-top: 20px;
 }
 
 .hero {
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    min-height: 100vh;
-    padding: 0 10%; /* Espacio a los costados en PC */
+    position: relative;
+    padding: 0 10%;
 }
 
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+}
+
+.main-title {
+    margin-bottom: 10px;
+    color: #f1c916;
+    font-family: "New Rocker", cursive;
+    font-size: clamp(4.5rem, 10vw, 8rem);
+    line-height: 0.9;
+}
+
+.hero-slogan {
+    font-size: clamp(0.72rem, 1.2vw, 1rem);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+}
 
 .btn-unite {
     display: inline-block;
-    padding: 18px 45px;
-    background-color: #f1c916;
+    margin-top: 24px;
+    padding: 17px 42px;
     color: #000;
-    font-family: 'New Rocker', cursive;
-    font-size: 1.6rem;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    background: #f1c916;
     border: 2px solid #f1c916;
-    margin-top: 20px;
+    border-radius: 999px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 1.45rem;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-.btn-unite:hover {
-    background-color: transparent;
+.btn-unite:hover,
+.btn-unite:focus-visible {
     color: #f1c916;
-    transform: scale(1.05);
+    background: transparent;
+    transform: translateY(-2px);
 }
 
-
-/* --- INDICADOR DE SCROLL --- */
 .scroll-indicator {
     position: absolute;
-    bottom: 30px;
+    bottom: 32px;
     left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     z-index: 5;
-    transition: opacity 0.5s ease; /* Para que desaparezca suave */
+    transform: translateX(-50%);
+    transition: opacity 0.4s ease;
+    cursor: pointer;
 }
 
 .arrow {
-    width: 40px;
-    height: 40px;
-    border-right: 3px solid #f1c916;
-    border-bottom: 3px solid #f1c916;
+    width: 38px;
+    height: 38px;
+    border-right: 2px solid #f1c916;
+    border-bottom: 2px solid #f1c916;
     transform: rotate(45deg);
-    animation: bounce 6s infinite;
+    animation: home-bounce 2.2s ease-in-out infinite;
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-    40% { transform: translateY(-10px) rotate(45deg); }
-    60% { transform: translateY(-5px) rotate(45deg); }
+@keyframes home-bounce {
+    0%, 100% { transform: translateY(-5px) rotate(45deg); opacity: 0.45; }
+    50% { transform: translateY(5px) rotate(45deg); opacity: 1; }
 }
 
-/* Clase para ocultar cuando el usuario scrollea */
 .scroll-hidden {
     opacity: 0;
     pointer-events: none;
 }
 
-
-/* Base para que el carrusel nunca mida 0 */
-.info-carousel {
-    min-height: 250px;
-    background-color: #111; /* Fondo oscuro por si la foto falla */
-    position: relative;
-    overflow: hidden;
+.about-section,
+.community-section,
+.join-section,
+.visit-section {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-/* Contenedores Generales */
-.info-section, .location-section {
-    padding: 80px 10%;
-    background-color: #000;
-    overflow: hidden;
+.about-section h2,
+.section-heading h2,
+.join-section h2 {
+    font-family: Arial Black, Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
 }
 
-.info-container, .location-container {
-    display: flex;
+.about-section {
+    display: grid;
+    grid-template-columns: 0.25fr 1.1fr 0.9fr;
+    gap: clamp(30px, 5vw, 90px);
+    padding: clamp(90px, 12vw, 165px) clamp(24px, 7vw, 108px);
+    color: var(--home-white);
+    background:
+        linear-gradient(115deg, rgba(255, 255, 255, 0.025), transparent 48%),
+        var(--home-charcoal);
+    border-top: 1px solid rgba(228, 189, 22, 0.16);
+    border-bottom: 1px solid rgba(228, 189, 22, 0.12);
+}
+
+.section-number {
+    color: var(--home-gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.about-title h2 {
+    color: var(--home-gold);
+    font-size: clamp(3.6rem, 7vw, 7.2rem);
+    line-height: 0.84;
+}
+
+.about-copy {
+    align-self: end;
+    max-width: 540px;
+}
+
+.about-copy .lead {
+    margin-bottom: 24px;
+    color: var(--home-white);
+    font-size: clamp(1.3rem, 2vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.34;
+}
+
+.about-copy > p:not(.lead) {
+    color: #b7b7b2;
+    line-height: 1.8;
+}
+
+.text-link {
+    display: inline-flex;
     align-items: center;
-    gap: 50px;
+    gap: 10px;
+    margin-top: 30px;
+    padding-bottom: 6px;
+    color: var(--home-white);
+    border-bottom: 1px solid currentColor;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
-/* Texto a la izquierda */
-.info-text {
-    flex: 1;
+.text-link span {
+    color: var(--home-gold);
 }
 
-.info-text h2 {
-    color: #f1c916;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+.community-section,
+.visit-section {
+    padding: clamp(90px, 11vw, 150px) clamp(24px, 7vw, 108px);
+    color: var(--home-white);
+    background: var(--home-black);
 }
 
-.info-text h2 span { color: #fff; font-size: 1.8rem; }
-
-.info-text p {
-    color: #ccc;
-    line-height: 1.6;
-    font-size: 1.1rem;
-    text-align: match-parent;
+.section-heading {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 54px;
 }
 
-/* El contenedor ahora tiene una altura fija */
-.info-carousel {
-    flex: 1;
-    height: 450px; /* Ajustá este valor según tus 11 renglones */
-    border: 2px solid #f1c916;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative; /* Para que las fotos se apilen */
-    background-color: #111; /* Fondo oscuro por si carga una foto lenta */
+.section-heading h2 {
+    color: var(--home-white);
+    font-size: clamp(3.6rem, 7vw, 7.2rem);
+    line-height: 0.84;
+}
+
+.section-heading > p {
+    max-width: 520px;
+    color: var(--home-muted);
+    line-height: 1.75;
+}
+
+.community-carousel {
+    border: 1px solid #292929;
 }
 
 .carousel-track {
-    width: 100%;
-    height: 100%;
-}
-
-.carousel-track img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Corta la foto para que llene el contenedor */
-    position: absolute; /* Apila una encima de otra */
-    top: 0;
-    left: 0;
-    opacity: 0; /* Todas invisibles por defecto */
-    transition: opacity 0.2s ease-in-out; /* El fundido suave */
-}
-
-/* La primera foto tiene que ser visible al arrancar */
-.carousel-track img:first-child {
-    opacity: 1;
-}
-
-
-/* Contenedor principal */
-.location-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    padding: 20px 0;
-}
-
-/* Cada columna (Horarios y Mapa) */
-.location-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 500px; /* Para que no se estiren demasiado en pantallas grandes */
-}
-
-/* Los encabezados (Títulos arriba de las cajas) */
-.column-header {
-    height: 50px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.column-header p {
-    color: #ffffff;
-    font-size: 1.4rem;
-    margin: 0;
-    text-align: center;
-}
-
-/* El texto de la dirección específicamente */
-.address-text-styled {
-    font-weight: bold;
-    letter-spacing: 1px;
-    border-bottom: 2px solid #f1c916;
-    padding-bottom: 2px;
-}
-
-/* Las cajas de contenido (donde va la imagen y el iframe) */
-.box-style {
-    width: 100%;
-    background-color: #111;
-    border: 2px solid #f1c916;
-    border-radius: 10px;
+    position: relative;
+    aspect-ratio: 16 / 8.4;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Quitamos el height fijo de aquí para que no afecte a todos por igual */
+    background: #111;
 }
 
-.box-style img {
-    width: 100%;
-    height: auto; /* La imagen mantiene su proporción */
-    display: block; /* Saca espacios extra abajo de la foto */
-    object-fit: contain; 
-}
-
-
-
-
-/* ANIMACIÓN DE SCROLL */
-/* Estado base de todos los que van a aparecer */
-.fade-in {
-    opacity: 0;
-    transition: all 1s ease-out;
-}
-
-/* Variaciones de dirección */
-.from-left { transform: translateX(-50px); }  /* Viene de la izquierda */
-.from-right { transform: translateX(50px); } /* Viene de la derecha */
-.fade-in:not(.from-left):not(.from-right) { transform: translateY(30px); } /* El mapa y titulo suben normal */
-
-/* Cuando el JS activa la clase .appear */
-.fade-in.appear {
-    opacity: 1;
-    transform: translate(0, 0); /* Vuelve a su posición original (sea X o Y) */
-}
-
-/* REGLA PARA LA PLANILLA (Se adapta a la foto) */
-.location-column:first-child .box-style {
-    height: auto !important; 
-}
-
-.location-column:first-child .box-style img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* REGLA PARA EL MAPA (Altura fija para que se vea) */
-.location-column:last-child .box-style {
-    height: 300px !important; 
-}
-
-.location-column:last-child .box-style iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Fondo oscuro que cubre TODA la pantalla */
-.zoom-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.95); /* Negro casi total */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999; /* Por encima de la navbar y todo */
-    cursor: zoom-out;
-}
-
-/* La imagen dentro del zoom */
-.zoom-img-full {
-    max-width: 95%;
-    max-height: 90%;
-    object-fit: contain; /* Mantiene la proporción sin deformar */
-    border: 2px solid #f1c916;
-    border-radius: 5px;
-    box-shadow: 0 0 30px rgba(241, 201, 22, 0.2);
-    animation: zoomIn 0.2s ease-out; /* Efecto suave de apertura */
-}
-
-/* Botón de cerrar (la X) */
-.zoom-close {
+.carousel-slide {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #f1c916;
-    font-size: 50px;
-    font-weight: bold;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.015);
+    transition: opacity 0.55s ease, transform 0.7s ease, visibility 0.55s;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.78) contrast(1.04);
+}
+
+.carousel-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    min-height: 72px;
+    padding: 0 22px;
+    border-top: 1px solid #292929;
+}
+
+.carousel-bar > p {
+    color: #777;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.carousel-bar > p span {
+    color: var(--home-gold);
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 9px;
+}
+
+.carousel-dot {
+    width: 26px;
+    height: 3px;
+    padding: 0;
+    background: #3c3c3c;
+    border: 0;
     cursor: pointer;
-    line-height: 1;
 }
 
-/* Animación para que no aparezca de golpe */
-@keyframes zoomIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+.carousel-dot.active {
+    background: var(--home-gold);
 }
 
-/* Bloquear el scroll del cuerpo cuando el zoom está abierto (Opcional) */
-body.modal-open {
+.carousel-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.carousel-controls button {
+    width: 42px;
+    height: 42px;
+    color: var(--home-white);
+    background: transparent;
+    border: 1px solid #3b3b3b;
+    cursor: pointer;
+}
+
+.carousel-controls button:hover,
+.carousel-controls button:focus-visible {
+    color: var(--home-black);
+    background: var(--home-gold);
+    border-color: var(--home-gold);
+}
+
+.join-section {
+    padding: clamp(90px, 12vw, 165px) clamp(24px, 7vw, 108px);
+    color: var(--home-black);
+    background: var(--home-gold);
+}
+
+.join-section .eyebrow {
+    color: var(--home-black);
+}
+
+.join-section h2 {
+    font-size: clamp(3.6rem, 7vw, 7.2rem);
+    line-height: 0.84;
+}
+
+.join-copy {
+    max-width: 650px;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    line-height: 1.65;
+}
+
+.join-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 38px;
+}
+
+.join-button {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    color: var(--home-white);
+    background: var(--home-black);
+    font-size: 0.77rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.join-button:hover,
+.join-button:focus-visible {
+    color: var(--home-black);
+    background: var(--home-white);
+}
+
+.join-actions span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.visit-section {
+    background: #111;
+}
+
+.visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.info-card {
+    padding: clamp(24px, 4vw, 46px);
+    background: #0b0b0b;
+    border: 1px solid #303030;
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.card-heading span {
+    color: var(--home-gold);
+    font-size: 0.7rem;
+}
+
+.card-heading h3 {
+    font-family: Arial Black, Arial, Helvetica, sans-serif;
+    font-size: clamp(1.35rem, 2vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+}
+
+.schedule-image {
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 0;
+    cursor: zoom-in;
+}
+
+.schedule-image img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.schedule-card > p {
+    margin-top: 14px;
+    color: #777;
+    font-size: 0.72rem;
+}
+
+.map-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
 }
 
-/* --- ESTILOS DEL MODAL ZOOM --- */
-.modal-zoom {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    top: 0;
-    left: 0;
+.map-frame iframe {
+    position: absolute;
+    inset: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    border: 0;
+}
+
+.modal-zoom {
+    position: fixed;
+    inset: 0;
     z-index: 10000;
-    justify-content: center;
+    display: none;
     align-items: center;
-    backdrop-filter: blur(8px); /* Desenfoque de fondo */
-    cursor: zoom-out;
+    justify-content: center;
+    padding: 70px 24px 24px;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+.modal-zoom.open {
+    display: flex;
 }
 
 .modal-wrapper {
     display: flex;
-    justify-content: center;
+    width: min(1100px, 95vw);
+    height: min(84vh, 760px);
     align-items: center;
-    width: 90%;
-    height: 90%;
+    justify-content: center;
 }
 
 #img-expandida {
     max-width: 100%;
-    max-height: 85vh;
-    border: 2px solid #f1c916;
+    max-height: 100%;
+    border: 2px solid var(--home-gold);
     border-radius: 5px;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 1);
-    animation: zoomAnim 0.3s ease-out;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
 }
 
 .cerrar-btn {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #f1c916;
-    font-size: 50px;
-    font-weight: bold;
+    top: 18px;
+    right: 28px;
+    width: 48px;
+    height: 48px;
+    color: var(--home-gold);
+    background: transparent;
+    border: 1px solid rgba(228, 189, 22, 0.5);
+    border-radius: 50%;
+    font-size: 2rem;
     cursor: pointer;
 }
 
-@keyframes zoomAnim {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-@media (min-width: 1024px) {
-    .location-container {
-        display: flex;
-        justify-content: space-between; 
-        align-items: flex-start;
-        max-width: 90%; 
-        margin: 0 auto;
-        gap: 80px; 
-        padding: 50px 0;
-    }
-
-    .location-column {
-        flex: 1; 
-        max-width: 550px; 
-    }
-
-    .location-column:first-child {
-        display: flex;
-        flex-direction: center;
-        align-items: center; /* Horarios más a la izquierda */
-    }
-
-    .location-column:last-child {
-        display: flex;
-        flex-direction: center;
-        align-items: center; /* Mapa más a la derecha */
-    }
-}
-
-/* RESPONSIVE INDEX */
-
-@media (max-width: 992px) {
+@media (max-width: 1160px) {
     .main-title {
-        font-size: 4rem;
-    }
-
-    .info-container, .location-container {
-        display: flex;
-        flex-direction: column; 
-        gap: 30px;
-        padding: 40px 5%;
-    }
-
-    .info-carousel {
-        width: 100%;
-        height: 350px; /* Si no tiene altura, no se ve nada */
-        position: relative;
-        overflow: hidden;
-    }
-
-    .box-style {
-        height: auto;
-    }
-
-        /* Contenedor principal: asegura que las columnas ocupen todo el ancho disponible */
-    .location-container {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        padding: 0 !important;
-        gap: 20px !important; /* Espacio entre planilla y mapa */
-    }
-
-    /* Cada columna (Horarios y Mapa) */
-    .location-column {
-        width: 100% !important; /* Ambas al 100% del ancho del celular */
-        max-width: none !important;
-        padding: 0 !important;
-    }
-
-    /* Las cajas que envuelven la imagen y el mapa */
-    .location-column .box-style {
-        width: 100% !important; /* Ancho total */
-        height: 300px !important; /* Alto fijo para que sean iguales */
-        display: flex !important;
-        overflow: hidden;
-        border: 2px solid #f1c916 !important;
-        border-radius: 10px;
-    }
-
-    /* La imagen de la planilla */
-    .location-column .box-style img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important; /* Llena el ancho y alto sin deformarse */
-    }
-
-    /* El mapa */
-    .location-column .box-style iframe {
-        width: 100% !important;
-        height: 100% !important;
-        border: none;
-    }
-
-    /* Ajuste de los títulos (NUESTROS HORARIOS / ESTAMOS EN) */
-    .column-header {
-        height: auto !important;
-        margin-bottom: 10px !important;
-    }
-
-    .column-header p {
-        font-size: 1.2rem !important;
+        font-size: clamp(3.4rem, 8.5vw, 5.8rem);
     }
 }
 
-@media (max-width: 1024px) {
-    
-    .info-container {
-        display: block !important; 
-        padding: 10px !important;
-        margin-bottom: 0 !important; 
-    }
-
-    .info-text p {
-        color: #ccc;
-        line-height: 1.5;
-        font-size: 1rem;
-        text-align: match-parent;
-    }
-
-    .info-carousel {
-        width: 105% !important;
-        height: 500px !important;
-        margin: 40px 0 10px 0 !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        transform: translateX(-5px) !important;
-    }
-
-    .carousel-track img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        position: absolute !important;
-        top: 0;
-        left: 0;
-    }
-    
-    .info-section, .location-section {
-        padding: 20px 5% !important;
-    }
-
-/* --- ESTA ES LA PARTE QUE ARREGLA EL MAPA --- */
-    /* Contenedor principal: asegura que las columnas ocupen todo el ancho disponible */
-    .location-container {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        padding: 0 !important;
-        gap: 20px !important; /* Espacio entre planilla y mapa */
-    }
-
-    /* Cada columna (Horarios y Mapa) */
-    .location-column {
-        width: 100% !important; /* Ambas al 100% del ancho del celular */
-        max-width: none !important;
-        padding: 0 !important;
-    }
-
-    /* Las cajas que envuelven la imagen y el mapa */
-    .location-column .box-style {
-        width: 100% !important; /* Ancho total */
-        height: 300px !important; /* Alto fijo para que sean iguales */
-        display: flex !important;
-        overflow: hidden;
-        border: 2px solid #f1c916 !important;
-        border-radius: 10px;
-    }
-
-    /* La imagen de la planilla */
-    .location-column .box-style img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important; /* Llena el ancho y alto sin deformarse */
-    }
-
-    /* El mapa */
-    .location-column .box-style iframe {
-        width: 100% !important;
-        height: 100% !important;
-        border: none;
-    }
-
-    /* Ajuste de los títulos (NUESTROS HORARIOS / ESTAMOS EN) */
-    .column-header {
-        height: auto !important;
-        margin-bottom: 10px !important;
-    }
-
-    .column-header p {
-        font-size: 1.2rem !important;
-    }
-
-    /* Ocultar botones de usuario en el header para móviles */
-    header > .Botones_usuarios { 
-        display: none !important; 
+@media (max-width: 900px) {
+    body {
+        overflow-x: hidden;
     }
 
     .hero {
-        padding: 0; 
-        justify-content: center; 
+        background-attachment: scroll;
     }
 
+    .hero-container,
     .hero-content {
-        align-items: center; 
-        text-align: center;
         width: 100%;
+        max-width: 100%;
+    }
+
+    .about-section,
+    .section-heading,
+    .visit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-section,
+    .community-section,
+    .join-section,
+    .visit-section {
+        padding: 88px clamp(22px, 6vw, 48px);
+    }
+
+    .section-number {
+        display: none;
+    }
+
+    .section-heading {
+        gap: 26px;
+        margin-bottom: 38px;
+    }
+
+    .hero {
+        padding: 0 24px;
+    }
+
+    .about-copy {
+        max-width: 680px;
+    }
+
+    .carousel-track {
+        aspect-ratio: 4 / 3;
+    }
+
+    .carousel-slide img {
+        object-position: center;
+    }
+
+    .info-card {
+        padding: 28px;
+    }
+
+    .schedule-image img {
+        object-fit: contain;
+    }
+
+    .map-frame {
+        height: clamp(280px, 54vw, 380px);
+        min-height: 0;
+        aspect-ratio: auto;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        min-height: 100svh;
+        padding: 86px 18px 70px;
+    }
+
+    .main-title {
+        max-width: 100%;
+        font-size: clamp(3rem, 12.4vw, 3.45rem);
+        line-height: 0.88;
+        overflow-wrap: normal;
+    }
+
+    .hero-slogan {
+        max-width: 320px;
+        margin: 0 auto;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        line-height: 1.5;
     }
 
     .btn-unite {
-        width: 100%; 
-        max-width: 300px; 
-        font-size: 1.3rem;
-        padding: 15px 20px;
+        width: min(100%, 290px);
+        min-height: 52px;
+        padding: 14px 18px;
+        font-size: 1rem;
     }
 
+    .scroll-indicator {
+        bottom: 26px;
+    }
+
+    .arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .about-section,
+    .community-section,
+    .join-section,
+    .visit-section {
+        padding: 68px 20px;
+    }
+
+    .eyebrow {
+        margin-bottom: 16px;
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        line-height: 1.4;
+    }
+
+    .about-title h2,
+    .section-heading h2,
+    .join-section h2 {
+        font-size: clamp(2.7rem, 13.6vw, 4rem);
+        line-height: 0.88;
+        letter-spacing: -0.06em;
+        overflow-wrap: normal;
+    }
+
+    .about-section {
+        gap: 38px;
+    }
+
+    .about-copy .lead {
+        font-size: 1.2rem;
+        line-height: 1.42;
+    }
+
+    .about-copy > p:not(.lead),
+    .section-heading > p,
+    .join-copy {
+        font-size: 0.96rem;
+        line-height: 1.7;
+    }
+
+    .text-link {
+        min-height: 44px;
+        align-items: center;
+        margin-top: 24px;
+        font-size: 0.7rem;
+    }
+
+    .carousel-track {
+        aspect-ratio: 4 / 3;
+    }
+
+    .carousel-bar {
+        grid-template-columns: 1fr auto;
+        min-height: 64px;
+        padding: 0 12px 0 16px;
+    }
+
+    .carousel-dots {
+        display: none;
+    }
+
+    .carousel-controls {
+        grid-column: 2;
+    }
+
+    .carousel-controls button {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+
+    .join-copy {
+        margin-top: 24px;
+    }
+
+    .join-actions {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 30px;
+    }
+
+    .join-button {
+        width: 100%;
+        min-height: 54px;
+    }
+
+    .join-actions span {
+        text-align: center;
+    }
+
+    .visit-grid {
+        gap: 16px;
+    }
+
+    .info-card {
+        padding: 20px;
+    }
+
+    .card-heading {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .card-heading h3 {
+        font-size: 1.25rem;
+        line-height: 1.15;
+    }
+
+    .schedule-image img {
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+
+    .map-frame {
+        height: clamp(260px, 72vw, 320px);
+        min-height: 0;
+        aspect-ratio: auto;
+    }
+
+    .modal-zoom {
+        padding: 76px 10px 14px;
+    }
+
+    .modal-wrapper {
+        width: 100%;
+        height: calc(100svh - 100px);
+    }
+
+    #img-expandida {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .cerrar-btn {
+        top: 14px;
+        right: 14px;
+        width: 46px;
+        height: 46px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .arrow {
+        animation: none;
+    }
+
+    .carousel-slide {
+        transition: none;
+    }
 }

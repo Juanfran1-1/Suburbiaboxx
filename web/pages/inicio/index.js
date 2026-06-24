@@ -1,52 +1,100 @@
-// --- FUNCIONES GLOBALES PARA EL ZOOM ---
-window.abrirZoom = function(src) {
-    const modal = document.getElementById('modal-planilla');
-    const img = document.getElementById('img-expandida');
-    img.src = src;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Bloquea el scroll
+const scrollArrow = document.getElementById('scrollArrow');
+const scheduleButton = document.querySelector('.schedule-image');
+const scheduleModal = document.getElementById('modal-planilla');
+const expandedSchedule = document.getElementById('img-expandida');
+const closeScheduleButton = document.querySelector('.cerrar-btn');
+
+window.addEventListener('scroll', () => {
+    scrollArrow?.classList.toggle('scroll-hidden', window.scrollY > 50);
+}, { passive: true });
+
+function openSchedule() {
+    expandedSchedule.src = scheduleButton.querySelector('img').src;
+    scheduleModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeScheduleButton.focus();
 }
 
-window.cerrarZoom = function() {
-    document.getElementById('modal-planilla').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Habilita el scroll
+function closeSchedule() {
+    scheduleModal.classList.remove('open');
+    document.body.style.overflow = '';
+    scheduleButton.focus();
 }
 
-// --- RESTO DE TU LÓGICA EXISTENTE ---
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. EFECTO DE APARECER AL SCROLLEAR
-    const observerOptions = { threshold: 0.2 };
+scheduleButton?.addEventListener('click', openSchedule);
+closeScheduleButton?.addEventListener('click', closeSchedule);
+scheduleModal?.addEventListener('click', (event) => {
+    if (event.target === scheduleModal) closeSchedule();
+});
 
-    window.addEventListener('scroll', () => {
-        const scrollArrow = document.getElementById('scrollArrow');
-        if (window.scrollY > 50) {
-            scrollArrow.classList.add('scroll-hidden');
-        } else {
-            scrollArrow.classList.remove('scroll-hidden');
-        }
+const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+const previousButton = document.getElementById('carousel-prev');
+const nextButton = document.getElementById('carousel-next');
+const currentSlideLabel = document.getElementById('current-slide');
+let currentSlide = 0;
+let carouselTimer;
+let touchStartX = 0;
+
+function showSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === currentSlide;
+        slide.classList.toggle('active', isActive);
+        slide.setAttribute('aria-hidden', String(!isActive));
     });
 
-    const fadeInObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('appear');
-            }
-        });
-    }, observerOptions);
+    dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === currentSlide;
+        dot.classList.toggle('active', isActive);
+        dot.toggleAttribute('aria-current', isActive);
+    });
 
-    document.querySelectorAll('.fade-in').forEach((el) => fadeInObserver.observe(el));
+    currentSlideLabel.textContent = String(currentSlide + 1).padStart(2, '0');
+}
 
-    // 2. LÓGICA DEL CARRUSEL
-    const slides = document.querySelectorAll('.carousel-track img');
-    let currentSlide = 0;
+function restartCarousel() {
+    window.clearInterval(carouselTimer);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        carouselTimer = window.setInterval(() => showSlide(currentSlide + 1), 4500);
+    }
+}
 
-    if (slides.length > 0) {
-        slides[0].style.opacity = 1; // Asegurar que la primera se vea
-        setInterval(() => {
-            slides[currentSlide].style.opacity = 0;
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].style.opacity = 1;
-        }, 3000);
+previousButton?.addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+    restartCarousel();
+});
+
+nextButton?.addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+    restartCarousel();
+});
+
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        showSlide(index);
+        restartCarousel();
+    });
+});
+
+document.querySelector('.carousel-track')?.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+
+document.querySelector('.carousel-track')?.addEventListener('touchend', (event) => {
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(distance) < 45) return;
+
+    showSlide(currentSlide + (distance < 0 ? 1 : -1));
+    restartCarousel();
+}, { passive: true });
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && scheduleModal.classList.contains('open')) {
+        closeSchedule();
     }
 });
+
+showSlide(0);
+restartCarousel();

@@ -1,144 +1,82 @@
-.historia-page {
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(
-        to right, 
-        rgba(0, 0, 0, 0.95) 20%, 
-        rgba(0, 0, 0, 0.7) 100%
-    ), 
-    url('../../assets/bolsas_suburbia.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10%;
-    z-index: 1;
-    position: relative;
+:root { --history-black:var(--color-black); --history-charcoal:var(--color-charcoal); --history-gold:var(--color-gold); --history-white:var(--color-white); --history-muted:var(--color-muted); }
+body { overflow-x:hidden; color:var(--history-white); background:var(--history-black); font-family:"Inter",Arial,sans-serif; }
+.history-hero { position:relative; min-height:100svh; display:flex; align-items:center; padding:135px clamp(24px,8vw,125px) 90px; background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.52) 58%,rgba(0,0,0,.28)),url("../../assets/bolsas_suburbia.jpg") center/cover; }
+.history-hero-content { width:100%; max-width:880px; min-width:0; overflow:hidden; }
+.history-hero h1 { color:var(--history-gold); font-family:"New Rocker",cursive; font-size:clamp(5rem,11vw,10.5rem); font-weight:400; line-height:.76; }
+.history-hero-content > p:last-child { max-width:520px; margin-top:34px; color:#ccc; font-size:1.15rem; line-height:1.65; }
+.hero-index { position:absolute; right:clamp(24px,6vw,90px); bottom:70px; display:flex; gap:15px; padding-left:20px; border-left:1px solid var(--history-gold); }
+.hero-index span { color:var(--history-gold); font-size:.67rem; font-weight:800; }
+.hero-index p { font-size:.72rem; line-height:1.5; text-transform:uppercase; }
+.story-section h2,.documentary-section h2,.coaches-section h2,.history-cta h2 { font-family:Arial Black,Arial,sans-serif; font-size:clamp(3.5rem,7vw,7.3rem); font-weight:900; letter-spacing:-.065em; line-height:.84; }
+
+.story-section { padding:clamp(95px,12vw,170px) clamp(24px,8vw,125px); background:linear-gradient(120deg,rgba(255,255,255,.025),transparent 50%),var(--history-charcoal); }
+.story-top { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(55px,9vw,145px); align-items:end; }
+.story-heading h2 { color:var(--history-gold); }
+.story-body .lead { max-width:720px; margin-bottom:34px; font-size:clamp(1.45rem,2.2vw,2.15rem); font-weight:600; line-height:1.35; }
+.story-body > p:not(.lead) { max-width:720px; margin-top:20px; color:#b2b2ae; line-height:1.75; }
+.pending-note { width:fit-content; margin-top:28px; padding:10px 13px; color:var(--history-gold); border:1px solid rgba(228,189,22,.42); font-size:.62rem; font-weight:800; letter-spacing:.08em; }
+
+.documentary-section { display:grid; grid-template-columns:.75fr 1.25fr; min-height:760px; }
+.documentary-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(70px,8vw,110px); }
+.documentary-copy > p:not(.eyebrow) { margin-top:30px; color:#999; line-height:1.75; }
+.documentary-copy button { width:fit-content; margin-top:35px; padding:15px 20px; color:#777; background:transparent; border:1px solid #444; font-size:.68rem; font-weight:800; letter-spacing:.07em; }
+.documentary-cover { position:relative; min-height:620px; overflow:hidden; }
+.documentary-cover::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,.38); }
+.documentary-cover img { width:100%; height:100%; object-fit:cover; filter:saturate(.62); }
+.play-mark { position:absolute; top:50%; left:50%; z-index:2; width:74px; height:74px; display:grid; place-items:center; color:var(--history-black); background:var(--history-gold); border-radius:50%; transform:translate(-50%,-50%); }
+.video-label { position:absolute; z-index:2; right:28px; bottom:25px; font-size:.66rem; font-weight:800; letter-spacing:.12em; }
+
+.coaches-section { padding:clamp(95px,12vw,165px) clamp(24px,8vw,125px); background:#111; }
+.coaches-heading { display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:end; margin-bottom:62px; }
+.coaches-heading > p { max-width:520px; color:var(--history-muted); line-height:1.75; }
+.coaches-panorama { position:relative; height:clamp(460px,48vw,700px); margin:0 0 22px; overflow:hidden; }
+.coaches-panorama::after { content:""; position:absolute; inset:50% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.85)); }
+.coaches-panorama img { width:100%; height:100%; object-fit:cover; filter:saturate(.68) contrast(1.04); }
+.coaches-panorama figcaption { position:absolute; z-index:2; right:28px; bottom:25px; left:28px; display:flex; justify-content:space-between; gap:30px; font-size:.65rem; font-weight:800; letter-spacing:.08em; }
+.coaches-panorama figcaption span { color:var(--history-gold); }
+.coach-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.coach-card { background:#0a0a0a; border:1px solid #303030; }
+.coach-card.featured { border-color:rgba(228,189,22,.7); }
+.coach-photo { position:relative; height:500px; overflow:hidden; }
+.coach-photo::after { content:""; position:absolute; inset:55% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.75)); }
+.coach-photo img { width:100%; height:100%; object-fit:cover; filter:saturate(.7) contrast(1.04); }
+.coach-photo > span { position:absolute; z-index:2; top:18px; left:18px; width:34px; height:34px; display:grid; place-items:center; color:var(--history-black); background:var(--history-gold); font-size:.62rem; font-weight:900; }
+.coach-info { min-height:190px; padding:26px; }
+.coach-info > p { margin-bottom:12px; color:var(--history-gold); font-size:.6rem; font-weight:800; letter-spacing:.1em; }
+.coach-info h3 { margin-bottom:15px; font-size:clamp(1.3rem,2vw,2rem); font-weight:900; line-height:1; }
+.coach-info > span { color:#90908c; font-size:.8rem; line-height:1.55; }
+
+.history-cta { padding:clamp(90px,11vw,150px) clamp(24px,8vw,125px); color:var(--history-black); background:var(--history-gold); }
+.history-cta .eyebrow { color:var(--history-black); }
+.history-cta > p:not(.eyebrow) { max-width:620px; margin-top:28px; line-height:1.7; }
+.history-cta a { display:inline-flex; min-height:54px; align-items:center; margin-top:35px; padding:0 25px; color:var(--history-white); background:var(--history-black); font-size:.72rem; font-weight:900; letter-spacing:.05em; text-decoration:none; }
+
+@media (max-width:900px) {
+    .history-hero { background-attachment:scroll; }
+    .hero-index { display:none; }
+    .story-top,.documentary-section,.coaches-heading { grid-template-columns:1fr; }
+    .story-top { gap:42px; }
+    .documentary-copy { padding:80px 28px; }
+    .coaches-heading { gap:28px; }
+    .coach-grid { grid-template-columns:1fr; }
+    .coach-card { display:grid; grid-template-columns:.8fr 1.2fr; }
+    .coach-photo { height:390px; }
+    .coach-info { display:flex; min-height:0; flex-direction:column; justify-content:center; }
 }
 
-/* Agregamos una viñeta para oscurecer los bordes (opcional pero recomendado) */
-.historia-page::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
-    pointer-events: none;
-}
-
-/* Aseguramos que el contenido esté por encima de la viñeta */
-.historia-container {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    gap: 80px; /* Más espacio entre texto y video */
-    align-items: center;
-    width: 100%;
-    max-width: 1250px;
-}
-
-/* --- TEXTO --- */
-.historia-text {
-    flex: 1;
-}
-
-.historia-title {
-    font-family: 'New Rocker', cursive;
-    color: #fff;
-    font-size: 4.5rem;
-    line-height: 1;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-}
-
-.historia-p {
-    color: #f1c916; /* Dorado como en tu captura */
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-family: sans-serif;
-    max-width: 450px;
-}
-
-
-/* --- VIDEO CARD --- */
-.historia-video-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.video-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 500px;
-    backdrop-filter: blur(10px);
-}
-
-.video-placeholder {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #000;
-    overflow: hidden;
-}
-
-.video-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.6;
-}
-
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-button::after {
-    content: '';
-    border-style: solid;
-    border-width: 10px 0 10px 20px;
-    border-color: transparent transparent transparent #fff;
-}
-
-.video-info {
-    margin-top: 20px;
-}
-
-.video-info h3 {
-    color: #fff;
-    font-family: sans-serif;
-    font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-}
-
-.video-info p {
-    color: #888;
-    font-size: 0.9rem;
-    margin-top: 5px;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-    .historia-container { flex-direction: column; text-align: center; padding: 50px 0; }
-    .historia-p { margin: 0 auto 20px; }
-    .social-icons { justify-content: center; }
+@media (max-width:560px) {
+    .history-hero { min-height:760px; padding:115px 20px 70px; background-position:54% center; overflow:hidden; }
+    .history-hero h1 { max-width:100%; font-size:clamp(2.35rem,10.2vw,2.75rem); line-height:.84; }
+    .history-hero-content > p:last-child { font-size:1rem; }
+    .story-section,.coaches-section,.history-cta { padding:70px 20px; }
+    .story-section h2,.documentary-section h2,.coaches-section h2,.history-cta h2 { font-size:clamp(2.8rem,14vw,4.2rem); }
+    .story-body .lead { font-size:1.28rem; }
+    .documentary-section { min-height:0; }
+    .documentary-cover { min-height:430px; }
+    .coaches-panorama { height:410px; }
+    .coaches-panorama figcaption { right:18px; bottom:17px; left:18px; display:grid; gap:7px; }
+    .coach-card { display:block; }
+    .coach-photo { height:430px; }
+    .coach-info { min-height:180px; }
+    .history-cta a { width:100%; justify-content:center; }
 }

@@ -87,6 +87,7 @@ for (const route of panelStaticRoutes) {
 await writeFile(
     path.join(outputDir, '_redirects'),
     [
+        '/equipo.html /index.html#equipo 301',
         '/panel /panel/index.html 200',
         '/panel/ /panel/index.html 200',
         '/panel/* /panel/index.html 200',
