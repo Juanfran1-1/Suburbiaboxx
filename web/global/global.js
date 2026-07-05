@@ -34,16 +34,7 @@ function injectHeader() {
                     <li><a href="index.html#equipo">Nuestro equipo</a></li>
                     <li><a href="se_parte.html">Sé parte</a></li>
                 </ul>
-                <div class="Botones_usuarios_mobile">
-                    <a href="${PANEL_URL}/login">Iniciar sesión</a>
-                    <a href="${PANEL_URL}/register">Registrarse</a>
-                </div>
             </aside>
-
-            <div class="Botones_usuarios">
-                <a href="${PANEL_URL}/login">Iniciar sesión</a>
-                <a href="${PANEL_URL}/register">Registrarse</a>
-            </div>
         </header>
     `);
 }
@@ -84,11 +75,6 @@ function injectFooter() {
                     <a href="https://maps.google.com/?q=-34.921124,-57.954753" target="_blank" rel="noopener noreferrer">La Plata, Buenos Aires ↗</a>
                 </div>
 
-                <div class="footer-column">
-                    <span>USUARIOS</span>
-                    <a href="${PANEL_URL}/login">Iniciar sesión</a>
-                    <a href="${PANEL_URL}/register">Registrarse</a>
-                </div>
             </div>
 
             <div class="footer-bottom">
