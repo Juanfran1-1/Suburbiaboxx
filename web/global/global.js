@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     injectFooter();
     setupMenu();
     setupHeaderScroll();
+    setupJoinNavigation();
 });
 
 function setupHeaderScroll() {
@@ -13,6 +14,32 @@ function setupHeaderScroll() {
 
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
+}
+
+function setupJoinNavigation() {
+    const isHomePage = /(?:^|\/)index\.html$/.test(window.location.pathname) || window.location.pathname.endsWith('/');
+    if (!isHomePage) return;
+
+    const scrollToJoinContent = behavior => {
+        const section = document.getElementById('se-parte');
+        if (!section) return;
+        const scrollableDistance = Math.max(0, section.offsetHeight - window.innerHeight);
+        const target = section.offsetTop + scrollableDistance * .79;
+        window.scrollTo({ top: target, behavior });
+    };
+
+    document.querySelectorAll('a[href="index.html#se-parte"]').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            history.replaceState(null, '', '#se-parte');
+            const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+            scrollToJoinContent(behavior);
+        });
+    });
+
+    if (window.location.hash === '#se-parte') {
+        window.requestAnimationFrame(() => scrollToJoinContent('auto'));
+    }
 }
 
 function injectHeader() {
