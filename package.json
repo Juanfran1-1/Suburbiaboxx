@@ -3,5 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-cloudflare.mjs"
+  },
+  "dependencies": {
+    "read-excel-file": "^9.3.1"
   }
 }

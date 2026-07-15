@@ -7,7 +7,7 @@ body { overflow-x:hidden; color:var(--history-white); background:var(--history-b
 .hero-index { position:absolute; right:clamp(24px,6vw,90px); bottom:70px; display:flex; gap:15px; padding-left:20px; border-left:1px solid var(--history-gold); }
 .hero-index span { color:var(--history-gold); font-size:.67rem; font-weight:800; }
 .hero-index p { font-size:.72rem; line-height:1.5; text-transform:uppercase; }
-.story-section h2,.documentary-section h2,.coaches-section h2,.history-cta h2 { font-family:Arial Black,Arial,sans-serif; font-size:clamp(3.5rem,7vw,7.3rem); font-weight:900; letter-spacing:-.065em; line-height:.84; }
+.story-section h2,.documentary-section h2,.coaches-section h2,.history-cta h2 { font-family:var(--font-subtitle); font-size:clamp(3.5rem,7vw,7.3rem); font-weight:400; letter-spacing:.025em; line-height:.84; }
 
 .story-section { padding:clamp(95px,12vw,170px) clamp(24px,8vw,125px); background:linear-gradient(120deg,rgba(255,255,255,.025),transparent 50%),var(--history-charcoal); }
 .story-top { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(55px,9vw,145px); align-items:end; }

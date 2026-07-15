@@ -2,6 +2,7 @@ import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import readXlsxFile from 'read-excel-file/node';
 
 const root = process.cwd();
 const outputDir = path.join(root, 'dist');
@@ -10,6 +11,7 @@ const panelDir = path.join(root, 'panel');
 const panelDistDir = path.join(panelDir, 'dist');
 const outputPanelDir = path.join(outputDir, 'panel');
 const panelNodeModulesDir = path.join(panelDir, 'node_modules');
+const scheduleWorkbookPath = path.join(webDir, 'data', 'horarios.xlsx');
 const panelStaticRoutes = [
     'login',
     'register',
@@ -65,6 +67,51 @@ await cp(webDir, outputDir, {
     recursive: true,
     filter: (src) => !src.includes(`${path.sep}.git`),
 });
+
+async function buildScheduleData() {
+    if (!existsSync(scheduleWorkbookPath)) {
+        throw new Error('Falta web/data/horarios.xlsx.');
+    }
+
+    const workbookSheets = await readXlsxFile(scheduleWorkbookPath);
+    const rows = workbookSheets[0]?.data ?? workbookSheets;
+    const headers = rows[0].map(value => String(value).trim());
+    const expectedHeaders = ['dia', 'hora_inicio', 'hora_fin', 'DT'];
+
+    if (expectedHeaders.some((header, index) => headers[index] !== header)) {
+        throw new Error(`El Excel de horarios debe tener estas columnas: ${expectedHeaders.join(', ')}.`);
+    }
+
+    const horarios = [];
+    const formatExcelTime = value => {
+        if (value instanceof Date) {
+            return `${String(value.getUTCHours()).padStart(2, '0')}:${String(value.getUTCMinutes()).padStart(2, '0')}`;
+        }
+        if (typeof value === 'number') {
+            const totalMinutes = Math.round(value * 24 * 60) % (24 * 60);
+            return `${String(Math.floor(totalMinutes / 60)).padStart(2, '0')}:${String(totalMinutes % 60).padStart(2, '0')}`;
+        }
+        return String(value).trim();
+    };
+
+    rows.slice(1).forEach(row => {
+        const [dia, horaInicio, horaFin, dt] = row;
+        if (![dia, horaInicio, horaFin, dt].every(value => value !== null && value !== undefined && value !== '')) return;
+        horarios.push({
+            dia: String(dia).trim(),
+            hora_inicio: formatExcelTime(horaInicio),
+            hora_fin: formatExcelTime(horaFin),
+            DT: String(dt).trim(),
+        });
+    });
+
+    const scheduleJson = `${JSON.stringify(horarios, null, 2)}\n`;
+    await mkdir(path.join(outputDir, 'data'), { recursive: true });
+    await writeFile(path.join(webDir, 'data', 'horarios.json'), scheduleJson);
+    await writeFile(path.join(outputDir, 'data', 'horarios.json'), scheduleJson);
+}
+
+await buildScheduleData();
 
 if (!existsSync(panelNodeModulesDir)) {
     await run('npm', ['ci'], { cwd: panelDir });

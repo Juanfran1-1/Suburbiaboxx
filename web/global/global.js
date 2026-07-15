@@ -4,7 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
     injectFooter();
     setupMenu();
+    setupHeaderScroll();
 });
+
+function setupHeaderScroll() {
+    const header = document.querySelector('header');
+    const updateHeader = () => header.classList.toggle('header-scrolled', window.scrollY > 24);
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+}
 
 function injectHeader() {
     document.body.insertAdjacentHTML('afterbegin', `
@@ -20,19 +29,23 @@ function injectHeader() {
             <nav aria-label="Navegación principal">
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
-                    <li><a href="nuestra_historia.html">Nuestra Historia</a></li>
-                    <li><a href="index.html#equipo">Nuestro equipo</a></li>
-                    <li><a href="se_parte.html">Sé parte</a></li>
+                    <li><a href="index.html#se-parte">Sé parte</a></li>
+                    <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
+                    <li><a href="index.html#equipo">Comunidad</a></li>
+                    <li><a href="index.html#horarios">Contacto</a></li>
                 </ul>
             </nav>
+
+            <a class="header-cta" href="se_parte.html">Unite al equipo</a>
 
             <aside class="sidebar" id="sidebar" aria-label="Menú móvil">
                 <button class="close-sidebar" id="close-sidebar" type="button" aria-label="Cerrar menú">×</button>
                 <ul class="sidebar-links">
                     <li><a href="index.html">Inicio</a></li>
-                    <li><a href="nuestra_historia.html">Nuestra Historia</a></li>
-                    <li><a href="index.html#equipo">Nuestro equipo</a></li>
-                    <li><a href="se_parte.html">Sé parte</a></li>
+                    <li><a href="index.html#se-parte">Sé parte</a></li>
+                    <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
+                    <li><a href="index.html#equipo">Comunidad</a></li>
+                    <li><a href="index.html#horarios">Contacto</a></li>
                 </ul>
             </aside>
         </header>
@@ -57,18 +70,28 @@ function injectFooter() {
                     <div>
                         <strong>SUBURBIA BOXX</strong>
                         <p>Más que solamente un club de boxeo.</p>
+                        <p class="footer-location">La Plata, Buenos Aires.</p>
+                        <div class="footer-social-mobile" aria-label="Redes sociales">
+                            <a href="https://instagram.com/suburbiaboxx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Suburbia Boxx">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="">
+                            </a>
+                            <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de Suburbia Boxx">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="footer-column">
+                <div class="footer-column footer-navigation">
                     <span>NAVEGACIÓN</span>
                     <a href="index.html">Inicio</a>
-                    <a href="nuestra_historia.html">Nuestra Historia</a>
-                    <a href="index.html#equipo">Nuestro equipo</a>
-                    <a href="se_parte.html">Sé parte</a>
+                    <a href="index.html#se-parte">Sé parte</a>
+                    <a href="index.html#quienes-somos">Quiénes somos</a>
+                    <a href="index.html#equipo">Comunidad</a>
+                    <a href="index.html#horarios">Contacto</a>
                 </div>
 
-                <div class="footer-column">
+                <div class="footer-column footer-contact">
                     <span>CONTACTO</span>
                     <a href="https://instagram.com/suburbiaboxx/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
                     <a href="https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
@@ -78,8 +101,7 @@ function injectFooter() {
             </div>
 
             <div class="footer-bottom">
-                <p>© ${new Date().getFullYear()} Suburbia Boxx. Todos los derechos reservados.</p>
-                <p>Diseñado y desarrollado por <strong>Juan Uceda</strong>.</p>
+                <p>© <a href="https://jucostudio.com.ar" target="_blank" rel="noopener noreferrer"><strong>JUCO STUDIO ↗</strong></a> ${new Date().getFullYear()} · Todos los derechos reservados.</p>
             </div>
         </footer>
     `);

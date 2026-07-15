@@ -1,31 +1,15 @@
 const scrollArrow = document.getElementById('scrollArrow');
-const scheduleButton = document.querySelector('.schedule-image');
-const scheduleModal = document.getElementById('modal-planilla');
-const expandedSchedule = document.getElementById('img-expandida');
-const closeScheduleButton = document.querySelector('.cerrar-btn');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+scrollArrow?.addEventListener('click', () => {
+    document.getElementById('se-parte')?.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth'
+    });
+});
 
 window.addEventListener('scroll', () => {
     scrollArrow?.classList.toggle('scroll-hidden', window.scrollY > 50);
 }, { passive: true });
-
-function openSchedule() {
-    expandedSchedule.src = scheduleButton.querySelector('img').src;
-    scheduleModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    closeScheduleButton.focus();
-}
-
-function closeSchedule() {
-    scheduleModal.classList.remove('open');
-    document.body.style.overflow = '';
-    scheduleButton.focus();
-}
-
-scheduleButton?.addEventListener('click', openSchedule);
-closeScheduleButton?.addEventListener('click', closeSchedule);
-scheduleModal?.addEventListener('click', (event) => {
-    if (event.target === scheduleModal) closeSchedule();
-});
 
 const slides = Array.from(document.querySelectorAll('.carousel-slide'));
 const dots = Array.from(document.querySelectorAll('.carousel-dot'));
@@ -56,7 +40,7 @@ function showSlide(index) {
 
 function restartCarousel() {
     window.clearInterval(carouselTimer);
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!reduceMotion) {
         carouselTimer = window.setInterval(() => showSlide(currentSlide + 1), 4500);
     }
 }
@@ -90,11 +74,205 @@ document.querySelector('.carousel-track')?.addEventListener('touchend', (event) 
     restartCarousel();
 }, { passive: true });
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && scheduleModal.classList.contains('open')) {
-        closeSchedule();
-    }
-});
-
 showSlide(0);
 restartCarousel();
+
+async function loadSchedule() {
+    const grid = document.getElementById('schedule-grid');
+    if (!grid) return;
+
+    try {
+        const response = await fetch('data/horarios.json');
+        if (!response.ok) throw new Error('No se pudieron cargar los horarios.');
+        const schedule = await response.json();
+        const dayOrder = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+        const groupedSchedule = schedule.reduce((groups, item) => {
+            if (!groups.has(item.dia)) groups.set(item.dia, []);
+            groups.get(item.dia).push(item);
+            return groups;
+        }, new Map());
+        grid.replaceChildren();
+
+        dayOrder.forEach(day => {
+            const classes = groupedSchedule.get(day);
+            if (!classes?.length) return;
+
+            const column = document.createElement('section');
+            column.className = 'schedule-day';
+            const heading = document.createElement('h4');
+            heading.textContent = day;
+            column.append(heading);
+
+            classes
+                .sort((first, second) => first.hora_inicio.localeCompare(second.hora_inicio))
+                .forEach(item => {
+                    const classBlock = document.createElement('div');
+                    classBlock.className = 'schedule-slot';
+                    const time = document.createElement('time');
+                    time.textContent = `${item.hora_inicio}–${item.hora_fin}`;
+                    const dt = document.createElement('strong');
+                    dt.textContent = item.DT;
+                    classBlock.append(time, dt);
+                    column.append(classBlock);
+                });
+
+            grid.append(column);
+        });
+
+        if (!grid.children.length) throw new Error('Todavía no hay horarios disponibles.');
+    } catch (error) {
+        console.error('No se pudo cargar la grilla de horarios:', error);
+        const fallback = document.createElement('div');
+        fallback.className = 'schedule-fallback';
+        const message = document.createElement('p');
+        message.textContent = 'Consultanos la grilla semanal actualizada.';
+        const contactLink = document.createElement('a');
+        contactLink.href = 'https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm';
+        contactLink.target = '_blank';
+        contactLink.rel = 'noopener noreferrer';
+        contactLink.textContent = 'Consultar horarios →';
+        fallback.append(message, contactLink);
+        grid.replaceChildren(fallback);
+    }
+}
+
+loadSchedule();
+
+const revealGroups = [
+    ['.about-title', '.about-copy'],
+    ['.community-section .section-heading > *'],
+    ['.community-carousel'],
+    ['.visit-section .section-heading > *'],
+    ['.info-card']
+];
+
+const revealElements = revealGroups.flatMap(selectors =>
+    selectors.flatMap(selector => Array.from(document.querySelectorAll(selector)))
+);
+
+revealElements.forEach((element, index) => {
+    element.classList.add('reveal', `reveal-delay-${Math.min(index % 3, 2)}`);
+});
+
+if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealElements.forEach(element => element.classList.add('reveal-visible'));
+} else {
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('reveal-visible');
+            revealObserver.unobserve(entry.target);
+        });
+    }, { threshold: .14, rootMargin: '0px 0px -40px' });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+}
+
+const sequenceSection = document.querySelector('.scroll-sequence');
+const sequenceCanvas = document.querySelector('.sequence-canvas');
+const sequenceContent = document.querySelector('.sequence-content');
+const sequenceShade = document.querySelector('.sequence-shade');
+
+if (sequenceSection && sequenceCanvas && !reduceMotion) {
+    const context = sequenceCanvas.getContext('2d');
+    const frameCount = 48;
+    const frames = Array(frameCount);
+    let currentFrame = 0;
+    let lastImpactState = false;
+    let ticking = false;
+
+    const framePath = index => `assets/frames-boxeo/frame-${String(index + 1).padStart(3, '0')}.jpg`;
+
+    function drawFrame(index) {
+        const image = frames[index];
+        if (!image?.complete || !image.naturalWidth) return;
+
+        const canvasRatio = sequenceCanvas.width / sequenceCanvas.height;
+        const imageRatio = image.naturalWidth / image.naturalHeight;
+        let sourceWidth = image.naturalWidth;
+        let sourceHeight = image.naturalHeight;
+        let sourceX = 0;
+        let sourceY = 0;
+
+        if (imageRatio > canvasRatio) {
+            sourceWidth = image.naturalHeight * canvasRatio;
+            sourceX = (image.naturalWidth - sourceWidth) / 2;
+        } else {
+            sourceHeight = image.naturalWidth / canvasRatio;
+            sourceY = (image.naturalHeight - sourceHeight) / 2;
+        }
+
+        context.clearRect(0, 0, sequenceCanvas.width, sequenceCanvas.height);
+        context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, sequenceCanvas.width, sequenceCanvas.height);
+    }
+
+    function loadFrame(index) {
+        if (frames[index]) return;
+        const image = new Image();
+        frames[index] = image;
+        image.decoding = 'async';
+        image.src = framePath(index);
+        image.addEventListener('load', () => {
+            if (index === currentFrame) drawFrame(index);
+        }, { once: true });
+    }
+
+    function resizeSequence() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        sequenceCanvas.width = Math.round(window.innerWidth * pixelRatio);
+        sequenceCanvas.height = Math.round(window.innerHeight * pixelRatio);
+        drawFrame(currentFrame);
+    }
+
+    function updateSequence() {
+        const rect = sequenceSection.getBoundingClientRect();
+        const scrollDistance = sequenceSection.offsetHeight - window.innerHeight;
+        const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
+        // El golpe ocupa la primera parte; el tramo final queda libre para leer el CTA.
+        const frameProgress = Math.min(progress / .62, 1);
+        const nextFrame = Math.round(frameProgress * (frameCount - 1));
+        const revealProgress = Math.max(0, Math.min(1, (progress - .64) / .12));
+
+        if (nextFrame !== currentFrame) {
+            currentFrame = nextFrame;
+            loadFrame(currentFrame);
+            drawFrame(currentFrame);
+        }
+
+        const isImpact = currentFrame >= 14 && currentFrame <= 18;
+        if (isImpact && !lastImpactState) {
+            sequenceCanvas.classList.remove('sequence-impact');
+            void sequenceCanvas.offsetWidth;
+            sequenceCanvas.classList.add('sequence-impact');
+        }
+        lastImpactState = isImpact;
+
+        sequenceShade.style.opacity = String(revealProgress * .72);
+        sequenceContent.style.opacity = String(revealProgress);
+        sequenceContent.style.transform = `translateY(${(1 - revealProgress) * 34}px)`;
+        sequenceContent.style.pointerEvents = revealProgress > .9 ? 'auto' : 'none';
+        ticking = false;
+    }
+
+    function requestSequenceUpdate() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateSequence);
+    }
+
+    loadFrame(0);
+    loadFrame(frameCount - 1);
+    resizeSequence();
+    window.addEventListener('resize', resizeSequence, { passive: true });
+    window.addEventListener('scroll', requestSequenceUpdate, { passive: true });
+    updateSequence();
+
+    const preloadFrames = () => {
+        for (let index = 1; index < frameCount - 1; index += 1) loadFrame(index);
+    };
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(preloadFrames, { timeout: 1800 });
+    } else {
+        window.setTimeout(preloadFrames, 400);
+    }
+}

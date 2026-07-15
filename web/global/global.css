@@ -5,6 +5,9 @@
     --color-white: #f5f3ec;
     --color-muted: #aaa;
     --color-line: #292929;
+    --font-display: "Arial Black", Arial, sans-serif;
+    --font-subtitle: "Bebas Neue", "Arial Narrow", sans-serif;
+    --font-body: "Inter", Arial, sans-serif;
 }
 
 * {
@@ -21,6 +24,7 @@ body {
 
 body {
     overflow-x: hidden;
+    font-family: var(--font-body);
 }
 
 img {
@@ -46,20 +50,36 @@ img {
 }
 
 header {
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 100;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 50px;
+    min-height: 88px;
+    padding: 8px 56px;
+    transition: padding .3s ease, background-color .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+}
+
+header.header-scrolled {
+    min-height: 72px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: rgba(5, 5, 5, .84);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .08);
+    backdrop-filter: blur(12px);
 }
 
 header > a img {
     display: block;
-    width: 90px;
+    width: 68px;
     height: auto;
+    transition: width .3s ease;
+}
+
+header.header-scrolled > a img {
+    width: 54px;
 }
 
 header nav {
@@ -70,21 +90,50 @@ header nav {
 
 header nav ul {
     display: flex;
-    gap: 20px;
+    gap: 34px;
     list-style: none;
 }
 
 header nav a {
-    color: rgba(241, 201, 22, .9);
+    color: var(--color-white);
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .075em;
     text-decoration: none;
     text-transform: uppercase;
+    transition: color .2s ease;
 }
 
 header nav a:hover,
 header nav a:focus-visible {
-    color: var(--color-white);
+    color: var(--color-gold);
+}
+
+.header-cta {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    color: #050505;
+    background: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    border-radius: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.header-cta:hover,
+.header-cta:focus-visible {
+    color: var(--color-gold);
+    background: transparent;
+    transform: translateY(-2px);
 }
 
 .Botones_usuarios {
@@ -182,7 +231,7 @@ header nav a:focus-visible {
 
 .footer-main {
     display: grid;
-    grid-template-columns: minmax(260px, 1.5fr) repeat(3, minmax(130px, .65fr));
+    grid-template-columns: minmax(260px, 1.5fr) repeat(2, minmax(130px, .65fr));
     gap: clamp(35px, 6vw, 90px);
     padding: 72px 0 62px;
 }
@@ -215,6 +264,15 @@ header nav a:focus-visible {
     line-height: 1.55;
 }
 
+.footer-identity .footer-location {
+    margin-top: 5px;
+    color: #c0c0bb;
+}
+
+.footer-social-mobile {
+    display: none;
+}
+
 .footer-column {
     display: flex;
     flex-direction: column;
@@ -244,16 +302,26 @@ header nav a:focus-visible {
 
 .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 30px;
     padding: 24px 0 28px;
     border-top: 1px solid #252525;
     font-size: .68rem;
     line-height: 1.5;
+    text-align: center;
 }
 
 .footer-bottom strong {
     color: var(--color-gold);
+}
+
+.footer-bottom a {
+    text-decoration: none;
+}
+
+.footer-bottom a:hover strong,
+.footer-bottom a:focus-visible strong {
+    color: var(--color-white);
 }
 
 @media (max-width: 1160px) {
@@ -271,7 +339,8 @@ header nav a:focus-visible {
     }
 
     header nav,
-    .Botones_usuarios {
+    .Botones_usuarios,
+    .header-cta {
         display: none;
     }
 
@@ -390,5 +459,32 @@ header nav a:focus-visible {
 
     .footer-identity {
         grid-column: auto;
+    }
+
+    .footer-navigation,
+    .footer-contact {
+        display: none;
+    }
+
+    .footer-social-mobile {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+    }
+
+    .footer-social-mobile a {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 50%;
+    }
+
+    .footer-social-mobile img {
+        width: 25px;
+        height: 25px;
+        object-fit: contain;
     }
 }

@@ -1,0 +1,140 @@
+[
+  {
+    "dia": "Lunes",
+    "hora_inicio": "09:00",
+    "hora_fin": "11:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Lunes",
+    "hora_inicio": "14:00",
+    "hora_fin": "16:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Lunes",
+    "hora_inicio": "19:00",
+    "hora_fin": "21:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Martes",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:30",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Martes",
+    "hora_inicio": "09:30",
+    "hora_fin": "11:00",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Martes",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:30",
+    "DT": "DT 1"
+  },
+  {
+    "dia": "Martes",
+    "hora_inicio": "18:00",
+    "hora_fin": "19:30",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Martes",
+    "hora_inicio": "19:30",
+    "hora_fin": "21:00",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Miércoles",
+    "hora_inicio": "09:00",
+    "hora_fin": "11:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Miércoles",
+    "hora_inicio": "14:00",
+    "hora_fin": "16:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Miércoles",
+    "hora_inicio": "19:00",
+    "hora_fin": "21:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Jueves",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:30",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Jueves",
+    "hora_inicio": "09:30",
+    "hora_fin": "11:00",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Jueves",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:30",
+    "DT": "DT 1"
+  },
+  {
+    "dia": "Jueves",
+    "hora_inicio": "18:00",
+    "hora_fin": "19:30",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Jueves",
+    "hora_inicio": "19:30",
+    "hora_fin": "21:00",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Viernes",
+    "hora_inicio": "09:00",
+    "hora_fin": "11:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Viernes",
+    "hora_inicio": "14:00",
+    "hora_fin": "16:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Viernes",
+    "hora_inicio": "19:00",
+    "hora_fin": "21:00",
+    "DT": "DT 2"
+  },
+  {
+    "dia": "Sábado",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:30",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Sábado",
+    "hora_inicio": "09:30",
+    "hora_fin": "11:00",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Sábado",
+    "hora_inicio": "18:00",
+    "hora_fin": "19:30",
+    "DT": "DT 3"
+  },
+  {
+    "dia": "Sábado",
+    "hora_inicio": "19:30",
+    "hora_fin": "21:00",
+    "DT": "DT 3"
+  }
+]
