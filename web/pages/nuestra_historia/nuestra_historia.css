@@ -6,179 +6,286 @@
     --history-muted: var(--color-muted);
 }
 
+
 body {
     overflow-x: hidden;
+
     color: var(--history-white);
     background: var(--history-black);
+
     font-family: var(--font-body);
 }
 
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .history-hero {
     position: relative;
+
     min-height: 100svh;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px clamp(24px, 8vw, 125px) 80px;
+
+    padding:
+        120px
+        clamp(24px, 8vw, 125px)
+        80px;
+
     overflow: hidden;
+
     background:
-        linear-gradient(90deg, rgba(0, 0, 0, .84), rgba(0, 0, 0, .48) 55%, rgba(0, 0, 0, .3)),
-        linear-gradient(0deg, rgba(0, 0, 0, .72), transparent 45%),
-        url("../../assets/bolsas_suburbia.jpg") center / cover no-repeat;
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, .84),
+            rgba(0, 0, 0, .48) 55%,
+            rgba(0, 0, 0, .3)
+        ),
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, .72),
+            transparent 45%
+        ),
+        url("../../assets/bolsas_suburbia.jpg")
+        center / cover no-repeat;
 }
+
 
 .history-hero::after {
     content: "";
+
     position: absolute;
     inset: auto 0 0;
+
     height: 18%;
-    background: linear-gradient(transparent, var(--history-black));
+
+    background:
+        linear-gradient(
+            transparent,
+            var(--history-black)
+        );
 }
+
 
 .history-hero-content {
     position: relative;
     z-index: 1;
+
     width: 100%;
     max-width: 1050px;
+
     text-align: center;
 }
 
+
 .history-hero h1 {
     color: var(--history-gold);
+
     font-family: "New Rocker", cursive;
-    font-size: clamp(5rem, 11vw, 10.5rem);
+
+    font-size:
+        clamp(
+            5rem,
+            11vw,
+            10.5rem
+        );
+
     font-weight: 400;
+
     line-height: .78;
-    text-shadow: 0 8px 35px rgba(0, 0, 0, .55);
+
+    text-shadow:
+        0 8px 35px
+        rgba(0, 0, 0, .55);
 }
+
 
 .history-hero-content > p:last-child {
     max-width: 600px;
-    margin: 34px auto 0;
+
+    margin:
+        34px
+        auto
+        0;
+
     color: #d0d0cc;
+
     font-size: 1.12rem;
+
     line-height: 1.65;
 }
 
-.story-section h2,
+
+
+/* =========================================================
+   HEADINGS GENERALES
+   ========================================================= */
+
 .founder-section h2,
+.suburbia-history h2,
+.training-paths h2,
 .documentary-section h2,
 .history-sequence h2 {
     font-family: var(--font-subtitle);
-    font-size: clamp(3.5rem, 7vw, 7.3rem);
+
+    font-size:
+        clamp(
+            3.5rem,
+            7vw,
+            7.3rem
+        );
+
     font-weight: 400;
+
     letter-spacing: .025em;
+
     line-height: .86;
 }
 
-.story-section {
-    padding: clamp(95px, 12vw, 170px) clamp(24px, 8vw, 125px);
-    background: linear-gradient(120deg, rgba(255, 255, 255, .025), transparent 50%), var(--history-charcoal);
-}
 
-.story-top {
-    display: grid;
-    grid-template-columns: .9fr 1.1fr;
-    gap: clamp(55px, 9vw, 145px);
-    align-items: end;
-}
 
-.story-heading h2 {
-    color: var(--history-gold);
-}
-
-.story-body .lead {
-    max-width: 720px;
-    margin-bottom: 34px;
-    font-size: clamp(1.4rem, 2.2vw, 2.1rem);
-    font-weight: 600;
-    line-height: 1.38;
-}
-
-.story-body > p:not(.lead) {
-    max-width: 720px;
-    margin-top: 20px;
-    color: #b5b5b0;
-    line-height: 1.78;
-}
+/* =========================================================
+   FUNDADOR
+   ========================================================= */
 
 .founder-section {
     display: grid;
-    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+
+    grid-template-columns:
+        minmax(0, .9fr)
+        minmax(0, 1.1fr);
+
     min-height: 900px;
+
     background: #0b0b0b;
 }
 
+
 .founder-photo {
     min-height: 780px;
+
     overflow: hidden;
 }
+
 
 .founder-photo img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
+
     object-position: center 38%;
-    filter: saturate(.72) contrast(1.04);
+
+    filter:
+        saturate(.72)
+        contrast(1.04);
 }
+
 
 .founder-copy {
     display: flex;
+
     justify-content: center;
+
     flex-direction: column;
-    padding: clamp(70px, 8vw, 125px);
+
+    padding:
+        clamp(
+            70px,
+            8vw,
+            125px
+        );
 }
+
 
 .founder-copy h2 {
     margin-bottom: 38px;
+
     color: var(--history-gold);
 }
+
 
 .founder-data {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     margin-bottom: 38px;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
+
+    border-top:
+        1px solid #333;
+
+    border-bottom:
+        1px solid #333;
 }
 
+
 .founder-data p {
-    padding: 18px 16px 18px 0;
+    padding:
+        18px
+        16px
+        18px
+        0;
+
     font-size: .78rem;
+
     font-weight: 700;
 }
 
+
 .founder-data p + p {
     padding-left: 16px;
-    border-left: 1px solid #333;
+
+    border-left:
+        1px solid #333;
 }
+
 
 .founder-data span {
     display: block;
+
     margin-bottom: 7px;
+
     color: var(--history-gold);
+
     font-size: .58rem;
+
     letter-spacing: .1em;
 }
 
+
 .founder-story {
     max-width: 650px;
+
     color: #aaa;
+
     line-height: 1.78;
 }
+
 
 .founder-story p + p {
     margin-top: 18px;
 }
 
 
+
 /* =========================================================
-   FOUNDER JOURNEY CAROUSEL
+   FOUNDER JOURNEY
    ========================================================= */
 
 .founder-journey {
-    padding: 72px clamp(18px, 4vw, 54px) 64px;
+    padding:
+        72px
+        clamp(18px, 4vw, 54px)
+        64px;
+
     overflow: hidden;
+
     background:
         radial-gradient(
             circle at 50% 30%,
@@ -188,83 +295,140 @@ body {
         #101010;
 }
 
+
 .founder-journey-head {
-    width: min(100%, 1700px);
+    width:
+        min(
+            100%,
+            1700px
+        );
+
     display: grid;
-    grid-template-columns: 1fr .72fr;
+
+    grid-template-columns:
+        1fr .72fr;
+
     gap: 70px;
+
     align-items: end;
-    margin: 0 auto 34px;
+
+    margin:
+        0
+        auto
+        34px;
 }
+
 
 .founder-journey-head h2 {
     margin: 0;
+
     color: var(--history-white);
+
     font-family: var(--font-subtitle);
-    font-size: clamp(3.7rem, 6vw, 6.5rem);
+
+    font-size:
+        clamp(
+            3.7rem,
+            6vw,
+            6.5rem
+        );
+
     font-weight: 400;
+
     line-height: .88;
+
     letter-spacing: .02em;
 }
 
-.founder-journey-summary {
-    max-width: 510px;
-    justify-self: end;
-    color: #aaa;
-    line-height: 1.75;
-}
 
 
-/* CAROUSEL */
+/* =========================================================
+   JOURNEY CAROUSEL
+   ========================================================= */
 
 .journey-carousel {
     position: relative;
-    width: min(100%, 1700px);
+
+    width:
+        min(
+            100%,
+            1700px
+        );
+
     height: 620px;
+
     margin: 0 auto;
+
     overflow: hidden;
 }
+
 
 .journey-card {
     position: absolute;
+
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     min-height: 620px;
+
     overflow: hidden;
-    border: 1px solid rgba(244, 196, 0, .32);
+
+    border:
+        1px solid
+        rgba(244, 196, 0, .32);
+
     background: #090909;
+
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 }
 
+
 .journey-card.is-active {
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
 }
 
 
-/* FOTO */
+
+/* =========================================================
+   JOURNEY FOTO
+   ========================================================= */
 
 .journey-bg {
     position: absolute;
+
     inset: -30px;
+
     background-position: center;
+
     background-size: cover;
+
     filter:
         blur(8px)
         grayscale(.2)
         saturate(.42)
         contrast(1.05);
+
     transform: scale(1.055);
 }
 
+
 .journey-overlay {
     position: absolute;
+
     inset: 0;
+
     z-index: 1;
+
     background:
         linear-gradient(
             90deg,
@@ -281,99 +445,193 @@ body {
 }
 
 
-/* CONTENIDO */
+
+/* =========================================================
+   JOURNEY CONTENIDO
+   ========================================================= */
 
 .journey-content {
     position: relative;
+
     z-index: 2;
+
     height: 100%;
+
     min-height: 620px;
+
     display: flex;
+
     flex-direction: column;
+
     padding:
         52px
         clamp(120px, 8vw, 165px)
         48px;
 }
+
+
 .journey-top {
     max-width: 900px;
 }
 
+
 .journey-round {
-    margin: 0 0 18px;
+    margin:
+        0
+        0
+        18px;
+
     color: var(--history-gold);
+
     font-size: .82rem;
+
     font-weight: 900;
+
     letter-spacing: .1em;
 }
+
 
 .journey-round span {
     color: #666;
 }
 
+
 .journey-top h3 {
     margin: 0;
+
     color: #fff;
+
     font-family: var(--font-subtitle);
-    font-size: clamp(4.3rem, 5.7vw, 7rem);
+
+    font-size:
+        clamp(
+            4.3rem,
+            5.7vw,
+            7rem
+        );
+
     font-weight: 400;
+
     line-height: .86;
+
     letter-spacing: .02em;
 }
 
+
 .journey-columns {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(70px, 7vw, 115px);
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        clamp(
+            70px,
+            7vw,
+            115px
+        );
+
     margin-top: auto;
+
     padding-top: 42px;
 }
 
+
 .journey-column {
     position: relative;
+
     max-width: 590px;
+
     color: #dededb;
+
     font-size: 1rem;
+
     line-height: 1.72;
 }
 
+
 .journey-column + .journey-column::before {
     content: "";
+
     position: absolute;
+
     top: 0;
-    left: calc(clamp(70px, 7vw, 115px) / -2);
+
+    left:
+        calc(
+            clamp(
+                70px,
+                7vw,
+                115px
+            ) / -2
+        );
+
     width: 1px;
+
     height: 100%;
-    background: rgba(255, 255, 255, .2);
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .2
+        );
 }
+
 
 .journey-column p {
     margin: 0;
 }
+
 
 .journey-column p + p {
     margin-top: 20px;
 }
 
 
-/* ZONAS LATERALES */
+
+/* =========================================================
+   JOURNEY FLECHAS
+   ========================================================= */
 
 .journey-edge {
     position: absolute;
+
     top: 0;
     bottom: 0;
+
     z-index: 10;
 
     width: 92px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 0;
 
-    color: rgba(255, 255, 255, .82);
-    background: rgba(0, 0, 0, .12);
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .82
+        );
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .12
+        );
+
     border: 0;
 
     cursor: pointer;
@@ -383,403 +641,1387 @@ body {
         color .28s ease;
 }
 
+
 .journey-edge span {
     position: relative;
+
     z-index: 2;
 
     display: block;
 
     font-size: 2rem;
+
     font-weight: 300;
 
     opacity: .85;
 
-    transform: scaleX(1.25);
+    transform:
+        scaleX(1.25);
 
     transition:
         transform .28s ease,
         opacity .28s ease;
 }
 
+
 .journey-edge::before {
     content: "";
+
     position: absolute;
+
     inset: 0;
 
-    background: rgba(244, 196, 0, 0);
+    background:
+        rgba(
+            244,
+            196,
+            0,
+            0
+        );
 
-    transition: background .28s ease;
+    transition:
+        background .28s ease;
 }
+
 
 .journey-edge:hover::before {
-    background: rgba(244, 196, 0, .28);
+    background:
+        rgba(
+            244,
+            196,
+            0,
+            .28
+        );
 }
+
 
 .journey-edge:hover span {
     opacity: 1;
 }
 
+
 .journey-edge-prev {
     left: 0;
-    border-right: 1px solid rgba(255, 255, 255, .08);
+
+    border-right:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
 }
+
 
 .journey-edge-next {
     right: 0;
-    border-left: 1px solid rgba(255, 255, 255, .08);
+
+    border-left:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
 }
+
 
 .journey-edge-next:hover span {
-    transform: translateX(6px) scaleX(1.25);
+    transform:
+        translateX(6px)
+        scaleX(1.25);
 }
+
 
 .journey-edge-prev:hover span {
-    transform: translateX(-6px) scaleX(1.25);
+    transform:
+        translateX(-6px)
+        scaleX(1.25);
 }
 
 
-/* INDICADORES */
 
-.journey-dots {
-    width: min(100%, 1700px);
-    display: flex;
-    justify-content: center;
-    gap: 9px;
-    margin: 20px auto 0;
+/* =========================================================
+   HISTORIA DE SUBURBIA
+   ========================================================= */
+
+.suburbia-history {
+    position: relative;
+
+    padding:
+        clamp(100px, 11vw, 175px)
+        clamp(24px, 7vw, 110px);
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #080808 0%,
+            #101010 40%,
+            #080808 100%
+        );
 }
 
-.journey-dots span {
-    width: 58px;
-    height: 4px;
-    background: #393939;
-    border-radius: 999px;
-    transition:
-        width .3s ease,
-        background .3s ease;
+
+.suburbia-history::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: min(80vw, 1200px);
+
+    height: 500px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(244, 196, 0, .04),
+            transparent 70%
+        );
+
+    transform:
+        translateX(-50%);
+
+    pointer-events: none;
 }
 
-.journey-dots span.is-active {
-    width: 72px;
-    background: var(--history-gold);
-}
-.documentary-section {
+
+
+/* =========================================================
+   HISTORIA HEADER
+   ========================================================= */
+
+.suburbia-history-head {
+    position: relative;
+
+    z-index: 1;
+
+    width:
+        min(
+            100%,
+            1500px
+        );
+
     display: grid;
-    grid-template-columns: .8fr 1.2fr;
-    min-height: 760px;
-    background: var(--history-black);
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(300px, .65fr);
+
+    gap:
+        clamp(
+            60px,
+            9vw,
+            145px
+        );
+
+    align-items: end;
+
+    margin:
+        0
+        auto
+        clamp(90px, 10vw, 150px);
 }
 
-.documentary-copy {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: clamp(70px, 8vw, 110px);
+
+.suburbia-history-head h2 {
+    margin: 0;
+
+    color: var(--history-gold);
 }
 
-.documentary-copy > p:not(.eyebrow) {
-    max-width: 540px;
-    margin-top: 30px;
-    color: #999;
+
+.suburbia-history-intro {
+    max-width: 560px;
+
+    margin: 0;
+
+    color: #b5b5b0;
+
+    font-size:
+        clamp(
+            1.05rem,
+            1.4vw,
+            1.3rem
+        );
+
     line-height: 1.75;
 }
 
+
+
+/* =========================================================
+   HISTORIA ACCORDION BASE / DESKTOP
+   ========================================================= */
+
+.suburbia-history-trigger {
+    display: none;
+}
+
+
+.suburbia-history-panel {
+    height: auto;
+
+    overflow: visible;
+
+    opacity: 1;
+}
+
+
+.suburbia-history-chapter {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    margin: 0;
+}
+
+
+.suburbia-history-chapter
++ .suburbia-history-chapter {
+    margin-top:
+        clamp(
+            100px,
+            13vw,
+            190px
+        );
+}
+
+
+.suburbia-history-panel-inner {
+    width:
+        min(
+            100%,
+            1500px
+        );
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(420px, .8fr);
+
+    gap:
+        clamp(
+            60px,
+            8vw,
+            125px
+        );
+
+    align-items: center;
+
+    margin: 0 auto;
+}
+
+
+.suburbia-history-chapter.is-reversed
+.suburbia-history-panel-inner {
+    grid-template-columns:
+        minmax(420px, .8fr)
+        minmax(0, 1.05fr);
+}
+
+
+.suburbia-history-chapter.is-reversed
+.suburbia-history-media {
+    order: 2;
+}
+
+
+.suburbia-history-chapter.is-reversed
+.suburbia-history-copy {
+    order: 1;
+}
+
+
+
+/* =========================================================
+   HISTORIA FOTO
+   ========================================================= */
+
+.suburbia-history-media {
+    position: relative;
+
+    min-height:
+        clamp(
+            500px,
+            47vw,
+            720px
+        );
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+
+.suburbia-history-media::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .07
+        );
+
+    pointer-events: none;
+}
+
+
+.suburbia-history-media img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        saturate(.65)
+        contrast(1.04);
+}
+
+
+
+/* =========================================================
+   HISTORIA COPY
+   ========================================================= */
+
+.suburbia-history-copy {
+    position: relative;
+}
+
+
+.suburbia-history-number {
+    display: block;
+
+    margin-bottom: 36px;
+
+    color:
+        rgba(
+            244,
+            196,
+            0,
+            .26
+        );
+
+    font-family: var(--font-subtitle);
+
+    font-size:
+        clamp(
+            5rem,
+            8vw,
+            9rem
+        );
+
+    font-weight: 400;
+
+    line-height: .7;
+}
+
+
+.suburbia-history-copy h3 {
+    max-width: 720px;
+
+    margin:
+        14px
+        0
+        34px;
+
+    color: #fff;
+
+    font-family: var(--font-subtitle);
+
+    font-size:
+        clamp(
+            3.2rem,
+            5vw,
+            5.8rem
+        );
+
+    font-weight: 400;
+
+    line-height: .88;
+
+    letter-spacing: .015em;
+}
+
+
+.suburbia-history-copy
+> p:not(.eyebrow):not(.suburbia-history-emphasis) {
+    max-width: 620px;
+
+    margin: 0;
+
+    color: #aaa;
+
+    line-height: 1.78;
+}
+
+
+.suburbia-history-copy
+> p:not(.eyebrow):not(.suburbia-history-emphasis)
++ p:not(.eyebrow) {
+    margin-top: 20px;
+}
+
+
+.suburbia-history-emphasis {
+    margin-top: 35px;
+
+    color: var(--history-gold);
+
+    font-family: var(--font-subtitle);
+
+    font-size:
+        clamp(
+            2rem,
+            3vw,
+            3rem
+        );
+
+    line-height: 1;
+}
+
+
+
+/* =========================================================
+   MANIFIESTO
+   ========================================================= */
+
+.suburbia-manifesto {
+    position: relative;
+
+    z-index: 1;
+
+    width:
+        min(
+            100%,
+            1250px
+        );
+
+    margin:
+        clamp(120px, 14vw, 220px)
+        auto;
+
+    padding:
+        clamp(
+            65px,
+            8vw,
+            110px
+        )
+        clamp(
+            30px,
+            7vw,
+            95px
+        );
+
+    border-top:
+        1px solid
+        rgba(
+            244,
+            196,
+            0,
+            .4
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            244,
+            196,
+            0,
+            .4
+        );
+
+    text-align: center;
+}
+
+
+.suburbia-manifesto-mark {
+    position: absolute;
+
+    top: 18px;
+    left: 50%;
+
+    color:
+        rgba(
+            244,
+            196,
+            0,
+            .22
+        );
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(
+            7rem,
+            12vw,
+            13rem
+        );
+
+    line-height: 1;
+
+    transform:
+        translateX(-50%);
+
+    pointer-events: none;
+}
+
+
+.suburbia-manifesto p {
+    position: relative;
+
+    z-index: 1;
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    color: #fff;
+
+    font-family: var(--font-subtitle);
+
+    font-size:
+        clamp(
+            2.4rem,
+            4.5vw,
+            5rem
+        );
+
+    font-weight: 400;
+
+    line-height: .98;
+
+    letter-spacing: .01em;
+}
+
+
+
+/* =========================================================
+   SISTEMA DE FORMACIÓN
+   ========================================================= */
+
+.training-paths {
+    padding:
+        clamp(
+            100px,
+            11vw,
+            160px
+        )
+        clamp(
+            24px,
+            7vw,
+            110px
+        );
+
+    background: #0b0b0b;
+}
+
+
+.training-paths-head {
+    width:
+        min(
+            100%,
+            1500px
+        );
+
+    margin:
+        0
+        auto
+        65px;
+}
+
+
+.training-paths-head h2 {
+    margin: 0;
+
+    color: var(--history-white);
+}
+
+
+.training-paths-intro {
+    max-width: 700px;
+
+    margin-top: 30px;
+
+    color: #999;
+
+    font-size: 1.05rem;
+
+    line-height: 1.75;
+}
+
+
+.training-paths-grid {
+    width:
+        min(
+            100%,
+            1500px
+        );
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    margin: 0 auto;
+
+    border-top:
+        1px solid #333;
+
+    border-bottom:
+        1px solid #333;
+}
+
+
+.training-path {
+    min-height: 390px;
+
+    padding:
+        38px
+        34px
+        44px;
+}
+
+
+.training-path + .training-path {
+    border-left:
+        1px solid #333;
+}
+
+
+.training-path-trigger {
+    width: 100%;
+
+    display: block;
+
+    padding: 0;
+
+    color: inherit;
+
+    background: none;
+
+    border: 0;
+
+    text-align: left;
+
+    cursor: default;
+}
+
+
+.training-path-number {
+    display: block;
+
+    margin-bottom: 52px;
+
+    color: var(--history-gold);
+
+    font-size: .72rem;
+
+    font-weight: 900;
+
+    letter-spacing: .12em;
+}
+
+
+.training-path h3 {
+    margin: 0;
+
+    color: #fff;
+
+    font-family: var(--font-subtitle);
+
+    font-size:
+        clamp(
+            2.5rem,
+            3.5vw,
+            4rem
+        );
+
+    font-weight: 400;
+
+    line-height: .9;
+}
+
+
+.training-path-arrow {
+    display: none;
+}
+
+
+.training-path-content {
+    margin-top: 32px;
+}
+
+
+.training-path-content-inner p {
+    max-width: 390px;
+
+    margin: 0;
+
+    color: #aaa;
+
+    line-height: 1.72;
+}
+
+
+.training-paths-closing {
+    width:
+        min(
+            100%,
+            1500px
+        );
+
+    max-width: 760px;
+
+    margin:
+        55px
+        auto
+        0;
+
+    color: #aaa;
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+}
+
+
+
+/* =========================================================
+   DOCUMENTAL
+   ========================================================= */
+
+.documentary-section {
+    display: grid;
+
+    grid-template-columns:
+        .8fr
+        1.2fr;
+
+    min-height: 760px;
+
+    background: var(--history-black);
+}
+
+
+.documentary-copy {
+    display: flex;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    padding:
+        clamp(
+            70px,
+            8vw,
+            110px
+        );
+}
+
+
+.documentary-copy
+> p:not(.eyebrow) {
+    max-width: 540px;
+
+    margin-top: 30px;
+
+    color: #999;
+
+    line-height: 1.75;
+}
+
+
 .documentary-copy button {
     width: fit-content;
+
     margin-top: 35px;
-    padding: 15px 20px;
+
+    padding:
+        15px
+        20px;
+
     color: #777;
+
     background: transparent;
-    border: 1px solid #444;
+
+    border:
+        1px solid #444;
+
     font-size: .68rem;
+
     font-weight: 800;
+
     letter-spacing: .07em;
 }
 
+
 .documentary-cover {
     position: relative;
+
     min-height: 620px;
+
     overflow: hidden;
 }
 
+
 .documentary-cover::after {
     content: "";
+
     position: absolute;
+
     inset: 0;
-    background: rgba(0, 0, 0, .42);
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .42
+        );
 }
+
 
 .documentary-cover img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
-    filter: saturate(.62);
+
+    filter:
+        saturate(.62);
 }
+
 
 .play-mark {
     position: absolute;
+
     top: 50%;
     left: 50%;
+
     z-index: 2;
+
     width: 74px;
     height: 74px;
+
     display: grid;
+
     place-items: center;
+
     color: var(--history-black);
+
     background: var(--history-gold);
+
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
 }
+
 
 .video-label {
     position: absolute;
+
     z-index: 2;
+
     right: 28px;
     bottom: 25px;
+
     font-size: .66rem;
+
     font-weight: 800;
+
     letter-spacing: .12em;
 }
 
+
+
+/* =========================================================
+   HISTORY SEQUENCE
+   ========================================================= */
+
 .history-sequence {
     position: relative;
+
     height: 380vh;
-    background: var(--history-black);
+
+    background:
+        var(--history-black);
 }
+
 
 .history-sequence-sticky {
     position: sticky;
+
     top: 0;
+
     height: 100vh;
+
     min-height: 620px;
+
     overflow: hidden;
-    background: #090909 url("../../assets/frames-boxeo/frame-001.jpg") center / cover no-repeat;
+
+    background:
+        #090909
+        url("../../assets/frames-boxeo/frame-001.jpg")
+        center / cover no-repeat;
 }
+
 
 .history-sequence-canvas,
 .history-sequence-fallback,
 .history-sequence-shade {
     position: absolute;
+
     inset: 0;
+
     width: 100%;
     height: 100%;
 }
+
 
 .history-sequence-canvas {
     display: block;
 }
 
+
 .history-sequence-canvas.sequence-impact {
-    animation: history-hit .18s linear;
+    animation:
+        history-hit
+        .18s
+        linear;
 }
+
 
 .history-sequence-fallback {
     display: none;
+
     object-fit: cover;
 }
 
+
 .history-sequence-shade {
     z-index: 1;
+
     opacity: 0;
-    background: rgba(0, 0, 0, .7);
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .7
+        );
+
     pointer-events: none;
 }
+
 
 .history-sequence-content {
     position: absolute;
+
     inset: 0;
+
     z-index: 2;
+
     display: flex;
+
     max-width: 900px;
+
     align-items: center;
+
     justify-content: center;
+
     flex-direction: column;
+
     margin: auto;
-    padding: 90px 24px 60px;
+
+    padding:
+        90px
+        24px
+        60px;
+
     opacity: 0;
+
     text-align: center;
-    transform: translateY(34px);
+
+    transform:
+        translateY(34px);
+
     pointer-events: none;
 }
 
-.history-sequence-content > p:not(.eyebrow) {
+
+.history-sequence-content
+> p:not(.eyebrow) {
     max-width: 630px;
+
     margin-top: 28px;
+
     color: #ccc;
+
     line-height: 1.7;
 }
 
+
 .history-sequence-content a {
     min-height: 54px;
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
+
     margin-top: 34px;
-    padding: 0 26px;
+
+    padding:
+        0
+        26px;
+
     color: var(--history-black);
-    background: var(--history-gold);
+
+    background:
+        var(--history-gold);
+
     font-size: .72rem;
+
     font-weight: 900;
+
     letter-spacing: .05em;
+
     text-decoration: none;
 }
 
+
+
+/* =========================================================
+   IMPACTO
+   ========================================================= */
+
 @keyframes history-hit {
-    0%, 100% { transform: translate(0); }
-    35% { transform: translate(-7px, 2px) scale(1.006); }
-    70% { transform: translate(5px, -1px) scale(1.003); }
+
+    0%,
+    100% {
+        transform:
+            translate(0);
+    }
+
+    35% {
+        transform:
+            translate(-7px, 2px)
+            scale(1.006);
+    }
+
+    70% {
+        transform:
+            translate(5px, -1px)
+            scale(1.003);
+    }
 }
 
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
 @media (max-width: 900px) {
-    .story-top,
+
     .founder-section,
     .documentary-section {
         grid-template-columns: 1fr;
     }
 
-    .story-top {
-        gap: 42px;
-    }
 
     .founder-photo {
-        height: min(118vw, 760px);
+        height:
+            min(
+                118vw,
+                760px
+            );
+
         min-height: 600px;
     }
 
+
     .founder-copy,
     .documentary-copy {
-        padding: 80px clamp(24px, 7vw, 60px);
+        padding:
+            80px
+            clamp(
+                24px,
+                7vw,
+                60px
+            );
     }
+
 
     .documentary-cover {
         min-height: 540px;
     }
-}
 
-@media (max-width: 560px) {
-    .history-hero {
-        min-height: 100svh;
-        padding: 105px 20px 70px;
-        background-position: 54% center;
+
+    .suburbia-history-head {
+        grid-template-columns: 1fr;
+
+        gap: 36px;
     }
 
+
+    .suburbia-history-intro {
+        max-width: 700px;
+    }
+
+
+    .suburbia-history-panel-inner,
+    .suburbia-history-chapter.is-reversed
+    .suburbia-history-panel-inner {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+
+    .suburbia-history-chapter.is-reversed
+    .suburbia-history-media,
+    .suburbia-history-chapter.is-reversed
+    .suburbia-history-copy {
+        order: initial;
+    }
+
+
+    .suburbia-history-media {
+        min-height:
+            min(
+                85vw,
+                660px
+            );
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE GENERAL
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .history-hero {
+        min-height: 100svh;
+
+        padding:
+            105px
+            20px
+            70px;
+
+        background-position:
+            54%
+            center;
+    }
+
+
     .history-hero h1 {
-        font-size: clamp(3.2rem, 17vw, 4.2rem);
+        font-size:
+            clamp(
+                3.2rem,
+                17vw,
+                4.2rem
+            );
+
         line-height: .82;
     }
 
-    .history-hero-content > p:last-child {
+
+    .history-hero-content
+    > p:last-child {
         font-size: .98rem;
     }
 
-    .story-section {
-        padding: 72px 20px;
-    }
 
-    .story-section h2,
     .founder-section h2,
+    .suburbia-history h2,
+    .training-paths h2,
     .documentary-section h2,
     .history-sequence h2 {
-        font-size: clamp(2.8rem, 14vw, 4.1rem);
+        font-size:
+            clamp(
+                2.8rem,
+                14vw,
+                4.1rem
+            );
     }
 
-    .story-body .lead {
-        font-size: 1.24rem;
-    }
 
     .founder-photo {
         height: 125vw;
+
         min-height: 480px;
     }
 
+
     .founder-copy,
     .documentary-copy {
-        padding: 70px 20px;
+        padding:
+            70px
+            20px;
     }
+
 
     .founder-data {
         grid-template-columns: 1fr;
     }
 
+
     .founder-data p + p {
         padding-left: 0;
-        border-top: 1px solid #333;
+
+        border-top:
+            1px solid #333;
+
         border-left: 0;
     }
+
 
     .documentary-cover {
         min-height: 430px;
     }
 
+
     .history-sequence-content {
         padding-right: 20px;
+
         padding-left: 20px;
     }
+
 
     .history-sequence-content a {
         width: 100%;
     }
+
 }
 
+
+
+/* =========================================================
+   MOBILE — JOURNEY + HISTORIA + RECORRIDOS
+   ========================================================= */
+
 @media (max-width: 768px) {
+
+
+    /* =====================================================
+       JOURNEY
+       ===================================================== */
+
     .founder-journey {
         min-height: 100svh;
 
         display: flex;
+
         flex-direction: column;
+
         justify-content: center;
 
-        padding: 72px 14px 36px;
+        padding:
+            72px
+            14px
+            36px;
 
         overflow: hidden;
     }
 
-    /* =========================
-       TÍTULO GENERAL
-       ========================= */
 
     .founder-journey-head {
         flex: 0 0 auto;
 
         width: 100%;
-        margin: 0 0 28px;
+
+        margin:
+            0
+            0
+            28px;
+
         padding: 0;
 
         display: flex;
+
         justify-content: center;
 
         text-align: center;
     }
 
+
     .founder-journey-head > div {
         width: 100%;
 
         display: flex;
+
         flex-direction: column;
+
         align-items: center;
 
         text-align: center;
     }
 
+
     .founder-journey-head .eyebrow {
         width: 100%;
-        margin: 0 0 8px;
+
+        margin:
+            0
+            0
+            8px;
 
         text-align: center;
     }
 
+
     .founder-journey-head h2 {
         width: 100%;
+
         margin: 0;
 
-        font-size: clamp(2.9rem, 13vw, 4.2rem);
+        font-size:
+            clamp(
+                2.9rem,
+                13vw,
+                4.2rem
+            );
+
         line-height: .88;
 
         text-align: center;
     }
 
-    /* =========================
-       CAROUSEL
-       ========================= */
 
     .journey-carousel {
         position: relative;
@@ -787,7 +2029,13 @@ body {
         flex: 0 0 auto;
 
         width: 100%;
-        height: min(67svh, 640px);
+
+        height:
+            min(
+                67svh,
+                640px
+            );
+
         min-height: 570px;
 
         margin: 0;
@@ -795,51 +2043,70 @@ body {
         overflow: hidden;
     }
 
+
     .journey-card {
         position: absolute;
+
         inset: 0;
 
         width: 100%;
         height: 100%;
+
         min-height: 0;
 
         overflow: hidden;
 
-        border: 1px solid rgba(244, 196, 0, .24);
+        border:
+            1px solid
+            rgba(
+                244,
+                196,
+                0,
+                .24
+            );
+
         border-radius: 18px;
 
         background: #090909;
 
         opacity: 0;
+
         visibility: visible;
 
         pointer-events: none;
 
-        transform-origin: center center;
+        transform-origin:
+            center center;
 
         box-shadow:
-            0 18px 50px rgba(0, 0, 0, .4);
+            0
+            18px
+            50px
+            rgba(
+                0,
+                0,
+                0,
+                .4
+            );
     }
 
-    /*
-        En mobile GSAP controla opacity.
-        No necesitamos el estado is-active.
-    */
+
     .journey-card.is-active {
         opacity: 0;
+
         visibility: visible;
+
         pointer-events: none;
     }
 
-    /* =========================
-       FONDO
-       ========================= */
 
     .journey-bg {
         position: absolute;
+
         inset: -20px;
 
         background-position: center;
+
         background-size: cover;
 
         filter:
@@ -848,12 +2115,16 @@ body {
             saturate(.45)
             brightness(.48);
 
-        transform: scale(1.06);
+        transform:
+            scale(1.06);
     }
+
 
     .journey-overlay {
         position: absolute;
+
         inset: 0;
+
         z-index: 1;
 
         background:
@@ -865,16 +2136,15 @@ body {
             );
     }
 
-    /* =========================
-       CONTENIDO
-       ========================= */
 
     .journey-content {
         position: relative;
+
         z-index: 2;
 
         width: 100%;
         height: 100%;
+
         min-height: 0;
 
         display: grid;
@@ -886,22 +2156,25 @@ body {
 
         padding:
             24px
-            clamp(24px, 7vw, 34px)
+            clamp(
+                24px,
+                7vw,
+                34px
+            )
             30px;
     }
+
 
     .journey-top {
         display: contents;
     }
 
-    /* =========================
-       ROUND
-       ========================= */
 
     .journey-round {
         grid-row: 1;
 
         justify-self: start;
+
         align-self: start;
 
         margin: 0;
@@ -909,19 +2182,25 @@ body {
         color: var(--history-gold);
 
         font-size: .66rem;
+
         font-weight: 900;
+
         letter-spacing: .13em;
 
         text-align: left;
     }
 
+
     .journey-round span {
-        color: rgba(255, 255, 255, .42);
+        color:
+            rgba(
+                255,
+                255,
+                255,
+                .42
+            );
     }
 
-    /* =========================
-       TÍTULO DEL ROUND
-       ========================= */
 
     .journey-top h3 {
         grid-row: 2;
@@ -929,25 +2208,32 @@ body {
         width: 100%;
 
         align-self: center;
+
         justify-self: center;
 
         margin: 0;
 
         color: #fff;
 
-        font-family: var(--font-subtitle);
-        font-size: clamp(2.85rem, 12vw, 4rem);
+        font-family:
+            var(--font-subtitle);
+
+        font-size:
+            clamp(
+                2.85rem,
+                12vw,
+                4rem
+            );
+
         font-weight: 400;
 
         line-height: .88;
+
         letter-spacing: .01em;
 
         text-align: center;
     }
 
-    /* =========================
-       TEXTO
-       ========================= */
 
     .journey-columns {
         grid-row: 3;
@@ -955,75 +2241,613 @@ body {
         display: block;
 
         width: 100%;
+
         max-width: 380px;
 
         margin: 0 auto;
+
         padding: 0;
     }
 
+
     .journey-column {
         width: 100%;
+
         max-width: none;
 
-        color: rgba(255, 255, 255, .80);
+        color:
+            rgba(
+                255,
+                255,
+                255,
+                .80
+            );
 
-        font-size: clamp(.84rem, 3.4vw, .95rem);
+        font-size:
+            clamp(
+                .84rem,
+                3.4vw,
+                .95rem
+            );
+
         line-height: 1.62;
 
         text-align: left;
     }
 
-    .journey-column + .journey-column {
+
+    .journey-column
+    + .journey-column {
         margin-top: 15px;
     }
 
-    .journey-column + .journey-column::before {
+
+    .journey-column
+    + .journey-column::before {
         display: none;
     }
+
 
     .journey-column p {
         margin: 0;
     }
 
+
     .journey-column p + p {
         margin-top: 13px;
     }
 
-    /* =========================
-       FLECHAS
-       ========================= */
 
     .journey-edge {
         display: none;
     }
+
+
+
+    /* =====================================================
+       HISTORIA SUBURBIA — ACCORDION MOBILE
+       ===================================================== */
+
+    .suburbia-history {
+        padding:
+            88px
+            20px;
+    }
+
+
+    .suburbia-history-head {
+        display: block;
+
+        margin-bottom: 58px;
+    }
+
+
+    .suburbia-history-head h2 {
+        font-size:
+            clamp(
+                3rem,
+                14vw,
+                4.3rem
+            );
+    }
+
+
+    .suburbia-history-intro {
+        margin-top: 28px;
+
+        font-size: .98rem;
+
+        line-height: 1.68;
+    }
+
+
+    .suburbia-history-chapters {
+        width: 100%;
+    }
+
+
+    .suburbia-history-chapter,
+    .suburbia-history-chapter.is-reversed {
+        width: 100%;
+
+        display: block;
+
+        margin: 0;
+
+        border-top:
+            1px solid #333;
+    }
+
+
+    .suburbia-history-chapter
+    + .suburbia-history-chapter {
+        margin-top: 0;
+    }
+
+
+    .suburbia-history-chapter:last-of-type {
+        border-bottom:
+            1px solid #333;
+    }
+
+
+
+    /* TRIGGER */
+
+    .suburbia-history-trigger {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            auto
+            minmax(0, 1fr)
+            auto;
+
+        gap: 16px;
+
+        align-items: center;
+
+        padding:
+            25px
+            2px;
+
+        color: inherit;
+
+        background: transparent;
+
+        border: 0;
+
+        text-align: left;
+
+        cursor: pointer;
+    }
+
+
+    .suburbia-history-trigger-number {
+        align-self: start;
+
+        padding-top: 6px;
+
+        color: var(--history-gold);
+
+        font-size: .64rem;
+
+        font-weight: 900;
+
+        line-height: 1;
+
+        letter-spacing: .12em;
+    }
+
+
+    .suburbia-history-trigger-copy {
+        min-width: 0;
+
+        display: block;
+    }
+
+
+    .suburbia-history-trigger-copy
+    .eyebrow {
+        display: block;
+
+        margin:
+            0
+            0
+            7px;
+
+        font-size: .56rem;
+
+        line-height: 1.3;
+    }
+
+
+    .suburbia-history-trigger-title {
+        display: block;
+
+        color: #fff;
+
+        font-family:
+            var(--font-subtitle);
+
+        font-size:
+            clamp(
+                1.9rem,
+                8.5vw,
+                2.7rem
+            );
+
+        font-weight: 400;
+
+        line-height: .9;
+
+        letter-spacing: .01em;
+    }
+
+
+    .suburbia-history-arrow {
+        align-self: center;
+
+        color: var(--history-gold);
+
+        font-size: 1.25rem;
+
+        line-height: 1;
+
+        transition:
+            transform .3s ease;
+    }
+
+
+    .suburbia-history-chapter.is-open
+    .suburbia-history-arrow {
+        transform:
+            rotate(180deg);
+    }
+
+
+
+    /* PANEL */
+
+    .suburbia-history-panel {
+        height: 0;
+
+        margin: 0;
+
+        overflow: hidden;
+
+        opacity: 0;
+    }
+
+
+    .suburbia-history-panel-inner,
+    .suburbia-history-chapter.is-reversed
+    .suburbia-history-panel-inner {
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 30px;
+
+        margin: 0;
+
+        padding:
+            4px
+            0
+            38px;
+    }
+
+
+
+    /* FOTO */
+
+    .suburbia-history-media,
+    .suburbia-history-chapter.is-reversed
+    .suburbia-history-media {
+        order: initial;
+
+        width: 100%;
+
+        height:
+            min(
+                105vw,
+                500px
+            );
+
+        min-height: 0;
+
+        margin: 0;
+
+        overflow: hidden;
+    }
+
+
+    .suburbia-history-media img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+
+
+    /* COPY */
+
+    .suburbia-history-copy,
+    .suburbia-history-chapter.is-reversed
+    .suburbia-history-copy {
+        order: initial;
+
+        width: 100%;
+
+        padding:
+            0
+            3px;
+    }
+
+
+    .suburbia-history-copy
+    > .suburbia-history-number,
+    .suburbia-history-copy
+    > .eyebrow,
+    .suburbia-history-copy
+    > h3 {
+        display: none;
+    }
+
+
+    .suburbia-history-copy
+    > p:not(.eyebrow):not(.suburbia-history-emphasis) {
+        max-width: none;
+
+        margin: 0;
+
+        color: #aaa;
+
+        font-size: .94rem;
+
+        line-height: 1.68;
+    }
+
+
+    .suburbia-history-copy
+    > p:not(.eyebrow):not(.suburbia-history-emphasis)
+    + p:not(.eyebrow) {
+        margin-top: 17px;
+    }
+
+
+    .suburbia-history-emphasis {
+        margin-top: 26px;
+
+        color: var(--history-gold);
+
+        font-size: 2.15rem;
+    }
+
+
+
+    /* =====================================================
+       MANIFIESTO MOBILE
+       ===================================================== */
+
+    .suburbia-manifesto {
+        margin:
+            85px
+            0;
+
+        padding:
+            64px
+            10px;
+    }
+
+
+    .suburbia-manifesto-mark {
+        top: 20px;
+
+        font-size: 8rem;
+    }
+
+
+    .suburbia-manifesto p {
+        font-size:
+            clamp(
+                2rem,
+                9vw,
+                3rem
+            );
+
+        line-height: 1;
+    }
+
+
+
+    /* =====================================================
+       TRAINING PATHS MOBILE
+       ===================================================== */
+
+    .training-paths {
+        padding:
+            82px
+            20px;
+    }
+
+
+    .training-paths-head {
+        margin-bottom: 45px;
+    }
+
+
+    .training-paths-head h2 {
+        font-size:
+            clamp(
+                3rem,
+                14vw,
+                4.3rem
+            );
+    }
+
+
+    .training-paths-intro {
+        margin-top: 25px;
+
+        font-size: .96rem;
+    }
+
+
+    .training-paths-grid {
+        display: block;
+
+        border-top:
+            1px solid #333;
+
+        border-bottom: 0;
+    }
+
+
+    .training-path {
+        min-height: 0;
+
+        padding: 0;
+
+        border-bottom:
+            1px solid #333;
+    }
+
+
+    .training-path
+    + .training-path {
+        border-left: 0;
+    }
+
+
+    .training-path-trigger {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            auto
+            1fr
+            auto;
+
+        gap: 16px;
+
+        align-items: center;
+
+        padding:
+            25px
+            2px;
+
+        cursor: pointer;
+    }
+
+
+    .training-path-number {
+        margin: 0;
+
+        font-size: .62rem;
+    }
+
+
+    .training-path h3 {
+        margin: 0;
+
+        font-size:
+            clamp(
+                2rem,
+                9vw,
+                2.9rem
+            );
+
+        text-align: left;
+    }
+
+
+    .training-path-arrow {
+        display: block;
+
+        color: var(--history-gold);
+
+        font-size: 1.3rem;
+
+        transition:
+            transform .3s ease;
+    }
+
+
+    .training-path.is-open
+    .training-path-arrow {
+        transform:
+            rotate(180deg);
+    }
+
+
+    .training-path-content {
+        height: 0;
+
+        margin: 0;
+
+        overflow: hidden;
+
+        opacity: 0;
+    }
+
+
+    .training-path-content-inner {
+        padding:
+            0
+            34px
+            27px
+            40px;
+    }
+
+
+    .training-path-content-inner p {
+        max-width: none;
+
+        color: #aaa;
+
+        font-size: .94rem;
+
+        line-height: 1.65;
+    }
+
+
+    .training-paths-closing {
+        margin-top: 42px;
+
+        font-size: .96rem;
+    }
+
 }
 
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
+
     .history-sequence {
         height: 100svh;
+
         min-height: 680px;
     }
 
+
     .history-sequence-sticky {
         position: relative;
+
         height: 100%;
     }
+
 
     .history-sequence-canvas {
         display: none;
     }
 
+
     .history-sequence-fallback {
         display: block;
     }
+
 
     .history-sequence-shade {
         opacity: .72;
     }
 
+
     .history-sequence-content {
         opacity: 1;
+
         transform: none;
+
         pointer-events: auto;
     }
+
 }
