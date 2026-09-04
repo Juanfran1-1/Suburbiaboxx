@@ -475,7 +475,7 @@ async function loadSchedule() {
     if (!grid) return;
 
     try {
-        const response = await fetch('data/horarios.json');
+        const response = await fetch('functions/api/horarios');
         if (!response.ok) throw new Error('No se pudieron cargar los horarios.');
         const schedule = await response.json();
         const dayOrder = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
