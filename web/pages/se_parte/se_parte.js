@@ -5,7 +5,6 @@ let selectedButton = null;
 let isTransitioning = false;
 
 
-
 /* =========================================================
    CONTENIDO
    ========================================================= */
@@ -27,7 +26,10 @@ const content = {
             'Unite a la comunidad y coordiná tu clase de reacondicionamiento técnico.',
 
         video:
-            'assets/videos/experiencia-web.mp4'
+            'assets/videos/experiencia-web.mp4',
+
+        whatsappMessage:
+            'Hola Ángel, vi el video para quienes ya tienen experiencia en boxeo. Quería consultarte cómo funciona para coordinar la clase de reacondicionamiento técnico.'
 
     },
 
@@ -47,12 +49,14 @@ const content = {
             'Unite a la comunidad y coordiná tu clase inicial de acondicionamiento técnico.',
 
         video:
-            'assets/videos/iniciacion-web.mp4'
+            'assets/videos/iniciacion-web.mp4',
+
+        whatsappMessage:
+            'Hola Ángel, vi el video sobre cómo empezar de cero en Suburbia. Quería consultarte cómo funciona para coordinar la primera clase de acondicionamiento técnico.'
 
     }
 
 };
-
 
 
 /* =========================================================
@@ -131,6 +135,11 @@ const conversionStage =
     );
 
 
+const coordinatorLink =
+    document.getElementById(
+        'coordinator-link'
+    );
+
 
 /* =========================================================
    STAGES
@@ -170,7 +179,6 @@ function showStage(index) {
 }
 
 
-
 /* =========================================================
    STATUS
    ========================================================= */
@@ -188,7 +196,6 @@ function setStatus(
         message;
 
 }
-
 
 
 /* =========================================================
@@ -212,6 +219,16 @@ function prepareVideo(type) {
     experienceVideo.pause();
 
 
+    try {
+
+        experienceVideo.currentTime =
+            0;
+
+    } catch {
+        // nada
+    }
+
+
     experienceVideo.src =
         selected.video;
 
@@ -220,6 +237,39 @@ function prepareVideo(type) {
 
 }
 
+
+/* =========================================================
+   PREPARAR WHATSAPP
+   ========================================================= */
+
+function prepareWhatsapp(type) {
+
+    const selected =
+        content[type];
+
+
+    if (
+        !selected ||
+        !coordinatorLink
+    ) {
+        return;
+    }
+
+
+    const phone =
+        '542214347534';
+
+
+    const message =
+        encodeURIComponent(
+            selected.whatsappMessage
+        );
+
+
+    coordinatorLink.href =
+        `https://wa.me/${phone}?text=${message}`;
+
+}
 
 
 /* =========================================================
@@ -285,6 +335,11 @@ function openModal(
         )
         .textContent =
             selected.conversion;
+
+
+    prepareWhatsapp(
+        type
+    );
 
 
     prepareVideo(
@@ -398,7 +453,6 @@ function openModal(
         ?.focus();
 
 }
-
 
 
 /* =========================================================
@@ -536,7 +590,6 @@ function closeModal() {
 }
 
 
-
 /* =========================================================
    TRANSICIÓN VIDEO -> CONVERSIÓN
    ========================================================= */
@@ -636,13 +689,13 @@ function transitionToConversion() {
                     'auto'
             }
 
-        });
+        }
+    );
 
 
-
-    /*
-        Sale el video
-    */
+    /* =========================
+       SALE EL VIDEO
+       ========================= */
 
     tl.to(
         videoStage,
@@ -662,10 +715,9 @@ function transitionToConversion() {
     );
 
 
-
-    /*
-        Cambio real de stage
-    */
+    /* =========================
+       CAMBIO DE STAGE
+       ========================= */
 
     tl.call(
         () => {
@@ -702,10 +754,9 @@ function transitionToConversion() {
     );
 
 
-
-    /*
-        Entra la pantalla final
-    */
+    /* =========================
+       ENTRA LA PANTALLA FINAL
+       ========================= */
 
     tl.to(
         conversionStage,
@@ -723,10 +774,9 @@ function transitionToConversion() {
     );
 
 
-
-    /*
-        Entran los elementos uno detrás de otro
-    */
+    /* =========================
+       ENTRAN LOS ELEMENTOS
+       ========================= */
 
     tl.to(
         conversionElements,
@@ -748,11 +798,9 @@ function transitionToConversion() {
     );
 
 
-
-    /*
-        Dejamos todo preparado
-        para una futura reapertura
-    */
+    /* =========================
+       LIMPIEZA
+       ========================= */
 
     tl.call(
         () => {
@@ -796,9 +844,8 @@ function transitionToConversion() {
 }
 
 
-
 /* =========================================================
-   CLICK OPCIONES
+   CLICK EN LAS OPCIONES
    ========================================================= */
 
 optionButtons.forEach(
@@ -819,7 +866,6 @@ optionButtons.forEach(
 
     }
 );
-
 
 
 /* =========================================================
@@ -856,19 +902,18 @@ watchButton
                 ];
 
 
+            const currentSource =
+                experienceVideo
+                    .getAttribute(
+                        'src'
+                    );
+
+
             if (
-                !experienceVideo
-                    .getAttribute(
-                        'src'
-                    )
-                ||
-                !experienceVideo
-                    .getAttribute(
-                        'src'
-                    )
-                    .includes(
-                        selected.video
-                    )
+                !currentSource ||
+                !currentSource.includes(
+                    selected.video
+                )
             ) {
 
                 prepareVideo(
@@ -938,7 +983,6 @@ watchButton
     );
 
 
-
 /* =========================================================
    VIDEO TERMINADO
    ========================================================= */
@@ -953,7 +997,6 @@ experienceVideo
 
         }
     );
-
 
 
 /* =========================================================
@@ -980,7 +1023,6 @@ experienceVideo
     );
 
 
-
 /* =========================================================
    METADATA
    ========================================================= */
@@ -997,9 +1039,8 @@ experienceVideo
     );
 
 
-
 /* =========================================================
-   CERRAR
+   CERRAR CON BOTÓN
    ========================================================= */
 
 closeButton
@@ -1008,6 +1049,10 @@ closeButton
         closeModal
     );
 
+
+/* =========================================================
+   CERRAR TOCANDO AFUERA
+   ========================================================= */
 
 modal
     ?.addEventListener(
@@ -1027,6 +1072,10 @@ modal
         }
     );
 
+
+/* =========================================================
+   CERRAR CON ESCAPE
+   ========================================================= */
 
 document
     .addEventListener(
