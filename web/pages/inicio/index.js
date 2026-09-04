@@ -315,104 +315,6 @@ function renderInstagramFeed(posts) {
 
 */
 
-
-async function loadInstagramData() {
-    try {
-        const response =
-            await fetch(
-                '/api/community'
-            );
-
-
-        if (!response.ok) {
-            throw new Error(
-                'No se pudieron cargar los datos de Instagram.'
-            );
-        }
-
-
-        const data =
-            await response.json();
-
-
-        if (!data.instagram) {
-            throw new Error(
-                'La respuesta no contiene información de Instagram.'
-            );
-        }
-
-
-        const instagram =
-            data.instagram;
-
-
-        if (instagramUsername) {
-            instagramUsername.textContent =
-                instagram.username
-                ||
-                '@suburbiaboxx';
-        }
-
-
-        if (instagramPosts) {
-            instagramPosts.textContent =
-                formatSocialNumber(
-                    instagram.posts
-                );
-        }
-
-
-        if (instagramFollowers) {
-            instagramFollowers.textContent =
-                formatSocialNumber(
-                    instagram.followers
-                );
-        }
-
-
-        if (
-            instagramLink &&
-            instagram.url
-        ) {
-            instagramLink.href =
-                instagram.url;
-        }
-
-
-        renderInstagramFeed(
-            instagram.latestPosts
-        );
-
-    } catch (error) {
-        console.warn(
-            'Instagram data:',
-            error.message
-        );
-
-
-        if (instagramFeed) {
-            const message =
-                document.createElement(
-                    'p'
-                );
-
-            message.className =
-                'instagram-feed-status';
-
-            message.textContent =
-                'Las publicaciones recientes no están disponibles.';
-
-            instagramFeed
-                .replaceChildren(
-                    message
-                );
-        }
-    }
-}
-
-
-loadInstagramData();
-
 function showSlide(index) {
     currentSlide = (index + slides.length) % slides.length;
 
@@ -471,61 +373,200 @@ showSlide(0);
 restartCarousel();
 
 async function loadSchedule() {
-    const grid = document.getElementById('schedule-grid');
+    const grid =
+        document.getElementById(
+            'schedule-grid'
+        );
+
     if (!grid) return;
 
     try {
-        const response = await fetch('functions/api/horarios');
-        if (!response.ok) throw new Error('No se pudieron cargar los horarios.');
-        const schedule = await response.json();
-        const dayOrder = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-        const groupedSchedule = schedule.reduce((groups, item) => {
-            if (!groups.has(item.dia)) groups.set(item.dia, []);
-            groups.get(item.dia).push(item);
-            return groups;
-        }, new Map());
+        const response =
+            await fetch(
+                '/api/horarios',
+                {
+                    cache: 'no-store'
+                }
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                'No se pudieron cargar los horarios.'
+            );
+        }
+
+        const schedule =
+            await response.json();
+
+        if (!Array.isArray(schedule)) {
+            throw new Error(
+                'El formato de horarios no es válido.'
+            );
+        }
+
+        const dayOrder = [
+            'Lunes',
+            'Martes',
+            'Miércoles',
+            'Jueves',
+            'Viernes',
+            'Sábado',
+            'Domingo'
+        ];
+
+        const groupedSchedule =
+            schedule.reduce(
+                (groups, item) => {
+
+                    if (!groups.has(item.dia)) {
+                        groups.set(
+                            item.dia,
+                            []
+                        );
+                    }
+
+                    groups
+                        .get(item.dia)
+                        .push(item);
+
+                    return groups;
+                },
+                new Map()
+            );
+
         grid.replaceChildren();
 
         dayOrder.forEach(day => {
-            const classes = groupedSchedule.get(day);
-            if (!classes?.length) return;
+            const classes =
+                groupedSchedule.get(day);
 
-            const column = document.createElement('section');
-            column.className = 'schedule-day';
-            const heading = document.createElement('h4');
-            heading.textContent = day;
-            column.append(heading);
+            if (!classes?.length) {
+                return;
+            }
+
+            const column =
+                document.createElement(
+                    'section'
+                );
+
+            column.className =
+                'schedule-day';
+
+            const heading =
+                document.createElement(
+                    'h4'
+                );
+
+            heading.textContent =
+                day;
+
+            column.append(
+                heading
+            );
 
             classes
-                .sort((first, second) => first.hora_inicio.localeCompare(second.hora_inicio))
+                .sort(
+                    (first, second) =>
+                        first.hora_inicio
+                            .localeCompare(
+                                second.hora_inicio
+                            )
+                )
                 .forEach(item => {
-                    const classBlock = document.createElement('div');
-                    classBlock.className = 'schedule-slot';
-                    const time = document.createElement('time');
-                    time.textContent = `${item.hora_inicio}–${item.hora_fin}`;
-                    const dt = document.createElement('strong');
-                    dt.textContent = item.DT;
-                    classBlock.append(time, dt);
-                    column.append(classBlock);
+
+                    const classBlock =
+                        document.createElement(
+                            'div'
+                        );
+
+                    classBlock.className =
+                        'schedule-slot';
+
+                    const time =
+                        document.createElement(
+                            'time'
+                        );
+
+                    time.textContent =
+                        `${item.hora_inicio}–${item.hora_fin}`;
+
+                    const dt =
+                        document.createElement(
+                            'strong'
+                        );
+
+                    dt.textContent =
+                        item.DT || '';
+
+                    classBlock.append(
+                        time,
+                        dt
+                    );
+
+                    column.append(
+                        classBlock
+                    );
                 });
 
-            grid.append(column);
+            grid.append(
+                column
+            );
         });
 
-        if (!grid.children.length) throw new Error('Todavía no hay horarios disponibles.');
+        if (!grid.children.length) {
+            throw new Error(
+                'Todavía no hay horarios disponibles.'
+            );
+        }
+
     } catch (error) {
-        console.error('No se pudo cargar la grilla de horarios:', error);
-        const fallback = document.createElement('div');
-        fallback.className = 'schedule-fallback';
-        const message = document.createElement('p');
-        message.textContent = 'Consultanos la grilla semanal actualizada.';
-        const contactLink = document.createElement('a');
-        contactLink.href = 'https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm';
-        contactLink.target = '_blank';
-        contactLink.rel = 'noopener noreferrer';
-        contactLink.textContent = 'Consultar horarios →';
-        fallback.append(message, contactLink);
-        grid.replaceChildren(fallback);
+
+        console.error(
+            'No se pudo cargar la grilla de horarios:',
+            error
+        );
+
+        const fallback =
+            document.createElement(
+                'div'
+            );
+
+        fallback.className =
+            'schedule-fallback';
+
+        const message =
+            document.createElement(
+                'p'
+            );
+
+        message.textContent =
+            'Consultanos la grilla semanal actualizada.';
+
+        const contactLink =
+            document.createElement(
+                'a'
+            );
+
+        contactLink.href =
+            'https://chat.whatsapp.com/DYA2gbptJUC7cyC4Wrayjm';
+
+        contactLink.target =
+            '_blank';
+
+        contactLink.rel =
+            'noopener noreferrer';
+
+        contactLink.textContent =
+            'Consultar horarios →';
+
+        fallback.append(
+            message,
+            contactLink
+        );
+
+        grid.replaceChildren(
+            fallback
+        );
     }
 }
 
