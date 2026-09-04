@@ -210,9 +210,10 @@ if (
 
     mobileJourney.add('(max-width: 768px)', () => {
         const section = document.querySelector('.founder-journey');
-        const carousel = document.querySelector('.journey-carousel');
+        const sectionHead = section?.querySelector('.founder-journey-head');
+        const carousel = section?.querySelector('.journey-carousel');
 
-        if (!section || !carousel) return;
+        if (!section || !sectionHead || !carousel) return;
 
         const cards = gsap.utils.toArray(
             carousel.querySelectorAll('.journey-card')
@@ -220,19 +221,24 @@ if (
 
         if (cards.length < 2) return;
 
-        /*
-            En mobile no usamos is-active.
-            GSAP controla directamente qué card se ve.
-        */
+
+        /* =================================================
+           ESTADO BASE MOBILE
+           ================================================= */
+
         cards.forEach(card => {
             card.classList.remove('is-active');
         });
 
+        gsap.set(sectionHead, {
+            opacity: 1,
+            y: 0
+        });
 
-        /*
-            Estado inicial:
-            solo ROUND 01 visible.
-        */
+        gsap.set(carousel, {
+            y: 0
+        });
+
         cards.forEach((card, index) => {
             gsap.set(card, {
                 y: 0,
@@ -245,23 +251,19 @@ if (
         });
 
 
+        /* =================================================
+           TIMELINE GENERAL
+           ================================================= */
+
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
 
-                /*
-                    Se fija toda la sección:
-                    título general + card.
-                */
                 pin: section,
 
                 start: 'top top',
 
-                /*
-                    Recorrido amplio para generar
-                    estaciones entre cada round.
-                */
-                end: '+=320%',
+                end: '+=350%',
 
                 scrub: .8,
 
@@ -273,11 +275,48 @@ if (
 
 
         /* =================================================
+           ESTACIÓN INICIAL
+           TÍTULO + ROUND 01
+           ================================================= */
+
+        timeline.to({}, {
+            duration: .75
+        });
+
+
+        /* =================================================
+           DESAPARECE EL TÍTULO
+           Y LA CARD SUBE
+           ================================================= */
+
+        timeline
+            .to(
+                sectionHead,
+                {
+                    y: -36,
+                    opacity: 0,
+                    duration: .75,
+                    ease: 'none'
+                }
+            )
+
+            .to(
+                carousel,
+                {
+                    y: -82,
+                    duration: .75,
+                    ease: 'none'
+                },
+                '<'
+            );
+
+
+        /* =================================================
            ROUND 01 - ESTACIÓN
            ================================================= */
 
         timeline.to({}, {
-            duration: 1.25
+            duration: 1.15
         });
 
 
@@ -286,13 +325,16 @@ if (
            ================================================= */
 
         timeline
-            .to(cards[0], {
-                y: -80,
-                scale: .96,
-                opacity: 0,
-                duration: 1,
-                ease: 'none'
-            })
+            .to(
+                cards[0],
+                {
+                    y: -80,
+                    scale: .96,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'none'
+                }
+            )
 
             .fromTo(
                 cards[1],
@@ -326,13 +368,16 @@ if (
            ================================================= */
 
         timeline
-            .to(cards[1], {
-                y: -80,
-                scale: .96,
-                opacity: 0,
-                duration: 1,
-                ease: 'none'
-            })
+            .to(
+                cards[1],
+                {
+                    y: -80,
+                    scale: .96,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'none'
+                }
+            )
 
             .fromTo(
                 cards[2],
@@ -357,15 +402,23 @@ if (
            ================================================= */
 
         timeline.to({}, {
-            duration: 1.55
+            duration: 1.6
         });
 
 
-        /*
-            Al volver a desktop limpiamos
-            todos los estilos inline de mobile.
-        */
+        /* =================================================
+           CLEANUP AL SALIR DE MOBILE
+           ================================================= */
+
         return () => {
+            gsap.set(sectionHead, {
+                clearProps: 'transform,opacity'
+            });
+
+            gsap.set(carousel, {
+                clearProps: 'transform'
+            });
+
             cards.forEach((card, index) => {
                 gsap.set(card, {
                     clearProps:
