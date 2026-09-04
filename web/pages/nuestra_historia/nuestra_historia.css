@@ -171,6 +171,297 @@ body {
     margin-top: 18px;
 }
 
+
+/* =========================================================
+   FOUNDER JOURNEY CAROUSEL
+   ========================================================= */
+
+.founder-journey {
+    padding: 72px clamp(18px, 4vw, 54px) 64px;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(255, 190, 0, .035),
+            transparent 36%
+        ),
+        #101010;
+}
+
+.founder-journey-head {
+    width: min(100%, 1700px);
+    display: grid;
+    grid-template-columns: 1fr .72fr;
+    gap: 70px;
+    align-items: end;
+    margin: 0 auto 34px;
+}
+
+.founder-journey-head h2 {
+    margin: 0;
+    color: var(--history-white);
+    font-family: var(--font-subtitle);
+    font-size: clamp(3.7rem, 6vw, 6.5rem);
+    font-weight: 400;
+    line-height: .88;
+    letter-spacing: .02em;
+}
+
+.founder-journey-summary {
+    max-width: 510px;
+    justify-self: end;
+    color: #aaa;
+    line-height: 1.75;
+}
+
+
+/* CAROUSEL */
+
+.journey-carousel {
+    position: relative;
+    width: min(100%, 1700px);
+    height: 620px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.journey-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 620px;
+    overflow: hidden;
+    border: 1px solid rgba(244, 196, 0, .32);
+    background: #090909;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.journey-card.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* FOTO */
+
+.journey-bg {
+    position: absolute;
+    inset: -30px;
+    background-position: center;
+    background-size: cover;
+    filter:
+        blur(8px)
+        grayscale(.2)
+        saturate(.42)
+        contrast(1.05);
+    transform: scale(1.055);
+}
+
+.journey-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 5, 5, .94) 0%,
+            rgba(7, 7, 7, .84) 28%,
+            rgba(8, 8, 8, .70) 56%,
+            rgba(6, 6, 6, .84) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, .76),
+            rgba(0, 0, 0, .16)
+        );
+}
+
+
+/* CONTENIDO */
+
+.journey-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    padding:
+        52px
+        clamp(120px, 8vw, 165px)
+        48px;
+}
+.journey-top {
+    max-width: 900px;
+}
+
+.journey-round {
+    margin: 0 0 18px;
+    color: var(--history-gold);
+    font-size: .82rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+}
+
+.journey-round span {
+    color: #666;
+}
+
+.journey-top h3 {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-subtitle);
+    font-size: clamp(4.3rem, 5.7vw, 7rem);
+    font-weight: 400;
+    line-height: .86;
+    letter-spacing: .02em;
+}
+
+.journey-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(70px, 7vw, 115px);
+    margin-top: auto;
+    padding-top: 42px;
+}
+
+.journey-column {
+    position: relative;
+    max-width: 590px;
+    color: #dededb;
+    font-size: 1rem;
+    line-height: 1.72;
+}
+
+.journey-column + .journey-column::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(clamp(70px, 7vw, 115px) / -2);
+    width: 1px;
+    height: 100%;
+    background: rgba(255, 255, 255, .2);
+}
+
+.journey-column p {
+    margin: 0;
+}
+
+.journey-column p + p {
+    margin-top: 20px;
+}
+
+
+/* ZONAS LATERALES */
+
+.journey-edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+
+    width: 92px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    color: rgba(255, 255, 255, .82);
+    background: rgba(0, 0, 0, .12);
+    border: 0;
+
+    cursor: pointer;
+
+    transition:
+        background .28s ease,
+        color .28s ease;
+}
+
+.journey-edge span {
+    position: relative;
+    z-index: 2;
+
+    display: block;
+
+    font-size: 2rem;
+    font-weight: 300;
+
+    opacity: .85;
+
+    transform: scaleX(1.25);
+
+    transition:
+        transform .28s ease,
+        opacity .28s ease;
+}
+
+.journey-edge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(244, 196, 0, 0);
+
+    transition: background .28s ease;
+}
+
+.journey-edge:hover::before {
+    background: rgba(244, 196, 0, .28);
+}
+
+.journey-edge:hover span {
+    opacity: 1;
+}
+
+.journey-edge-prev {
+    left: 0;
+    border-right: 1px solid rgba(255, 255, 255, .08);
+}
+
+.journey-edge-next {
+    right: 0;
+    border-left: 1px solid rgba(255, 255, 255, .08);
+}
+
+.journey-edge-next:hover span {
+    transform: translateX(6px) scaleX(1.25);
+}
+
+.journey-edge-prev:hover span {
+    transform: translateX(-6px) scaleX(1.25);
+}
+
+
+/* INDICADORES */
+
+.journey-dots {
+    width: min(100%, 1700px);
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin: 20px auto 0;
+}
+
+.journey-dots span {
+    width: 58px;
+    height: 4px;
+    background: #393939;
+    border-radius: 999px;
+    transition:
+        width .3s ease,
+        background .3s ease;
+}
+
+.journey-dots span.is-active {
+    width: 72px;
+    background: var(--history-gold);
+}
 .documentary-section {
     display: grid;
     grid-template-columns: .8fr 1.2fr;
@@ -426,6 +717,284 @@ body {
 
     .history-sequence-content a {
         width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .founder-journey {
+        min-height: 100svh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: 72px 14px 36px;
+
+        overflow: hidden;
+    }
+
+    /* =========================
+       TÍTULO GENERAL
+       ========================= */
+
+    .founder-journey-head {
+        flex: 0 0 auto;
+
+        width: 100%;
+        margin: 0 0 28px;
+        padding: 0;
+
+        display: flex;
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    .founder-journey-head > div {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .founder-journey-head .eyebrow {
+        width: 100%;
+        margin: 0 0 8px;
+
+        text-align: center;
+    }
+
+    .founder-journey-head h2 {
+        width: 100%;
+        margin: 0;
+
+        font-size: clamp(2.9rem, 13vw, 4.2rem);
+        line-height: .88;
+
+        text-align: center;
+    }
+
+    /* =========================
+       CAROUSEL
+       ========================= */
+
+    .journey-carousel {
+        position: relative;
+
+        flex: 0 0 auto;
+
+        width: 100%;
+        height: min(67svh, 640px);
+        min-height: 570px;
+
+        margin: 0;
+
+        overflow: hidden;
+    }
+
+    .journey-card {
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(244, 196, 0, .24);
+        border-radius: 18px;
+
+        background: #090909;
+
+        opacity: 0;
+        visibility: visible;
+
+        pointer-events: none;
+
+        transform-origin: center center;
+
+        box-shadow:
+            0 18px 50px rgba(0, 0, 0, .4);
+    }
+
+    /*
+        En mobile GSAP controla opacity.
+        No necesitamos el estado is-active.
+    */
+    .journey-card.is-active {
+        opacity: 0;
+        visibility: visible;
+        pointer-events: none;
+    }
+
+    /* =========================
+       FONDO
+       ========================= */
+
+    .journey-bg {
+        position: absolute;
+        inset: -20px;
+
+        background-position: center;
+        background-size: cover;
+
+        filter:
+            blur(5px)
+            grayscale(.2)
+            saturate(.45)
+            brightness(.48);
+
+        transform: scale(1.06);
+    }
+
+    .journey-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+
+        background:
+            linear-gradient(
+                180deg,
+                rgba(4, 4, 4, .62) 0%,
+                rgba(5, 5, 5, .78) 38%,
+                rgba(5, 5, 5, .96) 100%
+            );
+    }
+
+    /* =========================
+       CONTENIDO
+       ========================= */
+
+    .journey-content {
+        position: relative;
+        z-index: 2;
+
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+
+        display: grid;
+
+        grid-template-rows:
+            auto
+            minmax(120px, .7fr)
+            auto;
+
+        padding:
+            24px
+            clamp(24px, 7vw, 34px)
+            30px;
+    }
+
+    .journey-top {
+        display: contents;
+    }
+
+    /* =========================
+       ROUND
+       ========================= */
+
+    .journey-round {
+        grid-row: 1;
+
+        justify-self: start;
+        align-self: start;
+
+        margin: 0;
+
+        color: var(--history-gold);
+
+        font-size: .66rem;
+        font-weight: 900;
+        letter-spacing: .13em;
+
+        text-align: left;
+    }
+
+    .journey-round span {
+        color: rgba(255, 255, 255, .42);
+    }
+
+    /* =========================
+       TÍTULO DEL ROUND
+       ========================= */
+
+    .journey-top h3 {
+        grid-row: 2;
+
+        width: 100%;
+
+        align-self: center;
+        justify-self: center;
+
+        margin: 0;
+
+        color: #fff;
+
+        font-family: var(--font-subtitle);
+        font-size: clamp(2.85rem, 12vw, 4rem);
+        font-weight: 400;
+
+        line-height: .88;
+        letter-spacing: .01em;
+
+        text-align: center;
+    }
+
+    /* =========================
+       TEXTO
+       ========================= */
+
+    .journey-columns {
+        grid-row: 3;
+
+        display: block;
+
+        width: 100%;
+        max-width: 380px;
+
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .journey-column {
+        width: 100%;
+        max-width: none;
+
+        color: rgba(255, 255, 255, .80);
+
+        font-size: clamp(.84rem, 3.4vw, .95rem);
+        line-height: 1.62;
+
+        text-align: left;
+    }
+
+    .journey-column + .journey-column {
+        margin-top: 15px;
+    }
+
+    .journey-column + .journey-column::before {
+        display: none;
+    }
+
+    .journey-column p {
+        margin: 0;
+    }
+
+    .journey-column p + p {
+        margin-top: 13px;
+    }
+
+    /* =========================
+       FLECHAS
+       ========================= */
+
+    .journey-edge {
+        display: none;
     }
 }
 
