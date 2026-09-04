@@ -20,6 +20,399 @@ let currentSlide = 0;
 let carouselTimer;
 let touchStartX = 0;
 
+/* =========================================================
+   COMMUNITY - INSTAGRAM
+   ========================================================= */
+
+const instagramUsername =
+    document.getElementById(
+        'instagram-username'
+    );
+
+const instagramPosts =
+    document.getElementById(
+        'instagram-posts'
+    );
+
+const instagramFollowers =
+    document.getElementById(
+        'instagram-followers'
+    );
+
+const instagramLink =
+    document.getElementById(
+        'instagram-link'
+    );
+
+
+function formatSocialNumber(value) {
+
+    if (
+        typeof value === 'string' &&
+        value.trim()
+    ) {
+        return value;
+    }
+
+    const number =
+        Number(value);
+
+    if (!Number.isFinite(number)) {
+        return '—';
+    }
+
+    return new Intl
+        .NumberFormat('es-AR')
+        .format(number);
+}
+
+
+async function loadInstagramData() {
+
+    try {
+
+        const response =
+            await fetch(
+                '/api/community'
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                'No se pudieron cargar los datos de Instagram.'
+            );
+        }
+
+        const data =
+            await response.json();
+
+        if (!data.instagram) {
+            throw new Error(
+                'La respuesta no contiene información de Instagram.'
+            );
+        }
+
+        const instagram =
+            data.instagram;
+
+
+        if (instagramUsername) {
+            instagramUsername.textContent =
+                instagram.username ||
+                '@suburbiaboxx';
+        }
+
+
+        if (instagramPosts) {
+            instagramPosts.textContent =
+                formatSocialNumber(
+                    instagram.posts
+                );
+        }
+
+
+        if (instagramFollowers) {
+            instagramFollowers.textContent =
+                formatSocialNumber(
+                    instagram.followers
+                );
+        }
+
+
+        if (
+            instagramLink &&
+            instagram.url
+        ) {
+            instagramLink.href =
+                instagram.url;
+        }
+
+    } catch (error) {
+
+        console.warn(
+            'Instagram data:',
+            error.message
+        );
+
+    }
+}
+
+
+loadInstagramData();
+
+
+/*
+=========================================================
+INSTAGRAM MINI FEED - PENDIENTE META API
+=========================================================
+
+Cuando conectemos la API oficial de Meta,
+podemos volver a activar esta lógica.
+
+const instagramFeed =
+    document.getElementById(
+        'instagram-feed'
+    );
+
+
+function createInstagramPost(post) {
+
+    const link =
+        document.createElement(
+            'a'
+        );
+
+    link.className =
+        'instagram-post';
+
+    link.href =
+        post.url || '#';
+
+    link.target =
+        '_blank';
+
+    link.rel =
+        'noopener noreferrer';
+
+    link.setAttribute(
+        'aria-label',
+        'Ver publicación en Instagram'
+    );
+
+
+    const image =
+        document.createElement(
+            'img'
+        );
+
+    image.src =
+        post.image;
+
+    image.alt =
+        'Publicación reciente de Suburbia Boxx';
+
+    image.loading =
+        'lazy';
+
+
+    const type =
+        String(
+            post.type || ''
+        )
+            .toUpperCase();
+
+
+    if (
+        type === 'VIDEO' ||
+        type === 'REEL'
+    ) {
+
+        const badge =
+            document.createElement(
+                'span'
+            );
+
+        badge.className =
+            'instagram-post-type';
+
+        badge.textContent =
+            '▶';
+
+        badge.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
+        link.append(
+            badge
+        );
+    }
+
+
+    if (
+        type === 'CAROUSEL_ALBUM' ||
+        type === 'CAROUSEL'
+    ) {
+
+        const badge =
+            document.createElement(
+                'span'
+            );
+
+        badge.className =
+            'instagram-post-type';
+
+        badge.textContent =
+            '▣';
+
+        badge.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
+        link.append(
+            badge
+        );
+    }
+
+
+    const label =
+        document.createElement(
+            'span'
+        );
+
+    label.className =
+        'instagram-post-label';
+
+    label.textContent =
+        'VER PUBLICACIÓN ↗';
+
+
+    link.append(
+        image,
+        label
+    );
+
+
+    return link;
+}
+
+
+function renderInstagramFeed(posts) {
+
+    if (!instagramFeed) {
+        return;
+    }
+
+
+    const latestPosts =
+        Array.isArray(posts)
+            ?
+            posts
+                .filter(post =>
+                    post?.image &&
+                    post?.url
+                )
+                .slice(
+                    0,
+                    3
+                )
+            :
+            [];
+
+
+    if (!latestPosts.length) {
+        return;
+    }
+
+
+    instagramFeed
+        .replaceChildren(
+            ...latestPosts.map(
+                createInstagramPost
+            )
+        );
+}
+
+*/
+
+
+async function loadInstagramData() {
+    try {
+        const response =
+            await fetch(
+                '/api/community'
+            );
+
+
+        if (!response.ok) {
+            throw new Error(
+                'No se pudieron cargar los datos de Instagram.'
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.instagram) {
+            throw new Error(
+                'La respuesta no contiene información de Instagram.'
+            );
+        }
+
+
+        const instagram =
+            data.instagram;
+
+
+        if (instagramUsername) {
+            instagramUsername.textContent =
+                instagram.username
+                ||
+                '@suburbiaboxx';
+        }
+
+
+        if (instagramPosts) {
+            instagramPosts.textContent =
+                formatSocialNumber(
+                    instagram.posts
+                );
+        }
+
+
+        if (instagramFollowers) {
+            instagramFollowers.textContent =
+                formatSocialNumber(
+                    instagram.followers
+                );
+        }
+
+
+        if (
+            instagramLink &&
+            instagram.url
+        ) {
+            instagramLink.href =
+                instagram.url;
+        }
+
+
+        renderInstagramFeed(
+            instagram.latestPosts
+        );
+
+    } catch (error) {
+        console.warn(
+            'Instagram data:',
+            error.message
+        );
+
+
+        if (instagramFeed) {
+            const message =
+                document.createElement(
+                    'p'
+                );
+
+            message.className =
+                'instagram-feed-status';
+
+            message.textContent =
+                'Las publicaciones recientes no están disponibles.';
+
+            instagramFeed
+                .replaceChildren(
+                    message
+                );
+        }
+    }
+}
+
+
+loadInstagramData();
+
 function showSlide(index) {
     currentSlide = (index + slides.length) % slides.length;
 

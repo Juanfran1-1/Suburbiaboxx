@@ -899,7 +899,6 @@ if (
         gsap.matchMedia();
 
 
-
     suburbiaHistoryMedia.add(
         '(max-width: 768px)',
         () => {
@@ -918,12 +917,88 @@ if (
             }
 
 
-
             const duration =
                 reduceMotion
                     ? 0
                     : .4;
 
+
+            const scrollOffset =
+                90;
+
+
+            let scrollCall =
+                null;
+
+
+            /* =================================================
+               SCROLL AL INICIO DEL CAPÍTULO
+               ================================================= */
+
+            function scrollToChapter(
+                chapter
+            ) {
+
+                if (!chapter) {
+                    return;
+                }
+
+
+                /*
+                   Cancelamos cualquier scroll pendiente
+                   por si el usuario toca varios capítulos
+                   rápidamente.
+                */
+
+                scrollCall
+                    ?.kill();
+
+
+                /*
+                   Esperamos a que terminen tanto:
+                   - el capítulo que se está abriendo
+                   - el capítulo anterior que se está cerrando
+
+                   Recién ahí calculamos la posición real.
+                */
+
+                scrollCall =
+                    gsap.delayedCall(
+                        duration + .05,
+                        () => {
+
+                            requestAnimationFrame(
+                                () => {
+
+                                    const chapterTop =
+                                        chapter
+                                            .getBoundingClientRect()
+                                            .top
+                                        +
+                                        window.scrollY
+                                        -
+                                        scrollOffset;
+
+
+                                    window.scrollTo({
+
+                                        top:
+                                            chapterTop,
+
+                                        behavior:
+                                            reduceMotion
+                                                ? 'auto'
+                                                : 'smooth'
+
+                                    });
+
+                                }
+                            );
+
+                        }
+                    );
+
+            }
 
 
             /* =================================================
@@ -977,7 +1052,6 @@ if (
 
                 }
             );
-
 
 
             /* =================================================
@@ -1043,7 +1117,6 @@ if (
             }
 
 
-
             /* =================================================
                ABRIR CAPÍTULO
                ================================================= */
@@ -1104,8 +1177,18 @@ if (
                     }
                 );
 
-            }
 
+                /*
+                   Una vez que el layout terminó
+                   de acomodarse, llevamos al usuario
+                   al principio del capítulo.
+                */
+
+                scrollToChapter(
+                    chapter
+                );
+
+            }
 
 
             /* =================================================
@@ -1129,7 +1212,6 @@ if (
                     }
 
 
-
                     const handler =
                         () => {
 
@@ -1141,10 +1223,9 @@ if (
                                     );
 
 
-
                             /*
-                               Primero cerramos todos
-                               los demás capítulos.
+                               Primero cerramos cualquier
+                               otro capítulo abierto.
                             */
 
                             chapters.forEach(
@@ -1165,31 +1246,46 @@ if (
                             );
 
 
-
                             /*
-                               Si el actual estaba abierto,
-                               también lo cerramos.
+                               Si tocó el capítulo que ya
+                               estaba abierto, simplemente
+                               se cierra.
 
-                               Si estaba cerrado,
-                               lo abrimos.
+                               No hacemos scroll en ese caso.
                             */
 
-                            if (isOpen) {
+                            if (
+                                isOpen
+                            ) {
+
+                                scrollCall
+                                    ?.kill();
+
+
+                                scrollCall =
+                                    null;
+
 
                                 closeChapter(
                                     chapter
                                 );
 
-                            } else {
 
-                                openChapter(
-                                    chapter
-                                );
+                                return;
 
                             }
 
-                        };
 
+                            /*
+                               Si estaba cerrado:
+                               abrimos + reposicionamos.
+                            */
+
+                            openChapter(
+                                chapter
+                            );
+
+                        };
 
 
                     trigger
@@ -1208,12 +1304,19 @@ if (
             );
 
 
-
             /* =================================================
                CLEANUP AL VOLVER A DESKTOP
                ================================================= */
 
             return () => {
+
+                scrollCall
+                    ?.kill();
+
+
+                scrollCall =
+                    null;
+
 
                 handlers.forEach(
                     ({
@@ -1229,7 +1332,6 @@ if (
 
                     }
                 );
-
 
 
                 chapters.forEach(
