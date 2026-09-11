@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Página no encontrada | Suburbia Boxx</title>
+    <link rel="icon" href="/assets/logo-suburbia.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { color-scheme: dark; }
+        * { box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            color: #f5f3ec;
+            background:
+                linear-gradient(rgba(0, 0, 0, .68), rgba(0, 0, 0, .88)),
+                url("/assets/suburbia.jpg") center / cover no-repeat;
+            font-family: "Inter", Arial, sans-serif;
+            text-align: center;
+        }
+        main { max-width: 720px; }
+        .code {
+            margin: 0;
+            color: #e4bd16;
+            font: 800 clamp(6rem, 25vw, 13rem)/.75 "Bebas Neue", sans-serif;
+        }
+        h1 {
+            margin: 32px 0 12px;
+            font: 400 clamp(2.5rem, 8vw, 5rem)/.9 "Bebas Neue", sans-serif;
+            letter-spacing: .03em;
+        }
+        p { margin: 0 auto 32px; color: #c7c7c7; line-height: 1.6; }
+        a {
+            display: inline-flex;
+            min-height: 48px;
+            align-items: center;
+            padding: 0 24px;
+            color: #080808;
+            background: #e4bd16;
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        a:hover, a:focus-visible { background: #f5f3ec; }
+    </style>
+</head>
+<body>
+    <main>
+        <p class="code" aria-hidden="true">404</p>
+        <h1>Este round no existe</h1>
+        <p>La página que buscás fue movida, eliminada o nunca estuvo acá.</p>
+        <a href="/">Volver al inicio</a>
+    </main>
+</body>
+</html>
