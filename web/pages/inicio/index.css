@@ -410,14 +410,45 @@ body.intro-active {
         var(--home-gold);
 }
 
-.suburbia-player-cover {
-    width: 76px;
+.suburbia-player-visualizer {
+    width: 112px;
     height: 76px;
-    display: block;
+    display: flex;
     align-self: center;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, .12);
-    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.suburbia-player-visualizer i {
+    width: 5px;
+    height: 12px;
+    display: block;
+    background: var(--home-gold);
+    border-radius: 4px;
+    opacity: .82;
+    transform-origin: center;
+}
+
+.suburbia-player.is-playing .suburbia-player-visualizer i {
+    animation: suburbia-desktop-equalizer .78s ease-in-out infinite alternate;
+}
+
+.suburbia-player-visualizer i:nth-child(2),
+.suburbia-player-visualizer i:nth-child(6) {
+    height: 24px;
+    animation-delay: -.46s !important;
+}
+
+.suburbia-player-visualizer i:nth-child(3),
+.suburbia-player-visualizer i:nth-child(5) {
+    height: 38px;
+    animation-delay: -.25s !important;
+}
+
+.suburbia-player-visualizer i:nth-child(4) {
+    height: 52px;
+    animation-delay: -.62s !important;
 }
 
 .suburbia-player-toggle {
@@ -641,7 +672,7 @@ body.intro-active {
     padding: 9px 10px;
 }
 
-.suburbia-player.is-compact .suburbia-player-cover,
+.suburbia-player.is-compact .suburbia-player-visualizer,
 .suburbia-player.is-compact .suburbia-player-progress,
 .suburbia-player.is-compact .suburbia-player-current {
     display: none;
@@ -687,7 +718,7 @@ body.intro-active {
         padding: 5px 10px 5px 6px;
     }
 
-    .suburbia-player-cover {
+    .suburbia-player-visualizer {
         display: none;
     }
 
@@ -871,7 +902,7 @@ body.intro-active {
             rgba(0, 0, 0, .72),
             transparent 48%
         ),
-        url("../../assets/suburbia.jpg")
+        url("../../assets/suburbia.webp")
         center / cover
         no-repeat
         fixed;
@@ -2140,7 +2171,7 @@ body.intro-active {
 
     background:
         #090909
-        url("../../assets/frames-boxeo-144/frame-020.jpg")
+        url("../../assets/frames-boxeo-144/frame-020.webp")
         center / cover
         no-repeat;
 }
@@ -3703,6 +3734,18 @@ body.intro-active {
     }
 }
 
+@keyframes suburbia-desktop-equalizer {
+    0% {
+        transform: scaleY(.35);
+        opacity: .5;
+    }
+
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
 
 /* =========================================================
    REDUCED MOTION
@@ -3779,6 +3822,10 @@ body.intro-active {
     }
 
     .suburbia-player-equalizer i {
+        animation: none !important;
+    }
+
+    .suburbia-player-visualizer i {
         animation: none !important;
     }
 }

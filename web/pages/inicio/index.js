@@ -223,7 +223,7 @@ suburbiaPlayerViewToggle?.addEventListener(
                 : [
                     suburbiaPlayer
                         .querySelector(
-                            '.suburbia-player-cover'
+                            '.suburbia-player-visualizer'
                         ),
                     suburbiaPlayer
                         .querySelector(
@@ -264,6 +264,11 @@ function updateSuburbiaPlayState() {
     const playing =
         !suburbiaAudio.paused &&
         !suburbiaAudio.ended;
+
+    suburbiaPlayer?.classList.toggle(
+        'is-playing',
+        playing
+    );
 
     suburbiaPlayerToggle.setAttribute(
         'aria-label',
@@ -1445,7 +1450,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
                 ).padStart(
                     3,
                     '0'
-                )}.jpg`;
+                )}.webp`;
 
 
         function drawFrame(index) {
@@ -1992,13 +1997,8 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
             0
         );
 
-        loadFrame(
-            frameCount - 1
-        );
-
-
         /*
-        * Los primeros frames se cargan
+         * Los primeros frames se cargan
         * inmediatamente para evitar que el
         * usuario llegue a la secuencia antes
         * que las imágenes.
@@ -2006,7 +2006,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 
         for (
             let index = 0;
-            index < 18;
+            index < 8;
             index += 1
         ) {
 

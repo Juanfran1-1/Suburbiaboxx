@@ -46,7 +46,7 @@ img {
     justify-content: center;
     background:
         linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
-        url("../assets/suburbia.jpg") center / cover no-repeat fixed;
+        url("../assets/suburbia.webp") center / cover no-repeat fixed;
 }
 
 header {

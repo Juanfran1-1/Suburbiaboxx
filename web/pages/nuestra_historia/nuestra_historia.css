@@ -50,7 +50,7 @@ body {
             rgba(0, 0, 0, .72),
             transparent 45%
         ),
-        url("../../assets/bolsas_suburbia.jpg")
+        url("../../assets/bolsas_suburbia.webp")
         center / cover no-repeat;
 }
 
@@ -1589,7 +1589,7 @@ body {
 
     background:
         #090909
-        url("../../assets/frames-boxeo-144/frame-020.jpg")
+        url("../../assets/frames-boxeo-144/frame-020.webp")
         center / cover no-repeat;
 }
 

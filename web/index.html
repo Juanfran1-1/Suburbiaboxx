@@ -28,8 +28,9 @@
         Suburbia Boxx | Club de boxeo en La Plata
     </title>
     <link rel="icon" href="/assets/logo-suburbia.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="global/global.css?v=20260929-6">
-    <link rel="stylesheet" href="pages/inicio/index.css?v=20260929-13">
+    <link rel="preload" href="assets/suburbia.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="stylesheet" href="global/global.css?v=20260929-7">
+    <link rel="stylesheet" href="pages/inicio/index.css?v=20260929-14">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=New+Rocker&display=swap" rel="stylesheet">
@@ -57,6 +58,10 @@
                     id="site-intro-logo"
                     src="assets/logo-suburbia.jpg"
                     alt="Suburbia Boxx"
+                    width="1024"
+                    height="1024"
+                    fetchpriority="high"
+                    decoding="async"
                 >
 
                 <p
@@ -101,12 +106,9 @@
         aria-label="Reproductor de Suburbia"
         aria-hidden="true"
     >
-        <img
-            class="suburbia-player-cover"
-            src="assets/logo-suburbia.jpg"
-            alt=""
-            aria-hidden="true"
-        >
+        <div class="suburbia-player-visualizer" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
 
         <div class="suburbia-player-info">
 
@@ -191,7 +193,7 @@
         <section class="join-section scroll-sequence" id="se-parte" aria-label="Tu primer round empieza acá">
             <div class="sequence-sticky">
                 <canvas class="sequence-canvas" aria-hidden="true"></canvas>
-                <img class="sequence-fallback" src="assets/frames-boxeo-144/frame-020.jpg" alt="Bolsa de boxeo antes del golpe">
+                <img class="sequence-fallback" src="assets/frames-boxeo-144/frame-020.webp" alt="Bolsa de boxeo antes del golpe" width="1280" height="720" loading="lazy" decoding="async">
                 <div class="sequence-shade" aria-hidden="true"></div>
                 <div class="sequence-content">
                     <p class="eyebrow">¿ARRANCAMOS?</p>
@@ -269,6 +271,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia1.webp"
                     alt="Comunidad de Suburbia Boxx"
+                    width="765" height="1020" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -276,6 +279,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia2.webp"
                     alt="Entrenamiento en Suburbia Boxx"
+                    width="1360" height="1020" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -283,6 +287,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia3.webp"
                     alt="Equipo de Suburbia Boxx"
+                    width="1360" height="1020" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -290,6 +295,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia4.webp"
                     alt="Clase de boxeo en Suburbia Boxx"
+                    width="1600" height="1215" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -297,6 +303,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia5.webp"
                     alt="Alumno entrenando en Suburbia Boxx"
+                    width="1360" height="1020" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -304,6 +311,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia6.webp"
                     alt="Entrenamiento del equipo de Suburbia Boxx"
+                    width="1360" height="1020" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -311,6 +319,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia7.webp"
                     alt="Comunidad durante una clase de boxeo"
+                    width="1360" height="1020" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -318,6 +327,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia8.webp"
                     alt="Integrante de Suburbia Boxx"
+                    width="1206" height="720" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -325,6 +335,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia9.webp"
                     alt="Alumnos de Suburbia Boxx luego de entrenar"
+                    width="1280" height="960" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -332,6 +343,7 @@
                 <img
                     src="assets/foto-suburbia/foto-suburbia10.webp"
                     alt="Clase grupal de Suburbia Boxx"
+                    width="1600" height="1200" loading="lazy" decoding="async"
                 >
             </figure>
 
@@ -459,6 +471,10 @@
                     <img
                         src="assets/logo-suburbia.jpg"
                         alt="Suburbia Boxx"
+                        width="1024"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
                     >
                 </div>
 
@@ -607,7 +623,7 @@ las últimas 3 publicaciones reales de @suburbiaboxx.
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="pages/inicio/index.js?v=20260929-13"></script>
+    <script src="pages/inicio/index.js?v=20260929-14"></script>
     <script src="global/config.js"></script>
     <script src="global/global.js?v=20260929-6"></script>
 </body>
