@@ -170,6 +170,42 @@ header nav a:focus-visible {
     display: none;
 }
 
+.audio-control-icon {
+    display: grid;
+    place-items: center;
+}
+
+.audio-icon-play {
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 9px solid currentColor;
+}
+
+.audio-icon-pause {
+    display: none;
+    align-items: center;
+    gap: 3px;
+}
+
+.audio-icon-pause i {
+    width: 3px;
+    height: 12px;
+    display: block;
+    background: currentColor;
+    border-radius: 1px;
+}
+
+button[aria-pressed="true"] .audio-icon-play {
+    display: none;
+}
+
+button[aria-pressed="true"] .audio-icon-pause {
+    display: flex;
+}
+
 .social-pc-container {
     position: fixed;
     bottom: 30px;

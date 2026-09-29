@@ -28,8 +28,8 @@
         Suburbia Boxx | Club de boxeo en La Plata
     </title>
     <link rel="icon" href="/assets/logo-suburbia.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="global/global.css?v=20260929-4">
-    <link rel="stylesheet" href="pages/inicio/index.css?v=20260929-4">
+    <link rel="stylesheet" href="global/global.css?v=20260929-6">
+    <link rel="stylesheet" href="pages/inicio/index.css?v=20260929-9">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=New+Rocker&display=swap" rel="stylesheet">
@@ -82,7 +82,7 @@
 
 
     <!-- =====================================================
-        SUBURBIA SOUND
+        REPRODUCTOR DE AUDIO
         ===================================================== -->
 
     <audio
@@ -101,19 +101,30 @@
         aria-label="Reproductor de Suburbia"
         aria-hidden="true"
     >
-        <button
-            class="suburbia-player-toggle"
-            id="suburbia-player-toggle"
-            type="button"
-            aria-label="Pausar música"
+        <img
+            class="suburbia-player-cover"
+            src="assets/logo-suburbia.jpg"
+            alt=""
+            aria-hidden="true"
         >
-            <span id="suburbia-player-icon">Ⅱ</span>
-        </button>
 
         <div class="suburbia-player-info">
 
             <div class="suburbia-player-heading">
-                <span>SUBURBIA SOUND</span>
+                <button
+                    class="suburbia-player-toggle"
+                    id="suburbia-player-toggle"
+                    type="button"
+                    aria-label="Pausar música"
+                    aria-pressed="false"
+                >
+                    <span class="audio-control-icon" id="suburbia-player-icon" aria-hidden="true">
+                        <span class="audio-icon-play"></span>
+                        <span class="audio-icon-pause"><i></i><i></i></span>
+                    </span>
+                </button>
+
+                <span class="suburbia-player-title">FIBO - Cheka</span>
 
                 <span
                     class="suburbia-player-time"
@@ -573,8 +584,8 @@ las últimas 3 publicaciones reales de @suburbiaboxx.
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="pages/inicio/index.js?v=20260929-4"></script>
+    <script src="pages/inicio/index.js?v=20260929-8"></script>
     <script src="global/config.js"></script>
-    <script src="global/global.js?v=20260929-4"></script>
+    <script src="global/global.js?v=20260929-6"></script>
 </body>
 </html>

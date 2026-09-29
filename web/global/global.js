@@ -86,9 +86,12 @@ function injectHeader() {
                 </ul>
 
                 <div class="sidebar-audio" id="sidebar-audio" hidden>
-                    <span class="sidebar-audio-kicker">SUBURBIA SOUND</span>
-                    <button class="sidebar-audio-toggle" id="sidebar-audio-toggle" type="button">
-                        <span class="sidebar-audio-icon" id="sidebar-audio-icon" aria-hidden="true">▶</span>
+                    <span class="sidebar-audio-kicker">FIBO - Cheka</span>
+                    <button class="sidebar-audio-toggle" id="sidebar-audio-toggle" type="button" aria-pressed="false">
+                        <span class="sidebar-audio-icon audio-control-icon" id="sidebar-audio-icon" aria-hidden="true">
+                            <span class="audio-icon-play"></span>
+                            <span class="audio-icon-pause"><i></i><i></i></span>
+                        </span>
                         <span id="sidebar-audio-label">Reproducir canción</span>
                     </button>
                 </div>
@@ -186,7 +189,6 @@ function setupSidebarAudio() {
     const updateState = () => {
         const playing = !audio.paused && !audio.ended;
 
-        icon.textContent = playing ? 'Ⅱ' : '▶';
         label.textContent = playing ? 'Pausar canción' : 'Reproducir canción';
         button.setAttribute('aria-label', label.textContent);
         button.setAttribute('aria-pressed', String(playing));

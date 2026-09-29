@@ -133,11 +133,6 @@ function updateSuburbiaPlayState() {
         !suburbiaAudio.paused &&
         !suburbiaAudio.ended;
 
-    suburbiaPlayerIcon.textContent =
-        playing
-            ? 'Ⅱ'
-            : '▶';
-
     suburbiaPlayerToggle.setAttribute(
         'aria-label',
         playing
@@ -145,6 +140,11 @@ function updateSuburbiaPlayState() {
             'Pausar música'
             :
             'Reproducir música'
+    );
+
+    suburbiaPlayerToggle.setAttribute(
+        'aria-pressed',
+        String(playing)
     );
 }
 
@@ -192,6 +192,56 @@ function showSuburbiaPlayer() {
 
     suburbiaPlayer.style.transform =
         'none';
+}
+
+
+function hideSuburbiaPlayerOnMobile() {
+
+    if (
+        !suburbiaPlayer ||
+        !window.matchMedia(
+            '(max-width: 1160px)'
+        ).matches
+    ) {
+        return;
+    }
+
+    suburbiaPlayer.setAttribute(
+        'aria-hidden',
+        'true'
+    );
+
+    if (
+        window.gsap &&
+        !window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches
+    ) {
+        gsap.killTweensOf(
+            suburbiaPlayer
+        );
+
+        gsap.to(
+            suburbiaPlayer,
+            {
+                autoAlpha: 0,
+                y: 20,
+                duration: .35,
+                ease: 'power2.in'
+            }
+        );
+
+        return;
+    }
+
+    suburbiaPlayer.style.visibility =
+        'hidden';
+
+    suburbiaPlayer.style.opacity =
+        '0';
+
+    suburbiaPlayer.style.transform =
+        'translateY(20px)';
 }
 
 
@@ -516,6 +566,7 @@ suburbiaAudio?.addEventListener(
     () => {
 
         updateSuburbiaPlayState();
+        hideSuburbiaPlayerOnMobile();
 
         if (
             suburbiaPlayerProgressFill
@@ -540,6 +591,20 @@ if (introAlreadySeen) {
     document.body.classList.remove(
         'intro-active'
     );
+
+    if (
+        window.matchMedia(
+            '(min-width: 1161px)'
+        ).matches
+    ) {
+        window.requestAnimationFrame(
+            () => {
+                showSuburbiaPlayer();
+                updateSuburbiaPlayState();
+                updateSuburbiaPlayer();
+            }
+        );
+    }
 
 } else {
 
