@@ -1799,8 +1799,18 @@ if (
             );
 
 
-    const frameCount =
+    const firstFrameNumber =
+        20;
+
+
+    const lastFrameNumber =
         144;
+
+
+    const frameCount =
+        lastFrameNumber -
+        firstFrameNumber +
+        1;
 
 
     const frames =
@@ -1825,7 +1835,8 @@ if (
     const framePath =
         index =>
             `assets/frames-boxeo-144/frame-${String(
-                index + 1
+                index +
+                firstFrameNumber
             ).padStart(
                 3,
                 '0'
@@ -2157,8 +2168,10 @@ if (
 
 
         const isImpact =
-            currentFrame >= 42 &&
-            currentFrame <= 54;
+            currentFrame >=
+                42 - firstFrameNumber &&
+            currentFrame <=
+                54 - firstFrameNumber;
 
 
 

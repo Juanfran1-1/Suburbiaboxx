@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
     injectFooter();
     setupMenu();
+    setupSidebarAudio();
     setupHeaderScroll();
     setupJoinNavigation();
 });
@@ -83,6 +84,14 @@ function injectHeader() {
                     <li><a href="index.html#equipo">Comunidad</a></li>
                     <li><a href="index.html#horarios">Contacto</a></li>
                 </ul>
+
+                <div class="sidebar-audio" id="sidebar-audio" hidden>
+                    <span class="sidebar-audio-kicker">SUBURBIA SOUND</span>
+                    <button class="sidebar-audio-toggle" id="sidebar-audio-toggle" type="button">
+                        <span class="sidebar-audio-icon" id="sidebar-audio-icon" aria-hidden="true">▶</span>
+                        <span id="sidebar-audio-label">Reproducir canción</span>
+                    </button>
+                </div>
             </aside>
         </header>
     `);
@@ -161,4 +170,36 @@ function setupMenu() {
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') setMenuOpen(false);
     });
+}
+
+function setupSidebarAudio() {
+    const audio = document.getElementById('suburbia-audio');
+    const container = document.getElementById('sidebar-audio');
+    const button = document.getElementById('sidebar-audio-toggle');
+    const icon = document.getElementById('sidebar-audio-icon');
+    const label = document.getElementById('sidebar-audio-label');
+
+    if (!audio || !container || !button || !icon || !label) return;
+
+    container.hidden = false;
+
+    const updateState = () => {
+        const playing = !audio.paused && !audio.ended;
+
+        icon.textContent = playing ? 'Ⅱ' : '▶';
+        label.textContent = playing ? 'Pausar canción' : 'Reproducir canción';
+        button.setAttribute('aria-label', label.textContent);
+        button.setAttribute('aria-pressed', String(playing));
+    };
+
+    button.addEventListener('click', () => {
+        document.dispatchEvent(
+            new CustomEvent('suburbia:toggle-audio')
+        );
+    });
+
+    audio.addEventListener('play', updateState);
+    audio.addEventListener('pause', updateState);
+    audio.addEventListener('ended', updateState);
+    updateState();
 }

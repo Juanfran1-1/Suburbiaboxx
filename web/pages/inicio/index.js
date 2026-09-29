@@ -406,40 +406,49 @@ function setupSuburbiaIntro() {
 }
 
 
+async function toggleSuburbiaAudio() {
+
+    if (!suburbiaAudio) {
+        return;
+    }
+
+    if (
+        suburbiaAudio.paused ||
+        suburbiaAudio.ended
+    ) {
+
+        if (suburbiaAudio.ended) {
+            suburbiaAudio.currentTime =
+                0;
+        }
+
+        try {
+            await suburbiaAudio.play();
+            showSuburbiaPlayer();
+        } catch (error) {
+            console.warn(
+                'No se pudo reproducir el audio:',
+                error
+            );
+        }
+
+    } else {
+
+        suburbiaAudio.pause();
+    }
+
+    updateSuburbiaPlayState();
+}
+
+
 suburbiaPlayerToggle?.addEventListener(
     'click',
-    async () => {
+    toggleSuburbiaAudio
+);
 
-        if (!suburbiaAudio) {
-            return;
-        }
-
-        if (
-            suburbiaAudio.paused ||
-            suburbiaAudio.ended
-        ) {
-
-            if (suburbiaAudio.ended) {
-                suburbiaAudio.currentTime =
-                    0;
-            }
-
-            try {
-                await suburbiaAudio.play();
-            } catch (error) {
-                console.warn(
-                    'No se pudo reproducir el audio:',
-                    error
-                );
-            }
-
-        } else {
-
-            suburbiaAudio.pause();
-        }
-
-        updateSuburbiaPlayState();
-    }
+document.addEventListener(
+    'suburbia:toggle-audio',
+    toggleSuburbiaAudio
 );
 
 
@@ -1141,7 +1150,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
     revealElements.forEach(element => revealObserver.observe(element));
 }
 /* =========================================================
-   SCROLL SEQUENCE - 144 FRAMES
+   SCROLL SEQUENCE - FRAMES 020 A 144
    ========================================================= */
 
     const sequenceSection =
@@ -1180,7 +1189,10 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         CONFIGURACIÓN
         ===================================================== */
 
-        const frameCount = 144;
+        const firstFrameNumber = 20;
+        const lastFrameNumber = 144;
+        const frameCount =
+            lastFrameNumber - firstFrameNumber + 1;
 
         /*
         * Cuánto tarda la imagen en alcanzar
@@ -1232,7 +1244,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         const framePath =
             index =>
                 `assets/frames-boxeo-144/frame-${String(
-                    index + 1
+                    index + firstFrameNumber
                 ).padStart(
                     3,
                     '0'
@@ -1575,8 +1587,10 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
             * frames.
             */
 
-            const impactStart = 42;
-            const impactEnd = 54;
+            const impactStart =
+                42 - firstFrameNumber;
+            const impactEnd =
+                54 - firstFrameNumber;
 
 
             const isImpact =
