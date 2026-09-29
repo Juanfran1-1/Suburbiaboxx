@@ -1222,6 +1222,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         let lastImpactState = false;
 
         let animationFrameId = null;
+        let sequenceIsVisible = false;
 
 
         /* =====================================================
@@ -1230,7 +1231,7 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 
         const framePath =
             index =>
-                `assets/frames-boxeo/frame-${String(
+                `assets/frames-boxeo-144/frame-${String(
                     index + 1
                 ).padStart(
                     3,
@@ -1677,6 +1678,11 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 
         function animateSequence() {
 
+            if (!sequenceIsVisible) {
+                animationFrameId = null;
+                return;
+            }
+
             /*
             * En vez de saltar directamente al
             * frame que pide el scroll:
@@ -1776,13 +1782,41 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         }
 
 
+        function startSequenceAnimation() {
+
+            if (
+                sequenceIsVisible &&
+                animationFrameId === null
+            ) {
+                animationFrameId =
+                    window.requestAnimationFrame(
+                        animateSequence
+                    );
+            }
+        }
+
+
+        function stopSequenceAnimation() {
+
+            if (animationFrameId !== null) {
+                window.cancelAnimationFrame(
+                    animationFrameId
+                );
+
+                animationFrameId = null;
+            }
+        }
+
+
         /* =====================================================
         EVENTOS
         ===================================================== */
 
         function handleSequenceScroll() {
 
-            calculateSequenceProgress();
+            if (sequenceIsVisible) {
+                calculateSequenceProgress();
+            }
         }
 
 
@@ -1849,53 +1883,49 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         );
 
 
-        animateSequence();
+        if ('IntersectionObserver' in window) {
 
+            const sequenceObserver =
+                new IntersectionObserver(
+                    entries => {
 
-        /* =====================================================
-        PRECARGA DEL RESTO
-        ===================================================== */
+                        sequenceIsVisible =
+                            entries[0]
+                                ?.isIntersecting === true;
 
-        const preloadFrames =
-            () => {
+                        if (sequenceIsVisible) {
+                            calculateSequenceProgress();
+                            startSequenceAnimation();
+                        } else {
+                            stopSequenceAnimation();
+                        }
+                    },
+                    {
+                        threshold: 0
+                    }
+                );
 
-                /*
-                * No bloqueamos la carga inicial.
-                * El navegador descarga el resto
-                * cuando queda tiempo disponible.
-                */
-
-                for (
-                    let index = 18;
-                    index <
-                        frameCount;
-                    index += 1
-                ) {
-
-                    loadFrame(
-                        index
-                    );
-                }
-            };
-
-
-        if (
-            'requestIdleCallback'
-            in window
-        ) {
-
-            window.requestIdleCallback(
-                preloadFrames,
-                {
-                    timeout: 2200
-                }
+            sequenceObserver.observe(
+                sequenceSection
             );
 
         } else {
 
-            window.setTimeout(
-                preloadFrames,
-                600
-            );
+            sequenceIsVisible = true;
+            startSequenceAnimation();
         }
+
+
+        document.addEventListener(
+            'visibilitychange',
+            () => {
+
+                if (document.hidden) {
+                    stopSequenceAnimation();
+                    return;
+                }
+
+                startSequenceAnimation();
+            }
+        );
     }

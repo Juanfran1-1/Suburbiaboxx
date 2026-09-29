@@ -1800,7 +1800,7 @@ if (
 
 
     const frameCount =
-        48;
+        144;
 
 
     const frames =
@@ -1824,7 +1824,7 @@ if (
 
     const framePath =
         index =>
-            `assets/frames-boxeo/frame-${String(
+            `assets/frames-boxeo-144/frame-${String(
                 index + 1
             ).padStart(
                 3,
@@ -1949,6 +1949,8 @@ if (
     ) {
 
         if (
+            index < 0 ||
+            index >= frameCount ||
             frames[
                 index
             ]
@@ -2003,6 +2005,30 @@ if (
             }
 
         );
+
+    }
+
+
+
+    function preloadAround(
+        index
+    ) {
+
+        const radius =
+            10;
+
+
+        for (
+            let offset = -radius;
+            offset <= radius;
+            offset += 1
+        ) {
+
+            loadFrame(
+                index + offset
+            );
+
+        }
 
     }
 
@@ -2117,6 +2143,11 @@ if (
             );
 
 
+            preloadAround(
+                currentFrame
+            );
+
+
             drawFrame(
                 currentFrame
             );
@@ -2126,8 +2157,8 @@ if (
 
 
         const isImpact =
-            currentFrame >= 14 &&
-            currentFrame <= 18;
+            currentFrame >= 42 &&
+            currentFrame <= 54;
 
 
 
@@ -2240,6 +2271,11 @@ if (
     );
 
 
+    preloadAround(
+        0
+    );
+
+
     resizeSequence();
 
 
@@ -2277,50 +2313,5 @@ if (
     updateSequence();
 
 
-
-    const preloadFrames =
-        () => {
-
-            for (
-                let index = 1;
-                index < frameCount - 1;
-                index += 1
-            ) {
-
-                loadFrame(
-                    index
-                );
-
-            }
-
-        };
-
-
-
-    if (
-        'requestIdleCallback'
-        in window
-    ) {
-
-        window
-            .requestIdleCallback(
-
-                preloadFrames,
-
-                {
-                    timeout:
-                        1800
-                }
-
-            );
-
-    } else {
-
-        window.setTimeout(
-            preloadFrames,
-            400
-        );
-
-    }
 
 }
