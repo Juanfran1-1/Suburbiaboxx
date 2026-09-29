@@ -36,9 +36,109 @@
 </head>
 
 <body>
+    <!-- =====================================================
+     INTRO SUBURBIA
+     ===================================================== -->
 
+    <div
+        class="site-intro"
+        id="site-intro"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Bienvenida a Suburbia Boxx"
+    >
+        <div class="site-intro-grain" aria-hidden="true"></div>
+
+        <div class="site-intro-content">
+
+            <div class="site-intro-brand">
+                <img
+                    class="site-intro-logo"
+                    id="site-intro-logo"
+                    src="assets/logo-suburbia.jpg"
+                    alt="Suburbia Boxx"
+                >
+
+                <p
+                    class="site-intro-label"
+                    id="site-intro-label"
+                >
+                    CLUB DE BOXEO
+                </p>
+            </div>
+
+            <button
+                class="site-intro-enter"
+                id="site-intro-enter"
+                type="button"
+                aria-label="Entrar a Suburbia Boxx"
+            >
+                <span>ENTRAR AL RING</span>
+                <span aria-hidden="true">→</span>
+            </button>
+
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+        SUBURBIA SOUND
+        ===================================================== -->
+
+    <audio
+        id="suburbia-audio"
+        preload="metadata"
+    >
+        <source
+            src="assets/audio/suburbiatema-final.mp3"
+            type="audio/mpeg"
+        >
+    </audio>
+
+    <div
+        class="suburbia-player"
+        id="suburbia-player"
+        aria-label="Reproductor de Suburbia"
+        aria-hidden="true"
+    >
+        <button
+            class="suburbia-player-toggle"
+            id="suburbia-player-toggle"
+            type="button"
+            aria-label="Pausar música"
+        >
+            <span id="suburbia-player-icon">Ⅱ</span>
+        </button>
+
+        <div class="suburbia-player-info">
+
+            <div class="suburbia-player-heading">
+                <span>SUBURBIA SOUND</span>
+
+                <span
+                    class="suburbia-player-time"
+                    id="suburbia-player-time"
+                >
+                    0:00
+                </span>
+            </div>
+
+            <button
+                class="suburbia-player-progress"
+                id="suburbia-player-progress"
+                type="button"
+                aria-label="Cambiar posición del audio"
+            >
+                <span
+                    class="suburbia-player-progress-fill"
+                    id="suburbia-player-progress-fill"
+                ></span>
+            </button>
+
+        </div>
+    </div>
     <main>
-        <section class="hero">
+        <section class="hero" id="inicio">
             <div class="hero-grain" aria-hidden="true"></div>
             <div class="hero-container">
                 <div class="hero-content">
@@ -472,6 +572,7 @@ las últimas 3 publicaciones reales de @suburbiaboxx.
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="pages/inicio/index.js"></script>
     <script src="global/config.js"></script>
     <script src="global/global.js"></script>

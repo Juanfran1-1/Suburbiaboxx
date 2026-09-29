@@ -1,3 +1,542 @@
+/* =========================================================
+   SUBURBIA INTRO + SOUND
+   ========================================================= */
+
+const suburbiaIntro =
+    document.getElementById(
+        'site-intro'
+    );
+
+const suburbiaIntroLogo =
+    document.getElementById(
+        'site-intro-logo'
+    );
+
+const suburbiaIntroLabel =
+    document.getElementById(
+        'site-intro-label'
+    );
+
+const suburbiaIntroEnter =
+    document.getElementById(
+        'site-intro-enter'
+    );
+
+const suburbiaAudio =
+    document.getElementById(
+        'suburbia-audio'
+    );
+
+const suburbiaPlayer =
+    document.getElementById(
+        'suburbia-player'
+    );
+
+const suburbiaPlayerToggle =
+    document.getElementById(
+        'suburbia-player-toggle'
+    );
+
+const suburbiaPlayerIcon =
+    document.getElementById(
+        'suburbia-player-icon'
+    );
+
+const suburbiaPlayerProgress =
+    document.getElementById(
+        'suburbia-player-progress'
+    );
+
+const suburbiaPlayerProgressFill =
+    document.getElementById(
+        'suburbia-player-progress-fill'
+    );
+
+const suburbiaPlayerTime =
+    document.getElementById(
+        'suburbia-player-time'
+    );
+
+
+function formatAudioTime(seconds) {
+
+    if (!Number.isFinite(seconds)) {
+        return '0:00';
+    }
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+    const remainingSeconds =
+        Math.floor(
+            seconds % 60
+        );
+
+    return (
+        `${minutes}:` +
+        String(remainingSeconds)
+            .padStart(2, '0')
+    );
+}
+
+
+function updateSuburbiaPlayer() {
+
+    if (!suburbiaAudio) {
+        return;
+    }
+
+    const duration =
+        suburbiaAudio.duration;
+
+    const currentTime =
+        suburbiaAudio.currentTime;
+
+    const progress =
+        Number.isFinite(duration) &&
+        duration > 0
+            ?
+            (
+                currentTime /
+                duration
+            ) * 100
+            :
+            0;
+
+    if (suburbiaPlayerProgressFill) {
+        suburbiaPlayerProgressFill.style.width =
+            `${progress}%`;
+    }
+
+    if (suburbiaPlayerTime) {
+        suburbiaPlayerTime.textContent =
+            formatAudioTime(
+                currentTime
+            );
+    }
+}
+
+
+function updateSuburbiaPlayState() {
+
+    if (
+        !suburbiaAudio ||
+        !suburbiaPlayerIcon ||
+        !suburbiaPlayerToggle
+    ) {
+        return;
+    }
+
+    const playing =
+        !suburbiaAudio.paused &&
+        !suburbiaAudio.ended;
+
+    suburbiaPlayerIcon.textContent =
+        playing
+            ? 'Ⅱ'
+            : '▶';
+
+    suburbiaPlayerToggle.setAttribute(
+        'aria-label',
+        playing
+            ?
+            'Pausar música'
+            :
+            'Reproducir música'
+    );
+}
+
+
+function showSuburbiaPlayer() {
+
+    if (!suburbiaPlayer) {
+        return;
+    }
+
+    suburbiaPlayer.setAttribute(
+        'aria-hidden',
+        'false'
+    );
+
+    if (
+        window.gsap &&
+        !window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches
+    ) {
+
+        gsap.killTweensOf(
+            suburbiaPlayer
+        );
+
+        gsap.to(
+            suburbiaPlayer,
+            {
+                autoAlpha: 1,
+                y: 0,
+                duration: .55,
+                ease: 'power3.out'
+            }
+        );
+
+        return;
+    }
+
+    suburbiaPlayer.style.visibility =
+        'visible';
+
+    suburbiaPlayer.style.opacity =
+        '1';
+
+    suburbiaPlayer.style.transform =
+        'none';
+}
+
+
+function closeSuburbiaIntro() {
+
+    if (!suburbiaIntro) {
+        return;
+    }
+
+    document.body.classList.remove(
+        'intro-active'
+    );
+
+    if (
+        window.gsap &&
+        !window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches
+    ) {
+
+        const timeline =
+            gsap.timeline({
+                onComplete: () => {
+                    suburbiaIntro.remove();
+                }
+            });
+
+        timeline
+            .to(
+                [
+                    suburbiaIntroEnter,
+                    suburbiaIntroLabel
+                ],
+                {
+                    opacity: 0,
+                    y: -12,
+                    duration: .25,
+                    ease: 'power2.in'
+                },
+                0
+            )
+            .to(
+                suburbiaIntroLogo,
+                {
+                    opacity: 0,
+                    scale: 1.08,
+                    filter:
+                        'blur(5px) brightness(1.35)',
+                    duration: .42,
+                    ease: 'power2.in'
+                },
+                .04
+            )
+            .to(
+                suburbiaIntro,
+                {
+                    opacity: 0,
+                    duration: .48,
+                    ease: 'power2.inOut'
+                },
+                .24
+            );
+
+        return;
+    }
+
+    suburbiaIntro.remove();
+}
+
+
+async function enterSuburbia() {
+
+    sessionStorage.setItem(
+        'suburbiaIntroSeen',
+        'true'
+    );
+
+    if (
+        !suburbiaAudio ||
+        !suburbiaIntroEnter
+    ) {
+        closeSuburbiaIntro();
+        return;
+    }
+
+    suburbiaIntroEnter.disabled =
+        true;
+
+    try {
+
+        suburbiaAudio.currentTime =
+            0;
+
+        await suburbiaAudio.play();
+
+        updateSuburbiaPlayState();
+
+    } catch (error) {
+
+        console.warn(
+            'No se pudo iniciar el audio:',
+            error
+        );
+
+    }
+
+    showSuburbiaPlayer();
+
+    closeSuburbiaIntro();
+}
+
+
+function setupSuburbiaIntro() {
+
+    if (
+        !suburbiaIntro ||
+        !suburbiaIntroEnter
+    ) {
+        return;
+    }
+
+    document.body.classList.add(
+        'intro-active'
+    );
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+    if (
+        window.gsap &&
+        !prefersReducedMotion
+    ) {
+
+        gsap.set(
+            suburbiaIntroEnter,
+            {
+                autoAlpha: 0,
+                y: 16
+            }
+        );
+
+        const introTimeline =
+            gsap.timeline();
+
+        introTimeline
+            .to(
+                suburbiaIntroLogo,
+                {
+                    opacity: 1,
+                    scale: 1,
+                    filter:
+                        'blur(0px) brightness(1)',
+                    duration: 1.15,
+                    ease: 'power3.out'
+                },
+                .35
+            )
+            .to(
+                suburbiaIntroLabel,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: .7,
+                    ease: 'power2.out'
+                },
+                1.7
+            )
+            .to(
+                suburbiaIntroEnter,
+                {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: .65,
+                    ease: 'power3.out'
+                },
+                3.25
+            );
+
+    } else {
+
+        suburbiaIntroLogo.style.opacity =
+            '1';
+
+        suburbiaIntroLogo.style.filter =
+            'none';
+
+        suburbiaIntroLogo.style.transform =
+            'none';
+
+        suburbiaIntroLabel.style.opacity =
+            '1';
+
+        suburbiaIntroLabel.style.transform =
+            'none';
+
+        suburbiaIntroEnter.style.visibility =
+            'visible';
+
+        suburbiaIntroEnter.style.opacity =
+            '1';
+
+        suburbiaIntroEnter.style.transform =
+            'none';
+    }
+
+    suburbiaIntroEnter.addEventListener(
+        'click',
+        enterSuburbia
+    );
+}
+
+
+suburbiaPlayerToggle?.addEventListener(
+    'click',
+    async () => {
+
+        if (!suburbiaAudio) {
+            return;
+        }
+
+        if (
+            suburbiaAudio.paused ||
+            suburbiaAudio.ended
+        ) {
+
+            if (suburbiaAudio.ended) {
+                suburbiaAudio.currentTime =
+                    0;
+            }
+
+            try {
+                await suburbiaAudio.play();
+            } catch (error) {
+                console.warn(
+                    'No se pudo reproducir el audio:',
+                    error
+                );
+            }
+
+        } else {
+
+            suburbiaAudio.pause();
+        }
+
+        updateSuburbiaPlayState();
+    }
+);
+
+
+suburbiaPlayerProgress?.addEventListener(
+    'click',
+    event => {
+
+        if (
+            !suburbiaAudio ||
+            !Number.isFinite(
+                suburbiaAudio.duration
+            )
+        ) {
+            return;
+        }
+
+        const rect =
+            suburbiaPlayerProgress
+                .getBoundingClientRect();
+
+        const position =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    (
+                        event.clientX -
+                        rect.left
+                    ) /
+                    rect.width
+                )
+            );
+
+        suburbiaAudio.currentTime =
+            suburbiaAudio.duration *
+            position;
+
+        updateSuburbiaPlayer();
+    }
+);
+
+
+suburbiaAudio?.addEventListener(
+    'timeupdate',
+    updateSuburbiaPlayer
+);
+
+suburbiaAudio?.addEventListener(
+    'loadedmetadata',
+    updateSuburbiaPlayer
+);
+
+suburbiaAudio?.addEventListener(
+    'play',
+    updateSuburbiaPlayState
+);
+
+suburbiaAudio?.addEventListener(
+    'pause',
+    updateSuburbiaPlayState
+);
+
+suburbiaAudio?.addEventListener(
+    'ended',
+    () => {
+
+        updateSuburbiaPlayState();
+
+        if (
+            suburbiaPlayerProgressFill
+        ) {
+            suburbiaPlayerProgressFill
+                .style.width =
+                '100%';
+        }
+    }
+);
+
+
+const introAlreadySeen =
+    sessionStorage.getItem(
+        'suburbiaIntroSeen'
+    ) === 'true';
+
+if (introAlreadySeen) {
+
+    suburbiaIntro?.remove();
+
+    document.body.classList.remove(
+        'intro-active'
+    );
+
+} else {
+
+    setupSuburbiaIntro();
+}
+
 const scrollArrow = document.getElementById('scrollArrow');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -601,112 +1140,712 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 
     revealElements.forEach(element => revealObserver.observe(element));
 }
+/* =========================================================
+   SCROLL SEQUENCE - 144 FRAMES
+   ========================================================= */
 
-const sequenceSection = document.querySelector('.scroll-sequence');
-const sequenceCanvas = document.querySelector('.sequence-canvas');
-const sequenceContent = document.querySelector('.sequence-content');
-const sequenceShade = document.querySelector('.sequence-shade');
+    const sequenceSection =
+        document.querySelector(
+            '.scroll-sequence'
+        );
 
-if (sequenceSection && sequenceCanvas && !reduceMotion) {
-    const context = sequenceCanvas.getContext('2d');
-    const frameCount = 48;
-    const frames = Array(frameCount);
-    let currentFrame = 0;
-    let lastImpactState = false;
-    let ticking = false;
+    const sequenceCanvas =
+        document.querySelector(
+            '.sequence-canvas'
+        );
 
-    const framePath = index => `assets/frames-boxeo/frame-${String(index + 1).padStart(3, '0')}.jpg`;
+    const sequenceContent =
+        document.querySelector(
+            '.sequence-content'
+        );
 
-    function drawFrame(index) {
-        const image = frames[index];
-        if (!image?.complete || !image.naturalWidth) return;
+    const sequenceShade =
+        document.querySelector(
+            '.sequence-shade'
+        );
 
-        const canvasRatio = sequenceCanvas.width / sequenceCanvas.height;
-        const imageRatio = image.naturalWidth / image.naturalHeight;
-        let sourceWidth = image.naturalWidth;
-        let sourceHeight = image.naturalHeight;
-        let sourceX = 0;
-        let sourceY = 0;
 
-        if (imageRatio > canvasRatio) {
-            sourceWidth = image.naturalHeight * canvasRatio;
-            sourceX = (image.naturalWidth - sourceWidth) / 2;
+    if (
+        sequenceSection &&
+        sequenceCanvas &&
+        !reduceMotion
+    ) {
+
+        const context =
+            sequenceCanvas.getContext(
+                '2d'
+            );
+
+        /* =====================================================
+        CONFIGURACIÓN
+        ===================================================== */
+
+        const frameCount = 144;
+
+        /*
+        * Cuánto tarda la imagen en alcanzar
+        * el frame pedido por el scroll.
+        *
+        * Más bajo = más cinematográfico / suave.
+        * Más alto = más directo.
+        *
+        * 0.12 - 0.18 es una buena zona.
+        */
+        const smoothing = 0.14;
+
+        /*
+        * La secuencia completa termina al 62%
+        * del recorrido de la sección.
+        *
+        * Dejamos el resto para revelar y leer
+        * el contenido, igual que antes.
+        */
+        const sequenceEnd = 0.62;
+
+        const revealStart = 0.50;
+        const revealDuration = 0.10;
+
+
+        /* =====================================================
+        ESTADO
+        ===================================================== */
+
+        const frames =
+            Array(frameCount);
+
+        let targetFrame = 0;
+        let smoothFrame = 0;
+        let renderedFrame = -1;
+
+        let sequenceProgress = 0;
+
+        let lastImpactState = false;
+
+        let animationFrameId = null;
+
+
+        /* =====================================================
+        FRAMES
+        ===================================================== */
+
+        const framePath =
+            index =>
+                `assets/frames-boxeo/frame-${String(
+                    index + 1
+                ).padStart(
+                    3,
+                    '0'
+                )}.jpg`;
+
+
+        function drawFrame(index) {
+
+            const image =
+                frames[index];
+
+            if (
+                !image?.complete ||
+                !image.naturalWidth
+            ) {
+                return;
+            }
+
+            const canvasRatio =
+                sequenceCanvas.width /
+                sequenceCanvas.height;
+
+            const imageRatio =
+                image.naturalWidth /
+                image.naturalHeight;
+
+            let sourceWidth =
+                image.naturalWidth;
+
+            let sourceHeight =
+                image.naturalHeight;
+
+            let sourceX = 0;
+            let sourceY = 0;
+
+
+            /*
+            * COVER
+            */
+
+            if (
+                imageRatio >
+                canvasRatio
+            ) {
+
+                sourceWidth =
+                    image.naturalHeight *
+                    canvasRatio;
+
+                sourceX =
+                    (
+                        image.naturalWidth -
+                        sourceWidth
+                    ) / 2;
+
+            } else {
+
+                sourceHeight =
+                    image.naturalWidth /
+                    canvasRatio;
+
+                sourceY =
+                    (
+                        image.naturalHeight -
+                        sourceHeight
+                    ) / 2;
+            }
+
+
+            context.clearRect(
+                0,
+                0,
+                sequenceCanvas.width,
+                sequenceCanvas.height
+            );
+
+
+            context.drawImage(
+                image,
+                sourceX,
+                sourceY,
+                sourceWidth,
+                sourceHeight,
+                0,
+                0,
+                sequenceCanvas.width,
+                sequenceCanvas.height
+            );
+        }
+
+
+        function loadFrame(index) {
+
+            if (
+                index < 0 ||
+                index >= frameCount ||
+                frames[index]
+            ) {
+                return;
+            }
+
+            const image =
+                new Image();
+
+            frames[index] =
+                image;
+
+            image.decoding =
+                'async';
+
+            image.src =
+                framePath(index);
+
+
+            image.addEventListener(
+                'load',
+                () => {
+
+                    /*
+                    * Si justo estamos esperando este frame,
+                    * lo mostramos apenas termina de cargar.
+                    */
+
+                    if (
+                        index ===
+                        renderedFrame
+                    ) {
+                        drawFrame(
+                            index
+                        );
+                    }
+
+                },
+                {
+                    once: true
+                }
+            );
+        }
+
+
+        /* =====================================================
+        PRECARGA INTELIGENTE
+        ===================================================== */
+
+        function preloadAround(index) {
+
+            /*
+            * Mantenemos cargados varios frames
+            * alrededor del frame hacia el que
+            * nos estamos moviendo.
+            */
+
+            const radius = 10;
+
+            for (
+                let offset = -radius;
+                offset <= radius;
+                offset += 1
+            ) {
+
+                loadFrame(
+                    index + offset
+                );
+            }
+        }
+
+
+        /* =====================================================
+        CANVAS
+        ===================================================== */
+
+        function resizeSequence() {
+
+            const pixelRatio =
+                Math.min(
+                    window.devicePixelRatio ||
+                    1,
+                    2
+                );
+
+            sequenceCanvas.width =
+                Math.round(
+                    window.innerWidth *
+                    pixelRatio
+                );
+
+            sequenceCanvas.height =
+                Math.round(
+                    window.innerHeight *
+                    pixelRatio
+                );
+
+
+            if (
+                renderedFrame >= 0
+            ) {
+                drawFrame(
+                    renderedFrame
+                );
+            }
+        }
+
+
+        /* =====================================================
+        PROGRESO DEL SCROLL
+        ===================================================== */
+
+        function calculateSequenceProgress() {
+
+            const rect =
+                sequenceSection
+                    .getBoundingClientRect();
+
+            const scrollDistance =
+                sequenceSection.offsetHeight -
+                window.innerHeight;
+
+
+            if (
+                scrollDistance <= 0
+            ) {
+                sequenceProgress = 0;
+                return;
+            }
+
+
+            sequenceProgress =
+                Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        -rect.top /
+                        scrollDistance
+                    )
+                );
+
+
+            /*
+            * Los 144 frames recorren solamente
+            * la primera parte de la sección.
+            */
+
+            const frameProgress =
+                Math.min(
+                    sequenceProgress /
+                    sequenceEnd,
+                    1
+                );
+
+
+            targetFrame =
+                frameProgress *
+                (
+                    frameCount -
+                    1
+                );
+
+
+            preloadAround(
+                Math.round(
+                    targetFrame
+                )
+            );
+
+
+            /* =================================================
+            REVEAL DEL CTA
+            ================================================= */
+
+            const revealProgress =
+                Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        (
+                            sequenceProgress -
+                            revealStart
+                        ) /
+                        revealDuration
+                    )
+                );
+
+
+            if (sequenceShade) {
+
+                sequenceShade
+                    .style.opacity =
+                    String(
+                        revealProgress *
+                        .72
+                    );
+            }
+
+
+            if (sequenceContent) {
+
+                sequenceContent
+                    .style.opacity =
+                    String(
+                        revealProgress
+                    );
+
+                sequenceContent
+                    .style.transform =
+                    `translateY(${
+                        (
+                            1 -
+                            revealProgress
+                        ) *
+                        34
+                    }px)`;
+
+                sequenceContent
+                    .style.pointerEvents =
+                    revealProgress >
+                    .9
+                        ?
+                        'auto'
+                        :
+                        'none';
+            }
+        }
+
+
+        /* =====================================================
+        IMPACTO
+        ===================================================== */
+
+        function updateImpact(
+            frame
+        ) {
+
+            /*
+            * IMPORTANTE:
+            *
+            * Estos valores son provisionales.
+            *
+            * Los viejos frames 14–18 sobre 48
+            * equivaldrían aproximadamente a
+            * 42–54 sobre 144.
+            *
+            * Después de verlo funcionando
+            * podemos poner el impacto EXACTAMENTE
+            * donde ocurre el golpe en los nuevos
+            * frames.
+            */
+
+            const impactStart = 42;
+            const impactEnd = 54;
+
+
+            const isImpact =
+                frame >=
+                    impactStart &&
+                frame <=
+                    impactEnd;
+
+
+            if (
+                isImpact &&
+                !lastImpactState
+            ) {
+
+                sequenceCanvas
+                    .classList
+                    .remove(
+                        'sequence-impact'
+                    );
+
+                /*
+                * Fuerza reflow para reiniciar
+                * la animación CSS.
+                */
+                void sequenceCanvas
+                    .offsetWidth;
+
+                sequenceCanvas
+                    .classList
+                    .add(
+                        'sequence-impact'
+                    );
+            }
+
+
+            lastImpactState =
+                isImpact;
+        }
+
+
+        /* =====================================================
+        MOTOR DE ANIMACIÓN
+        ===================================================== */
+
+        function animateSequence() {
+
+            /*
+            * En vez de saltar directamente al
+            * frame que pide el scroll:
+            *
+            * scroll
+            *   ↓
+            * targetFrame
+            *   ↓
+            * smoothFrame
+            *   ↓
+            * frame visible
+            *
+            * Esto elimina buena parte de la
+            * sensación "tosca".
+            */
+
+            const difference =
+                targetFrame -
+                smoothFrame;
+
+
+            if (
+                Math.abs(
+                    difference
+                ) < .01
+            ) {
+
+                smoothFrame =
+                    targetFrame;
+
+            } else {
+
+                smoothFrame +=
+                    difference *
+                    smoothing;
+            }
+
+
+            const nextFrame =
+                Math.max(
+                    0,
+                    Math.min(
+                        frameCount - 1,
+                        Math.round(
+                            smoothFrame
+                        )
+                    )
+                );
+
+
+            if (
+                nextFrame !==
+                renderedFrame
+            ) {
+
+                loadFrame(
+                    nextFrame
+                );
+
+                /*
+                * Precargamos también los frames
+                * inmediatamente siguientes.
+                */
+
+                loadFrame(
+                    nextFrame + 1
+                );
+
+                loadFrame(
+                    nextFrame + 2
+                );
+
+                loadFrame(
+                    nextFrame - 1
+                );
+
+
+                renderedFrame =
+                    nextFrame;
+
+
+                drawFrame(
+                    renderedFrame
+                );
+
+
+                updateImpact(
+                    renderedFrame
+                );
+            }
+
+
+            animationFrameId =
+                window.requestAnimationFrame(
+                    animateSequence
+                );
+        }
+
+
+        /* =====================================================
+        EVENTOS
+        ===================================================== */
+
+        function handleSequenceScroll() {
+
+            calculateSequenceProgress();
+        }
+
+
+        function handleSequenceResize() {
+
+            resizeSequence();
+
+            calculateSequenceProgress();
+        }
+
+
+        /* =====================================================
+        INICIALIZACIÓN
+        ===================================================== */
+
+        loadFrame(
+            0
+        );
+
+        loadFrame(
+            frameCount - 1
+        );
+
+
+        /*
+        * Los primeros frames se cargan
+        * inmediatamente para evitar que el
+        * usuario llegue a la secuencia antes
+        * que las imágenes.
+        */
+
+        for (
+            let index = 0;
+            index < 18;
+            index += 1
+        ) {
+
+            loadFrame(
+                index
+            );
+        }
+
+
+        resizeSequence();
+
+        calculateSequenceProgress();
+
+
+        window.addEventListener(
+            'resize',
+            handleSequenceResize,
+            {
+                passive: true
+            }
+        );
+
+
+        window.addEventListener(
+            'scroll',
+            handleSequenceScroll,
+            {
+                passive: true
+            }
+        );
+
+
+        animateSequence();
+
+
+        /* =====================================================
+        PRECARGA DEL RESTO
+        ===================================================== */
+
+        const preloadFrames =
+            () => {
+
+                /*
+                * No bloqueamos la carga inicial.
+                * El navegador descarga el resto
+                * cuando queda tiempo disponible.
+                */
+
+                for (
+                    let index = 18;
+                    index <
+                        frameCount;
+                    index += 1
+                ) {
+
+                    loadFrame(
+                        index
+                    );
+                }
+            };
+
+
+        if (
+            'requestIdleCallback'
+            in window
+        ) {
+
+            window.requestIdleCallback(
+                preloadFrames,
+                {
+                    timeout: 2200
+                }
+            );
+
         } else {
-            sourceHeight = image.naturalWidth / canvasRatio;
-            sourceY = (image.naturalHeight - sourceHeight) / 2;
+
+            window.setTimeout(
+                preloadFrames,
+                600
+            );
         }
-
-        context.clearRect(0, 0, sequenceCanvas.width, sequenceCanvas.height);
-        context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, sequenceCanvas.width, sequenceCanvas.height);
     }
-
-    function loadFrame(index) {
-        if (frames[index]) return;
-        const image = new Image();
-        frames[index] = image;
-        image.decoding = 'async';
-        image.src = framePath(index);
-        image.addEventListener('load', () => {
-            if (index === currentFrame) drawFrame(index);
-        }, { once: true });
-    }
-
-    function resizeSequence() {
-        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-        sequenceCanvas.width = Math.round(window.innerWidth * pixelRatio);
-        sequenceCanvas.height = Math.round(window.innerHeight * pixelRatio);
-        drawFrame(currentFrame);
-    }
-
-    function updateSequence() {
-        const rect = sequenceSection.getBoundingClientRect();
-        const scrollDistance = sequenceSection.offsetHeight - window.innerHeight;
-        const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
-        // El golpe ocupa la primera parte; el tramo final queda libre para leer el CTA.
-        const frameProgress = Math.min(progress / .62, 1);
-        const nextFrame = Math.round(frameProgress * (frameCount - 1));
-        const revealProgress = Math.max(0, Math.min(1, (progress - .64) / .12));
-
-        if (nextFrame !== currentFrame) {
-            currentFrame = nextFrame;
-            loadFrame(currentFrame);
-            drawFrame(currentFrame);
-        }
-
-        const isImpact = currentFrame >= 14 && currentFrame <= 18;
-        if (isImpact && !lastImpactState) {
-            sequenceCanvas.classList.remove('sequence-impact');
-            void sequenceCanvas.offsetWidth;
-            sequenceCanvas.classList.add('sequence-impact');
-        }
-        lastImpactState = isImpact;
-
-        sequenceShade.style.opacity = String(revealProgress * .72);
-        sequenceContent.style.opacity = String(revealProgress);
-        sequenceContent.style.transform = `translateY(${(1 - revealProgress) * 34}px)`;
-        sequenceContent.style.pointerEvents = revealProgress > .9 ? 'auto' : 'none';
-        ticking = false;
-    }
-
-    function requestSequenceUpdate() {
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(updateSequence);
-    }
-
-    loadFrame(0);
-    loadFrame(frameCount - 1);
-    resizeSequence();
-    window.addEventListener('resize', resizeSequence, { passive: true });
-    window.addEventListener('scroll', requestSequenceUpdate, { passive: true });
-    updateSequence();
-
-    const preloadFrames = () => {
-        for (let index = 1; index < frameCount - 1; index += 1) loadFrame(index);
-    };
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(preloadFrames, { timeout: 1800 });
-    } else {
-        window.setTimeout(preloadFrames, 400);
-    }
-}

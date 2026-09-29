@@ -43,9 +43,18 @@ function setupJoinNavigation() {
 }
 
 function injectHeader() {
+    const isHomePage =
+    /(?:^|\/)index\.html$/.test(window.location.pathname) ||
+    window.location.pathname.endsWith('/');
+
+    const homeLink =
+        isHomePage
+            ? '#inicio'
+            : 'index.html';
+
     document.body.insertAdjacentHTML('afterbegin', `
         <header>
-            <a href="index.html" aria-label="Suburbia Boxx, inicio">
+            <a href="${homeLink}" aria-label="Suburbia Boxx, inicio">
                 <img src="assets/logo-suburbia.jpg" alt="Suburbia Boxx">
             </a>
 
@@ -55,7 +64,7 @@ function injectHeader() {
 
             <nav aria-label="Navegación principal">
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="${homeLink}">Inicio</a></li>
                     <li><a href="index.html#se-parte">Sé parte</a></li>
                     <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
                     <li><a href="index.html#equipo">Comunidad</a></li>
@@ -68,7 +77,7 @@ function injectHeader() {
             <aside class="sidebar" id="sidebar" aria-label="Menú móvil">
                 <button class="close-sidebar" id="close-sidebar" type="button" aria-label="Cerrar menú">×</button>
                 <ul class="sidebar-links">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="${homeLink}">Inicio</a></li>
                     <li><a href="index.html#se-parte">Sé parte</a></li>
                     <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
                     <li><a href="index.html#equipo">Comunidad</a></li>
@@ -78,6 +87,7 @@ function injectHeader() {
         </header>
     `);
 }
+
 
 function injectFooter() {
     document.body.insertAdjacentHTML('beforeend', `

@@ -20,6 +20,617 @@ html {
     scroll-margin-top: 0;
 }
 
+/* =========================================================
+   SUBURBIA INTRO
+   ========================================================= */
+
+body.intro-active {
+    overflow: hidden;
+}
+
+.site-intro {
+    position: fixed;
+    inset: 0;
+
+    z-index: 10000;
+
+    display: grid;
+
+    width: 100%;
+    height: 100dvh;
+
+    place-items: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            #151515 0%,
+            #090909 34%,
+            #000 72%
+        );
+
+    color: var(--home-white);
+}
+
+.site-intro::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(228, 189, 22, 0),
+            rgba(228, 189, 22, .025) 50%,
+            rgba(228, 189, 22, 0)
+        );
+
+    pointer-events: none;
+}
+
+.site-intro-grain {
+    position: absolute;
+    inset: -50%;
+
+    z-index: 2;
+
+    width: 200%;
+    height: 200%;
+
+    opacity: .11;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+
+    animation:
+        intro-grain
+        .25s
+        steps(2)
+        infinite;
+
+    pointer-events: none;
+}
+
+.site-intro-content {
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+
+    width:
+        min(
+            92vw,
+            620px
+        );
+
+    align-items: center;
+
+    flex-direction: column;
+
+    text-align: center;
+}
+
+.site-intro-brand {
+    display: flex;
+
+    align-items: center;
+
+    flex-direction: column;
+}
+
+@keyframes intro-logo-idle {
+
+    0%,
+
+    100% {
+
+        transform: scale(1);
+
+        filter: blur(0) brightness(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.012);
+
+        filter: blur(0) brightness(1.07);
+
+    }
+
+}
+
+.site-intro-logo.intro-ready {
+
+    animation:
+
+        intro-logo-idle
+
+        3.2s
+
+        ease-in-out
+
+        infinite;
+
+}
+
+.site-intro-logo {
+    display: block;
+
+    width:
+        clamp(
+            150px,
+            18vw,
+            230px
+        );
+
+    height: auto;
+
+    opacity: 0;
+
+    filter:
+        blur(10px)
+        brightness(.92);
+
+    transform:
+        scale(.92);
+
+    will-change:
+        opacity,
+        transform,
+        filter;
+}
+
+.site-intro-label {
+    margin-top: 26px;
+
+    opacity: 0;
+
+    color: #b9b9b4;
+
+    font-family:
+        var(--font-body);
+
+    font-size: .68rem;
+
+    font-weight: 700;
+
+    letter-spacing: .34em;
+
+    text-indent: .34em;
+
+    transform:
+        translateY(12px);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+.site-intro-enter {
+    position: relative;
+
+    display: inline-flex;
+
+    min-width: 215px;
+    min-height: 50px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    margin-top: 44px;
+
+    padding:
+        0 25px;
+
+    opacity: 0;
+
+    color: #050505;
+
+    background:
+        var(--home-gold);
+
+    border:
+        1px solid
+        var(--home-gold);
+
+    border-radius: 0;
+
+    font-family:
+        var(--font-body);
+
+    font-size: .69rem;
+
+    font-weight: 900;
+
+    letter-spacing: .11em;
+
+    cursor: pointer;
+
+    transform:
+        translateY(16px);
+
+    visibility: hidden;
+
+    transition:
+        color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+
+    will-change:
+        opacity,
+        transform;
+}
+
+.site-intro-enter > span:last-child {
+    font-size: 1rem;
+
+    transition:
+        transform .25s ease;
+}
+
+.site-intro-enter:hover,
+.site-intro-enter:focus-visible {
+    color:
+        var(--home-gold);
+
+    background:
+        transparent;
+
+    transform:
+        translateY(-2px);
+}
+
+.site-intro-enter:hover > span:last-child,
+.site-intro-enter:focus-visible > span:last-child {
+    transform:
+        translateX(5px);
+}
+
+.site-intro-enter:focus-visible {
+    outline:
+        2px solid
+        var(--home-white);
+
+    outline-offset: 5px;
+}
+
+@keyframes intro-grain {
+    0% {
+        transform:
+            translate(0, 0);
+    }
+
+    25% {
+        transform:
+            translate(2%, -3%);
+    }
+
+    50% {
+        transform:
+            translate(-3%, 2%);
+    }
+
+    75% {
+        transform:
+            translate(3%, 3%);
+    }
+
+    100% {
+        transform:
+            translate(-2%, -2%);
+    }
+}
+
+
+/* =========================================================
+   SUBURBIA SOUND PLAYER
+   ========================================================= */
+
+.suburbia-player {
+    position: fixed;
+
+    right: 26px;
+    bottom: 26px;
+
+    z-index: 900;
+
+    display: flex;
+
+    width:
+        min(
+            340px,
+            calc(100vw - 52px)
+        );
+
+    min-height: 68px;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        11px
+        16px
+        11px
+        11px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    color:
+        var(--home-white);
+
+    background:
+        rgba(8, 8, 8, .88);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .13);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0, 0, 0, .45);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    transform:
+        translateY(20px);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+.suburbia-player::before {
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    left: -1px;
+
+    width: 72px;
+    height: 1px;
+
+    background:
+        var(--home-gold);
+}
+
+.suburbia-player-toggle {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+
+    flex: 0 0 46px;
+
+    place-items: center;
+
+    padding: 0;
+
+    color:
+        var(--home-black);
+
+    background:
+        var(--home-gold);
+
+    border:
+        1px solid
+        var(--home-gold);
+
+    border-radius: 50%;
+
+    font-family:
+        var(--font-body);
+
+    font-size: .82rem;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.suburbia-player-toggle:hover,
+.suburbia-player-toggle:focus-visible {
+    color:
+        var(--home-gold);
+
+    background:
+        transparent;
+
+    transform:
+        scale(1.04);
+}
+
+.suburbia-player-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.suburbia-player-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 9px;
+}
+
+.suburbia-player-heading > span:first-child {
+    color:
+        var(--home-white);
+
+    font-size: .62rem;
+
+    font-weight: 900;
+
+    letter-spacing: .14em;
+}
+
+.suburbia-player-time {
+    flex: 0 0 auto;
+
+    color: #73736f;
+
+    font-size: .58rem;
+
+    font-weight: 700;
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+.suburbia-player-progress {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: 14px;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    background: transparent;
+
+    border: 0;
+
+    cursor: pointer;
+}
+
+.suburbia-player-progress::before {
+    content: "";
+
+    position: absolute;
+
+    top: 6px;
+    right: 0;
+    left: 0;
+
+    height: 2px;
+
+    background:
+        #393939;
+}
+
+.suburbia-player-progress-fill {
+    position: absolute;
+
+    top: 6px;
+    left: 0;
+
+    width: 0%;
+    height: 2px;
+
+    background:
+        var(--home-gold);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INTRO / PLAYER MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .site-intro-content {
+        width: calc(100% - 32px);
+    }
+
+    .site-intro-logo {
+        width: clamp(
+            185px,
+            52vw,
+            230px
+        );
+    }
+
+    .site-intro-label {
+        margin-top: 28px;
+
+        font-size: .68rem;
+
+        letter-spacing: .30em;
+        text-indent: .30em;
+    }
+
+    .site-intro-enter {
+        width: min(
+            100%,
+            310px
+        );
+
+        min-height: 62px;
+
+        margin-top: 52px;
+
+        padding: 0 26px;
+
+        font-size: .73rem;
+
+        letter-spacing: .11em;
+    }
+
+    .site-intro-enter > span:last-child {
+        font-size: 1.05rem;
+    }
+
+
+    /* PLAYER */
+
+    .suburbia-player {
+        right: 14px;
+        bottom: 14px;
+
+        width: calc(100% - 28px);
+
+        min-height: 62px;
+
+        padding:
+            9px
+            14px
+            9px
+            9px;
+    }
+
+    .suburbia-player-toggle {
+        width: 42px;
+        height: 42px;
+
+        flex-basis: 42px;
+    }
+
+    .suburbia-player-heading > span:first-child {
+        font-size: .58rem;
+    }
+}
 
 /* =========================================================
    HERO
@@ -2929,5 +3540,13 @@ html {
         transform: none;
 
         pointer-events: auto;
+    }
+
+    .site-intro-grain {
+        animation: none;
+    }
+
+    .site-intro-logo.intro-ready {
+        animation: none;
     }
 }
