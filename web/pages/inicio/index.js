@@ -1250,6 +1250,68 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
                 return;
             }
 
+            const isMobile =
+                window.innerWidth <= 768;
+
+            context.clearRect(
+                0,
+                0,
+                sequenceCanvas.width,
+                sequenceCanvas.height
+            );
+
+
+            /* =====================================================
+            MOBILE — MOSTRAR EL 16:9 COMPLETO
+            ===================================================== */
+
+            if (isMobile) {
+
+                const scale =
+                    Math.min(
+                        sequenceCanvas.width /
+                            image.naturalWidth,
+                        sequenceCanvas.height /
+                            image.naturalHeight
+                    );
+
+                const drawWidth =
+                    image.naturalWidth *
+                    scale;
+
+                const drawHeight =
+                    image.naturalHeight *
+                    scale;
+
+                const drawX =
+                    (
+                        sequenceCanvas.width -
+                        drawWidth
+                    ) / 2;
+
+                const drawY =
+                    (
+                        sequenceCanvas.height -
+                        drawHeight
+                    ) / 2;
+
+
+                context.drawImage(
+                    image,
+                    drawX,
+                    drawY,
+                    drawWidth,
+                    drawHeight
+                );
+
+                return;
+            }
+
+
+            /* =====================================================
+            DESKTOP — COVER COMO YA ESTÁ FUNCIONANDO
+            ===================================================== */
+
             const canvasRatio =
                 sequenceCanvas.width /
                 sequenceCanvas.height;
@@ -1267,10 +1329,6 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
             let sourceX = 0;
             let sourceY = 0;
 
-
-            /*
-            * COVER
-            */
 
             if (
                 imageRatio >
@@ -1299,14 +1357,6 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
                         sourceHeight
                     ) / 2;
             }
-
-
-            context.clearRect(
-                0,
-                0,
-                sequenceCanvas.width,
-                sequenceCanvas.height
-            );
 
 
             context.drawImage(
