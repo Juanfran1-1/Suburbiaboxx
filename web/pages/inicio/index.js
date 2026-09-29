@@ -57,6 +57,16 @@ const suburbiaPlayerTime =
         'suburbia-player-time'
     );
 
+const suburbiaPlayerDuration =
+    document.getElementById(
+        'suburbia-player-duration'
+    );
+
+const suburbiaPlayerViewToggle =
+    document.getElementById(
+        'suburbia-player-view-toggle'
+    );
+
 
 function formatAudioTime(seconds) {
 
@@ -116,7 +126,129 @@ function updateSuburbiaPlayer() {
                 currentTime
             );
     }
+
+    if (suburbiaPlayerDuration) {
+        suburbiaPlayerDuration.textContent =
+            formatAudioTime(
+                duration
+            );
+    }
 }
+
+
+suburbiaPlayerViewToggle?.addEventListener(
+    'click',
+    () => {
+        if (window.gsap) {
+            gsap.killTweensOf(
+                suburbiaPlayer
+            );
+
+            gsap.set(
+                suburbiaPlayer,
+                {
+                    clearProps:
+                        'width,height,minHeight,aspectRatio'
+                }
+            );
+        }
+
+        const initialRect =
+            suburbiaPlayer.getBoundingClientRect();
+
+        const compact =
+            suburbiaPlayer.classList.toggle(
+                'is-compact'
+            );
+
+        const finalRect =
+            suburbiaPlayer.getBoundingClientRect();
+
+        suburbiaPlayerViewToggle.setAttribute(
+            'aria-expanded',
+            String(!compact)
+        );
+
+        suburbiaPlayerViewToggle.setAttribute(
+            'aria-label',
+            compact
+                ? 'Expandir reproductor'
+                : 'Compactar reproductor'
+        );
+
+        const reducePlayerMotion =
+            window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            ).matches;
+
+        if (
+            !window.gsap ||
+            reducePlayerMotion
+        ) {
+            return;
+        }
+
+        gsap.killTweensOf(
+            suburbiaPlayer
+        );
+
+        gsap.fromTo(
+            suburbiaPlayer,
+            {
+                width: initialRect.width,
+                height: initialRect.height,
+                minHeight: initialRect.height,
+                aspectRatio: 'auto'
+            },
+            {
+                width: finalRect.width,
+                height: finalRect.height,
+                minHeight: finalRect.height,
+                duration: .42,
+                ease: 'power3.inOut',
+                clearProps:
+                    'width,height,minHeight,aspectRatio'
+            }
+        );
+
+        const animatedContent =
+            compact
+                ? [
+                    suburbiaPlayer
+                        .querySelector(
+                            '.suburbia-player-info'
+                        ),
+                    suburbiaPlayerViewToggle
+                ]
+                : [
+                    suburbiaPlayer
+                        .querySelector(
+                            '.suburbia-player-cover'
+                        ),
+                    suburbiaPlayer
+                        .querySelector(
+                            '.suburbia-player-info'
+                        ),
+                    suburbiaPlayerViewToggle
+                ];
+
+        gsap.fromTo(
+            animatedContent,
+            {
+                opacity: .25,
+                y: compact ? 5 : -5
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: .3,
+                delay: .08,
+                ease: 'power2.out',
+                clearProps: 'opacity,transform'
+            }
+        );
+    }
+);
 
 
 function updateSuburbiaPlayState() {
@@ -409,7 +541,7 @@ function setupSuburbiaIntro() {
                     duration: .7,
                     ease: 'power2.out'
                 },
-                1.7
+                1.05
             )
             .to(
                 suburbiaIntroEnter,
@@ -419,7 +551,7 @@ function setupSuburbiaIntro() {
                     duration: .65,
                     ease: 'power3.out'
                 },
-                3.25
+                1.5
             );
 
     } else {

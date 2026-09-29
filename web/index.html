@@ -29,7 +29,7 @@
     </title>
     <link rel="icon" href="/assets/logo-suburbia.jpg" type="image/jpeg">
     <link rel="stylesheet" href="global/global.css?v=20260929-6">
-    <link rel="stylesheet" href="pages/inicio/index.css?v=20260929-9">
+    <link rel="stylesheet" href="pages/inicio/index.css?v=20260929-12">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=New+Rocker&display=swap" rel="stylesheet">
@@ -124,11 +124,21 @@
                     </span>
                 </button>
 
-                <span class="suburbia-player-title">FIBO - Cheka</span>
+                <span class="suburbia-player-meta">
+                    <strong>FIBO</strong>
+                    <small>Cheka</small>
+                </span>
 
                 <span
-                    class="suburbia-player-time"
+                    class="suburbia-player-time suburbia-player-current"
                     id="suburbia-player-time"
+                >
+                    0:00
+                </span>
+
+                <span
+                    class="suburbia-player-time suburbia-player-duration"
+                    id="suburbia-player-duration"
                 >
                     0:00
                 </span>
@@ -147,6 +157,16 @@
             </button>
 
         </div>
+
+        <button
+            class="suburbia-player-view-toggle"
+            id="suburbia-player-view-toggle"
+            type="button"
+            aria-label="Compactar reproductor"
+            aria-expanded="true"
+        >
+            <span aria-hidden="true"></span>
+        </button>
     </div>
     <main>
         <section class="hero" id="inicio">
@@ -584,7 +604,7 @@ las últimas 3 publicaciones reales de @suburbiaboxx.
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="pages/inicio/index.js?v=20260929-8"></script>
+    <script src="pages/inicio/index.js?v=20260929-13"></script>
     <script src="global/config.js"></script>
     <script src="global/global.js?v=20260929-6"></script>
 </body>

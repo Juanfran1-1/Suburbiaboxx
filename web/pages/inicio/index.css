@@ -357,6 +357,8 @@ body.intro-active {
 
     padding: 18px;
 
+    overflow: hidden;
+
     opacity: 0;
 
     visibility: hidden;
@@ -412,6 +414,7 @@ body.intro-active {
     width: 76px;
     height: 76px;
     display: block;
+    align-self: center;
     object-fit: cover;
     border: 1px solid rgba(255, 255, 255, .12);
     border-radius: 5px;
@@ -490,9 +493,18 @@ body.intro-active {
     margin-bottom: 13px;
 }
 
-.suburbia-player-title {
+.suburbia-player-meta {
     min-width: 0;
     flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    white-space: nowrap;
+}
+
+.suburbia-player-meta strong {
 
     color:
         var(--home-white);
@@ -502,8 +514,13 @@ body.intro-active {
     font-weight: 900;
 
     letter-spacing: .14em;
+}
 
-    white-space: nowrap;
+.suburbia-player-meta small {
+    color: #85857f;
+    font-size: .56rem;
+    font-weight: 700;
+    letter-spacing: .1em;
 }
 
 .suburbia-player-time {
@@ -517,6 +534,10 @@ body.intro-active {
 
     font-variant-numeric:
         tabular-nums;
+}
+
+.suburbia-player-duration {
+    display: none;
 }
 
 .suburbia-player-progress {
@@ -568,6 +589,81 @@ body.intro-active {
     pointer-events: none;
 }
 
+.suburbia-player-view-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    width: 28px;
+    height: 28px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+
+    color: #9b9b95;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.suburbia-player-view-toggle span {
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform .2s ease;
+}
+
+.suburbia-player-view-toggle:hover,
+.suburbia-player-view-toggle:focus-visible {
+    color: var(--home-gold);
+}
+
+.suburbia-player.is-compact {
+    width: min(370px, calc(100vw - 52px));
+    min-height: 66px;
+    aspect-ratio: auto;
+
+    flex-direction: row;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 9px 10px;
+}
+
+.suburbia-player.is-compact .suburbia-player-cover,
+.suburbia-player.is-compact .suburbia-player-progress,
+.suburbia-player.is-compact .suburbia-player-current {
+    display: none;
+}
+
+.suburbia-player.is-compact .suburbia-player-info {
+    display: block;
+}
+
+.suburbia-player.is-compact .suburbia-player-heading {
+    margin: 0;
+}
+
+.suburbia-player.is-compact .suburbia-player-duration {
+    display: inline;
+}
+
+.suburbia-player.is-compact .suburbia-player-view-toggle {
+    position: static;
+    flex: 0 0 28px;
+}
+
+.suburbia-player.is-compact .suburbia-player-view-toggle span {
+    transform: translateY(2px) rotate(225deg);
+}
+
 
 @media (max-width: 1160px) {
 
@@ -588,19 +684,38 @@ body.intro-active {
     }
 
     .suburbia-player-cover {
-        width: 42px;
-        height: 42px;
-        flex: 0 0 42px;
+        display: none;
     }
 
     .suburbia-player-info {
         display: block;
     }
 
+    .suburbia-player-meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .suburbia-player-meta strong::after {
+        content: " -";
+    }
+
+    .suburbia-player-meta small {
+        color: var(--home-white);
+        font-size: .68rem;
+        font-weight: 900;
+        letter-spacing: .14em;
+    }
+
     .suburbia-player-toggle {
         width: 28px;
         height: 28px;
         flex-basis: 28px;
+    }
+
+    .suburbia-player-view-toggle {
+        display: none;
     }
 }
 
@@ -678,8 +793,20 @@ body.intro-active {
         flex-basis: 42px;
     }
 
-    .suburbia-player-heading > span:first-child {
+    .suburbia-player-meta strong {
         font-size: .58rem;
+    }
+
+    .suburbia-player.is-compact .suburbia-player-progress {
+        display: block;
+    }
+
+    .suburbia-player.is-compact .suburbia-player-current {
+        display: inline;
+    }
+
+    .suburbia-player.is-compact .suburbia-player-duration {
+        display: none;
     }
 }
 
